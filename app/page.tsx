@@ -1,9 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Sidebar from "./components/sidebar/page";
 import Header from "./components/header/page";
+import ScheduleMeet from "./components/jadwaltemu/page";
+import Promobanner from "./components/promobanner/page";
+
+// Asset foto dokter
+import doctor1 from "@/public/doctor1.png";
+import doctor2 from "@/public/doctor2.png";
+import doctor3 from "@/public/doctor3.png";
+
+
 const mockFacilities = [
   {
     id: 1,
@@ -29,6 +37,12 @@ const mockFacilities = [
     name: "Harmony Dental",
     city: "Bandung",
   },
+  {
+    id: 5,
+    type: "Rumah Sakit",
+    name: "RS Mitra Keluarga",
+    city: "Bandung",
+  }
 ];
 
 const mockDoctors = [
@@ -38,7 +52,7 @@ const mockDoctors = [
     specialty: "Spesialis Jantung dan Pembuluh Darah",
     rating: 5.0,
     totalPatients: 450,
-    image: "/doctor1.jpg",
+    image: doctor1,
   },
   {
     id: 2,
@@ -46,7 +60,7 @@ const mockDoctors = [
     specialty: "Dokter Umum",
     rating: 4.9,
     totalPatients: 450,
-    image: "/doctor2.jpg",
+    image: doctor2,
   },
   {
     id: 3,
@@ -54,7 +68,7 @@ const mockDoctors = [
     specialty: "Spesialis Penyakit Dalam",
     rating: 5.0,
     totalPatients: 450,
-    image: "/doctor3.jpg",
+    image: doctor3,
   },
 ];
 
@@ -63,7 +77,7 @@ const mockAppointments = [
     id: 1,
     specialty: "Psikiater",
     facility: "RS Medic Center - Bandung",
-    queue: 10,
+    queue: 2,
     date: new Date(2025, 7, 26),
     time: "13:00 WIB",
   },
@@ -71,47 +85,27 @@ const mockAppointments = [
     id: 2,
     specialty: "Psikiater",
     facility: "RS Medic Center - Bandung",
-    queue: 2,
+    queue: 10,
     date: new Date(2025, 8, 2),
     time: "13:00 WIB",
   },
 ];
+
 
 export default function Home() {
   
 
   return (
     <div className="min-h-screen flex bg-gray-50 text-gray-800">
-      
-    <Sidebar/>
+      {/* Sidebar */}
+      <Sidebar />
 
       {/* Main Content */}
       <main className="flex-1 px-10 pt-8 pb-10 space-y-8 overflow-auto">
       <Header/>
-        {/* Promo Banner */}
-        <section className="relative rounded-lg overflow-hidden bg-gradient-to-r from-blue-400 to-blue-200 text-white p-6 flex items-center space-x-8 shadow">
-          <div className="flex-1">
-            <h3 className="text-xl font-semibold mb-2">PROMO SPESIAL</h3>
-            <button className="bg-white text-blue-600 py-1 px-4 rounded-md font-semibold shadow">Book Sekarang</button>
-          </div>
-          <div className="flex-1 text-right">
-            <h3 className="text-2xl font-semibold mb-2">DISKON 30%</h3>
-            <p>Dapatkan diskon untuk pengguna baru <span className="font-bold">mediQ</span></p>
-          </div>
-          <Image
-            src="/doctor-promo.png"
-            alt="doctor promo"
-            width={150}
-            height={180}
-            className="rounded-lg"
-            priority
-          />
-          <div className="absolute top-2 left-2 p-1 bg-black bg-opacity-40 rounded">
-            <svg width="20" height="20" fill="white" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="10" cy="10" r="10" />
-            </svg>
-          </div>
-        </section>
+
+        {/* Promo Banner (Carousel)*/}
+        <Promobanner/>
 
         {/* Fasilitas Kesehatan Terdekat */}
         <section>
@@ -148,43 +142,44 @@ export default function Home() {
         {/* Dokter Pilihan Pasien */}
         <section>
           <h2 className="font-semibold mb-4 text-lg">Dokter Pilihan Pasien</h2>
-          <div className="flex space-x-6 overflow-x-auto pb-2">
+          <div className="flex space-x-4 overflow-x-auto pb-2">
             {mockDoctors.map((doctor) => (
               <div
                 key={doctor.id}
-                className="bg-white rounded-xl p-6 min-w-[220px] shadow flex flex-col items-center space-y-3"
+                className="flex w-60 flex-col items-start bg-white rounded-[8px] shadow-sm border"
               >
-                <Image
-                  src={doctor.image}
-                  alt={doctor.name}
-                  width={120}
-                  height={120}
-                  className="rounded-lg"
-                  priority
-                />
-                <h3 className="font-semibold text-center">{doctor.name}</h3>
-                <p className="text-gray-500 text-sm text-center">{doctor.specialty}</p>
-                <div className="flex items-center space-x-2 text-yellow-400">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.049 2.927C9.552 1.697 11.448 1.697 11.951 2.927l1.25 3.794a1 1 0 0 0 .95.69h3.983c1.238 0 1.754 1.582.753 2.25l-3.224 2.33a1 1 0 0 0-.364 1.118l1.25 3.794c.503 1.23-1.023 2.238-2.069 1.491l-3.224-2.33a1 1 0 0 0-1.176 0l-3.224 2.33c-1.046.747-2.572-.261-2.069-1.49l1.25-3.794a1 1 0 0 0-.364-1.118l-3.224-2.33c-1-.668-.485-2.25.753-2.25h3.983a1 1 0 0 0 .95-.69l1.25-3.793z" />
-                  </svg>
-                  <span>{doctor.rating}</span>
-                  <span className="text-gray-400">|</span>
-                  <span className="text-gray-600 text-sm">{doctor.totalPatients}+ Total Pasien</span>
+                {/* Image dan Nama */}
+                <div className="flex flex-col items-center justify-center">
+                  <div className="relative w-60 h-60 overflow-hidden rounded-t-md bg-blue-200 align-left">
+                    <Image
+                      src={doctor.image}
+                      alt={doctor.name}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className="rounded-xl object-cover"
+                    />
+                  </div>
+                  <h3 className="font-semibold text-center mt-2">{doctor.name}</h3>
                 </div>
+                {/* Specialty */}
+                <p className="text-gray-500 text-sm text-left mb-2">{doctor.specialty}</p>
+
+                {/* Rating */}
+                <div className="flex items-center justify-center space-x-1">
+                  <span className="text-sm font-semibold">{doctor.rating}</span>
+                </div>
+                {/* Total Patients */}
+                <div className="text-center text-sm text-gray-600 mt-1">
+                  <span>{doctor.totalPatients}+ Total Pasien</span>
+            </div>
               </div>
             ))}
           </div>
         </section>
-      </main>
 
-      {/* Sidebar Jadwal Temu */}
-      
+        {/* Jadwal Temu */}
+      </main>
+      <ScheduleMeet mockAppointments={mockAppointments} />
     </div>
   );
 }
