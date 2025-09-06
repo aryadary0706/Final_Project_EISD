@@ -9,7 +9,7 @@ import * as React from "react";
 
 export default function Promobanner() {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center px-10">
       <Carousel
         className="relative rounded-[12px] overflow-hidden bg-gradient-to-r from-blue-600 to-blue-400 text-white p-6 h-[187px] w-full"
         opts={{ loop: true }}

@@ -2,6 +2,25 @@ import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
+const mockAppointments = [
+  {
+    id: 1,
+    specialty: "Dokter Umum",
+    facility: "RS Medic Center",
+    queue: 1,
+    date: new Date(2025, 8, 6),
+    time: "13:00 WIB - 13:15 WIB",
+  },
+  {
+    id: 2,
+    specialty: "Dokter Umum",
+    facility: "RS Medic Center",
+    queue: 2,
+    date: new Date(2025, 8, 7),
+    time: "13:00 WIB - 13:15 WIB",
+  }
+];
+
 type Appointment = {
   id: number;
   specialty: string;
@@ -11,11 +30,7 @@ type Appointment = {
   time: string;
 };
 
-type ScheduleMeetProps = {
-  mockAppointments: Appointment[];
-};
-
-export default function ScheduleMeet({ mockAppointments }: ScheduleMeetProps) {
+export default function ScheduleMeet() {
   const getDateKey = (date: Date) =>
   `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 
@@ -29,7 +44,7 @@ export default function ScheduleMeet({ mockAppointments }: ScheduleMeetProps) {
   }, {} as Record<string, Appointment[]>);
 
   return (
-    <aside className="w-[480px] bg-white shadow-md p-6 flex flex-col space-y-6">
+    <aside className="w-[480px] bg-gray-50 shadow-md p-6 flex flex-col space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="font-semibold text-[18px]">Jadwal Temu Mendatang</h2>
         {/* Menggunakan tombol dengan ikon dari shadcn/ui */}
