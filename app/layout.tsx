@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google"; // Import Poppins
 import "./globals.css";
-import Sidebar from "@/components/app-components/sidebar";
-import Header from "@/components/app-components/header";
+import AppLayout from "@/components/appLayout";
+
 
 // Definisikan Poppins dengan varian yang dibutuhkan
 const poppins = Poppins({
@@ -27,21 +27,7 @@ export default function RootLayout({
     <html lang="en">
       {/* Terapkan variabel font ke body */}
       <body className={`${poppins.variable} font-sans antialiased`}>
-        <div className="min-h-screen flex bg-white text-gray-800">
-          {/* Sidebar */}
-          <Sidebar />
-
-          {/* Main Content Area - Header + Page Content */}
-          <div className="flex-1 flex flex-col">
-            
-            {/* Page Content - This is where children (page content) goes */}
-            <main className="flex-1 flex">
-              <div className="flex-1 pl-5 pb-10 space-y-8 overflow-auto">
-                {children}
-              </div>
-            </main>
-          </div>
-        </div>
+        <AppLayout>{children}</AppLayout>
       </body>
     </html>
   );

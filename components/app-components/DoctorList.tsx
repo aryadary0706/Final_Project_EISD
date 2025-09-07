@@ -1,92 +1,81 @@
-import Image from "next/image";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-
-// Asset foto dokter
-import doctor1 from "@/public/doctor1.png";
-import doctor2 from "@/public/doctor2.png";
-import doctor3 from "@/public/doctor3.png";
+import Link from "next/link";
+import Image from "next/image";
+import { Star } from "lucide-react";
+import image1 from "@/public/doctor1.png"
+import image2 from "@/public/doctor2.png"
+import image3 from "@/public/doctor3.png"
+import style from "@/app/styles/main.module.css"
+import clsx from "clsx";
 
 const mockDoctors = [
-    {
-      id: 1,
-      name: "dr. Arief Nugroho, Sp.JP",
-      specialty: "Spesialis Jantung dan Pembuluh Darah",
-      rating: 5.0,
-      totalPatients: 450,
-      image: doctor1,
-    },
-    {
-      id: 2,
-      name: "dr. Ratna Dewi",
-      specialty: "Dokter Umum",
-      rating: 4.9,
-      totalPatients: 450,
-      image: doctor2,
-    },
-    {
-      id: 3,
-      name: "dr. Andini Pratama, Sp.PD",
-      specialty: "Spesialis Penyakit Dalam",
-      rating: 5.0,
-      totalPatients: 450,
-      image: doctor3,
-    },
-  ];
+  {
+    id: 1,
+    name: "dr. Arief Nugroho, Sp.JP",
+    specialty: "Spesialis Jantung dan Pembuluh Darah",
+    rating: "5.0",
+    totalPatients: "450+",
+    image: image1
+  },
+  {
+    id: 2,
+    name: "dr. Ratna Dewi Sp.A",
+    specialty: "Spesialis Anak",
+    rating: "4.9",
+    totalPatients: "450+",
+    image: image2
+  },
+  {
+    id: 3,
+    name: "dr. Andini Pratama, Sp.PD",
+    specialty: "Spesialias Penyakit Dalam",
+    rating: "5.0",
+    totalPatients: "450+",
+    image: image3
+  }
+];
 
 export default function DoctorList() {
   return (
     <div className="flex space-x-4 overflow-x-auto pb-2">
       {mockDoctors.map((doctor) => (
-        <Card key={doctor.id} className="w-64 flex-shrink-0 hover:shadow-lg transition-shadow duration-200">
-          <CardHeader className="p-0">
-            <div className="relative w-full h-48 overflow-hidden rounded-t-xl bg-gradient-to-br from-blue-50 to-blue-100">
+        <Link key={doctor.id} href="#" className="w-fit flex-shrink-0">
+          <div className="w-64 h-78 flex flex-col rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
+            {/* Div for Image */}
+            <div className={clsx(style.doctorimage, "relative w-full h-48 overflow-hidden")}>
               <Image
                 src={doctor.image}
                 alt={doctor.name}
-                fill
+                width={200}
+                height={200}
                 style={{ objectFit: 'cover' }}
                 className="object-cover"
               />
             </div>
-          </CardHeader>
-          
-          <CardContent className="p-4 space-y-3">
-            <div className="text-center">
-              <CardTitle className="text-base font-semibold text-gray-900 leading-tight">
-                {doctor.name}
-              </CardTitle>
-              <CardDescription className="text-sm text-gray-600 mt-1">
-                {doctor.specialty}
-              </CardDescription>
-            </div>
-
-            <div className="flex items-center justify-center space-x-2">
-              <div className="flex items-center space-x-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-4 h-4 text-yellow-400 fill-current"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <span className="text-sm font-semibold text-gray-700">{doctor.rating}</span>
+            
+            {/* Div for Description */}
+            <div className={clsx(style.doctordescription)}>
+              <div className="text-left">
+                <h4 className="text-base font-semibold text-gray-900 leading-tight">
+                  {doctor.name}
+                </h4>
+                <p className="text-sm text-gray-600 mt-1">
+                  {doctor.specialty}
+                </p>
               </div>
-              <Badge variant="secondary" className="text-xs">
-                {doctor.totalPatients}+ Pasien
-              </Badge>
-            </div>
 
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="w-full text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300"
-            >
-              Lihat Profil
-            </Button>
-          </CardContent>
-        </Card>
+              <div className="flex items-center justify-start space-x-2 mt-3">
+                <div className="flex items-center">
+                  <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                  <span className="text-sm font-semibold text-gray-700">{doctor.rating}</span>
+                </div>
+                <Badge variant="outline" className="text-sm">
+                  {doctor.totalPatients} Pasien
+                </Badge>
+              </div>
+            </div>
+          </div>
+        </Link>
       ))}
     </div>
   );

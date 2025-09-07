@@ -7,7 +7,7 @@ export default function Header() {
   const [search, setSearch] = useState("");
 
   return (
-    <header className="flex items-center w-full pt-13 pb-4 px-8">
+    <header className="flex items-center w-full py-4 px-4">
       {/* Bagian Kiri: Profile & Greeting */}
       <div className="flex items-center space-x-4 flex-shrink-0">
         <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">

@@ -1,0 +1,41 @@
+.faskesCard {
+    border-radius: 12px;
+    background: #FFF;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.05);
+}
+
+.faskesTag {
+    display: flex;
+    padding: 8px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 4px;
+    background: var(--Foundation-Neutral-Light, #F1F1F1);
+    color: #59A5F5;
+    font-size: 11px;
+    color: var(--Foundation-Secondary-Normal, #59A5F5);
+    text-align: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 13.2px */
+}
+
+.doctordescription {
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+}
+
+.doctorimage {
+    display: flex;
+    padding: 8px 44px 0 45px;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 12px 12px 0 0;
+    background: var(--lin-6, linear-gradient(90deg, #D8EDFA 0%, #E5F5FF 50.86%, #C2E8FF 100%));
+}

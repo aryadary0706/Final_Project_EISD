@@ -1,0 +1,149 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+    height: auto;
+    padding: 32px 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 3px solid #EAEAEA;
+    background: #FFF;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+    padding-bottom: 60px; 
+}
+
+.titleTypography {
+    font-family: Poppins, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 120%;
+    background: linear-gradient(90deg, #59A5F5 0%, #B8DAFE 54.4%, #59A5F5 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    padding: 0 24px;
+}
+
+.menuTypography {
+    color: #000;
+    font-family: Poppins, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 120%;
+    margin-bottom: 16px; /* Space below "Menu" heading */
+    padding-left: 10px;
+}
+
+.navItem {
+    display: flex;
+    width: 100%;
+    padding: 12px;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    border-radius: 8px;
+}
+
+.navItem:active {
+    color: #59A5F5;
+}
+
+.logoutContainer {
+    margin-top: auto;
+    width: 100%;
+    padding: 0 24px;
+    padding-top: 32px;
+}
+
+.logoutButton {
+    display: flex;
+    width: 100%;
+    padding: 24px;
+    align-items: center;
+    justify-content: center; /* Center the icon and text */
+    gap: 8px;
+    border-radius: 8px;
+    border: 3px solid #F1F1F1;
+    background-color: #FFF;
+    color: #333;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.logoutButton:hover {
+    background-color: #F1F1F1;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        width: 82px; /* Lebar diperkecil */
+        align-items: center;
+    }
+
+    .titleTypography {
+        font-size: 0; /* Sembunyikan teks "mediQ" */
+    }
+
+    /* Tampilkan hanya huruf 'Q' */
+    .titleTypography::before {
+        content: "Q";
+        font-size: 32px; /* Atur ukuran font untuk huruf 'Q' */
+        background: linear-gradient(90deg, #59A5F5 0%, #B8DAFE 54.4%, #59A5F5 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .navbar {
+        padding: 0; /* Hapus padding agar elemen rata tengah */
+        align-items: center;
+    }
+
+    .menuTypography {
+        display: none; /* Sembunyikan tulisan "Menu" */
+    }
+
+    .navItem {
+        justify-content: center; /* Rata tengah icon */
+        padding: 12px;
+        gap: 0;
+    }
+
+    .navItem span {
+        display: none; /* Sembunyikan nama menu */
+    }
+
+    .logoutContainer {
+        padding: 0; /* Hapus padding */
+        display: flex;
+        justify-content: center;
+    }
+
+    .logoutButton {
+        width: auto;
+        padding: 12px; /* Sesuaikan padding */
+        justify-content: center;
+    }
+
+    .logoutButton span {
+        display: none; /* Sembunyikan teks "Keluar" */
+    }
+}
