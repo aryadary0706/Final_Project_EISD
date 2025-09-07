@@ -1,84 +1,66 @@
+"use client";
+
 import React from 'react';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import styles from "@/app/styles/sidebar.module.css";
+import { Button } from '@/components/ui/button';
+import { Home, Search, Clock, User, LogOut } from 'lucide-react';
+import { Separator } from '@radix-ui/react-separator';
+import clsx from 'clsx';
 
 const navItems = [
-  { 
-    name: 'Beranda', 
-    href: '#', 
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-      </svg>
-    )
-  },
-  { 
-    name: 'Telusuri', 
-    href: '#', 
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-      </svg>
-    )
-  },
-  { 
-    name: 'Riwayat', 
-    href: '#', 
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    )
-  },
-  { 
-    name: 'Profil', 
-    href: '#', 
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-      </svg>
-    )
-  },
+  { name: 'Beranda', href: '/', icon: <Home className="w-6 h-6" /> },
+  { name: 'Telusuri', href: '/telusuri', icon: <Search className="w-6 h-6" /> },
+  { name: 'Riwayat', href: '/riwayat', icon: <Clock className="w-6 h-6" /> },
+  { name: 'Profil', href: '/profil', icon: <User className="w-6 h-6" /> },
 ];
 
 export default function Sidebar() {
+  const pathname = usePathname(); // Dapatkan path URL saat ini
+
   return (
-    <aside className="w-[320px] bg-gray-50 shadow-md flex flex-col p-8 space-y-8">
+    <aside className={styles.container}>
       {/* Logo */}
-      <div className="flex justify-center p-3">
-        <span className="text-4xl font-bold text-blue-400">mediQ</span>
+      <div className={styles.title}>
+        <h1 className={styles.titleTypography}>mediQ</h1>
       </div>
 
       {/* Menu */}
-      <div className="mt-2">
-        <p className="text-xl font-semibold text-gray-600 mb-6">Menu</p>
-        <nav className="flex flex-col space-y-2">
-        {navItems.map((item) => (
-          <Link
-            key={item.name}
-            href={item.href}
-            className="flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors"
-          >
-            {item.icon}
-            <span className="text-lg font-normal">{item.name}</span>
-          </Link>
-        ))}
+      <div className={styles.navbar}>
+        <h4 className={styles.menuTypography}>Menu</h4>
+        <nav className="flex flex-col space-y-2 w-full">
+          {navItems.map((item) => {
+            // Tentukan apakah item saat ini aktif
+            const isActive = item.href === pathname;
+
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                
+                className={clsx(styles.navItem, {
+                  [styles.activeNavItem]: isActive,
+                })}
+              >
+                {item.icon}
+                <span className="text-[16px] font-normal pl-3">{item.name}</span>
+              </Link>
+            );
+          })}
         </nav>
       </div>
+      
+      {/* Separator */}
+      <Separator className="my-4" />
 
-      {/* Tombol Keluar */}
-      <Button variant="outline" className="mt-auto flex items-center justify-center space-x-2 py-2 px-4 rounded-md text-gray-600 hover:bg-gray-100">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-5 h-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7" />
-        </svg>
-        <span>Keluar</span>
-      </Button>
+      {/* Logout Button */}
+      <div className={styles.logoutContainer}>
+        <Button className={styles.logoutButton}>
+          <LogOut className="w-5 h-5" />
+          <span>Keluar</span>
+        </Button>
+      </div>
     </aside>
   );
 }
