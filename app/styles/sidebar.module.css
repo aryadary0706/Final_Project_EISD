@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    width: 260px;
+    width: 300px;
     height: auto;
     padding: 32px 0;
     flex-direction: column;
@@ -20,6 +20,9 @@
 }
 
 .titleTypography {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     font-family: Poppins, sans-serif;
     font-size: 32px;
     font-weight: 600;
@@ -60,8 +63,13 @@
     border-radius: 8px;
 }
 
-.navItem:active {
+.navItem:hover {
+    background-color: #F8F9FA;
+}
+
+.activeNavItem {
     color: #59A5F5;
+    font-weight: 800;
 }
 
 .logoutContainer {

@@ -1,9 +1,6 @@
-"use client";
 
-import Beranda from "./pages/beranda/page";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <Beranda/>
-  );
+export default function Beranda() {
+    redirect("/beranda");
 }

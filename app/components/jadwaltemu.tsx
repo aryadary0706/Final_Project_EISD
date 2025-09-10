@@ -1,10 +1,11 @@
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { compareAsc, format } from "date-fns";
 import { id as LocaleID } from "date-fns/locale";
 import style from "@/app/styles/schedule.module.css"
 import { Calendar, Clock, BadgePlus} from "lucide-react";
+import { Separator } from '@radix-ui/react-separator';
 
 const mockAppointments = [
   {
@@ -54,7 +55,7 @@ export default function ScheduleMeet() {
   );
 
   return (
-    <aside className={style.container}>
+    <div className={style.container}>
       <div className="flex justify-between items-center self-stretch mb-6">
         <h2 className="font-semibold text-[18px]">Jadwal Temu Mendatang</h2>
         <button className="font-light text-blue-400 hover:underline">batalkan</button>
@@ -118,11 +119,13 @@ export default function ScheduleMeet() {
           ))}
         </div>
       </ScrollArea>
+      
+      <Separator className="my-4" />
 
       <Button className={style.button}>
         Buat Jadwal Baru
         <BadgePlus className="w-10 h-10"/>
       </Button>
-    </aside>
+    </div>
   );
 }

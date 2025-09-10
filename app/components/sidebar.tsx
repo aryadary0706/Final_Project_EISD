@@ -10,14 +10,14 @@ import { Separator } from '@radix-ui/react-separator';
 import clsx from 'clsx';
 
 const navItems = [
-  { name: 'Beranda', href: '/', icon: <Home className="w-6 h-6" /> },
-  { name: 'Telusuri', href: '/telusuri', icon: <Search className="w-6 h-6" /> },
+  { name: 'Beranda', href: '/beranda', icon: <Home className="w-6 h-6" /> },
+  { name: 'Telusuri', href: '/search', icon: <Search className="w-6 h-6" /> },
   { name: 'Riwayat', href: '/riwayat', icon: <Clock className="w-6 h-6" /> },
   { name: 'Profil', href: '/profil', icon: <User className="w-6 h-6" /> },
 ];
 
 export default function Sidebar() {
-  const pathname = usePathname(); // Dapatkan path URL saat ini
+  const pathname = usePathname();
 
   return (
     <aside className={styles.container}>
@@ -31,14 +31,15 @@ export default function Sidebar() {
         <h4 className={styles.menuTypography}>Menu</h4>
         <nav className="flex flex-col space-y-2 w-full">
           {navItems.map((item) => {
-            // Tentukan apakah item saat ini aktif
-            const isActive = item.href === pathname;
+            // Perbaiki logika untuk menentukan halaman aktif
+            const isActive = pathname === item.href || 
+              (item.href === '/' && pathname === '/') ||
+              (item.href !== '/' && pathname.startsWith(item.href));
 
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                
                 className={clsx(styles.navItem, {
                   [styles.activeNavItem]: isActive,
                 })}
