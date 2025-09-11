@@ -12,19 +12,28 @@ import Link from 'next/link';
 import { Edit, MapPin, Plus, User } from 'lucide-react';
 import React, { useState } from 'react';
 import SettingsAccount from '@/app/components/settingsaccount';
+import { useUserStore } from "@/stores/userStore";
 
 
 export default function ProfilePage() {
   const [selectedGender, setSelectedGender] = useState('perempuan');
   const [selectedBloodtype, setSelectedBloodtype] = useState('A');
   const [hasAllergies, setHasAllergies] = useState(true);
+  const user = useUserStore((state) => state.user);
+  const updateUser = useUserStore((state) => state.updateUser);
 
-  const handleGenderChange = (gender : string) => {
+  const handleGenderChange = (gender: string) => {
     setSelectedGender(gender);
+    updateUser({ gender });
   };
-  
-  const handleBloodtypeChange = (bloodtype : string) => {
+
+  const handleBloodtypeChange = (bloodtype: string) => {
     setSelectedBloodtype(bloodtype);
+    updateUser({ golonganDarah: bloodtype });
+  };
+
+  const handleAllergiesChange = (value: string) => {
+    updateUser({ alergi: value });
   };
 
   const genderOptions = [
@@ -51,7 +60,7 @@ export default function ProfilePage() {
             </Avatar>
           </Link>
           <div className="flex flex-col items-start gap-2">
-            <h1 className="text-2xl font-medium">Naswa Gyna Sahira</h1>
+            <h1 className="text-2xl font-medium">{user?.nama || "User"}</h1>
             <div className="flex items-center text-md text-gray-500 ">
               <MapPin className="h-4 w-4 mr-1" />
               <span>Bergabung Mei 2025</span>
@@ -74,12 +83,12 @@ export default function ProfilePage() {
             <div className="grid grid-cols-2 gap-15 items-center self-stretch">
               <div>
                 <Label className="mb-3 font-semibold text-[16px]" htmlFor="nama-lengkap">Nama Lengkap</Label>
-                <Input className="p-6" id="nama-lengkap" value="Naswa Gyna Sahira" readOnly />
+                <Input className="p-6" id="nama-lengkap" value={user?.nama   || ""} readOnly />
               </div>
               <div>
                 <Label className="block mb-3 font-semibold text-[16px]" htmlFor="umur-pasien">Umur Pasien</Label>
                 <div className="flex items-center">
-                  <Input id="umur-pasien" value="12" className="p-6 w-[100px]" readOnly />
+                  <Input id="umur-pasien" value={user?.umur || ""}  className="p-6 w-[100px]" readOnly />
                   <span className="ml-2">Tahun</span>
                 </div>
               </div>
@@ -88,14 +97,14 @@ export default function ProfilePage() {
               <div>
                 <Label className="block mb-3 font-semibold text-[16px]" htmlFor="berat-badan">Berat Badan</Label>
                 <div className="flex items-center">
-                  <Input id="berat-badan" value="12" className="w-[100px] p-6" readOnly />
+                  <Input id="berat-badan" value={user?.beratBadan || ""} className="w-[100px] p-6" readOnly />
                   <span className="ml-2">kg</span>
                 </div>
               </div>
               <div>
                 <Label className="block mb-3 font-semibold text-[16px]" htmlFor="tinggi-badan">Tinggi Badan</Label>
                 <div className="flex items-center">
-                  <Input id="tinggi-badan" value="12" className="w-[100px] p-6" readOnly />
+                  <Input id="tinggi-badan" value={user?.tinggiBadan || ""}className="w-[100px] p-6" readOnly />
                   <span className="ml-2">cm</span>
                 </div>
               </div>
@@ -187,16 +196,16 @@ export default function ProfilePage() {
             <div className="grid grid-cols-2 gap-4">
               <div className='gap-4'>
                 <Label className="block mb-1 text-[16px]" htmlFor="negara">Negara</Label>
-                <Input className="p-6" id="negara" value="Indonesia" readOnly />
+                <Input className="p-6" id="negara" value={user?.alamat?.negara || "Indonesia"} readOnly />
               </div>
               <div>
                 <Label className="block mb-1 text-[16px]" htmlFor="kota">Kota</Label>
-                <Input className="p-6" id="kota" value="Bandung" readOnly />
+                <Input className="p-6" id="kota" value={user?.alamat?.kota || "Bandung"} readOnly />
               </div>
             </div>
             <div>
               <Label className="block mb-1 text-[16px]" htmlFor="kode-pos">Kode POS</Label>
-              <Input className="p-6" id="kode-pos" value="40111" readOnly />
+              <Input className="p-6" id="kode-pos" value={user?.alamat?.kodePos || "40111"} readOnly />
             </div>
           </CardContent>
         </Card>

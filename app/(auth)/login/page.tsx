@@ -11,16 +11,37 @@ import Rumahsakit from "@/public/image_login.png";
 import styles from "@/app/styles/sidebar.module.css";
 import mediQ from "@/public/mediQ.png"
 import { Separator } from "@/components/ui/separator"
+import { useUserStore } from "@/stores/userStore";
+
+const mockUsers = [
+  { id: 1, nama: "Nasywa", email: "john.doe@example.com", password: "password123" },
+  { id: 2, nama: "Jane Smith", email: "jane.smith@example.com", password: "securepassword" },
+  { id: 3, nama: "Peter Jones", email: "peter.jones@example.com", password: "strongpassword" }
+];
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
   const router = useRouter();
 
-  const handleLogin = () => {
-    // contoh: validasi login dulu
-    // kalau sukses:
-    router.push("/");
+  const handleLogin = (e: React.FormEvent) => {
+    const { setUser } = useUserStore.getState();
+
+    e.preventDefault();
+    setLoginError("");
+    
+    const user = mockUsers.find(
+      (u) => u.email === email && u.password === password
+    );
+
+    if (user) {
+      setUser(user); // simpan ke global store
+      router.push("/beranda"); // pindah ke halaman beranda
+    } else {
+      setLoginError("Email atau password salah");
+    }
   };
 
   return (

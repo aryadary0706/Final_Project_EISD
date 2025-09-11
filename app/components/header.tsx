@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Search, Bell } from "lucide-react";
+import { useUserStore } from "@/stores/userStore";
 
 export default function Header() {
   const [search, setSearch] = useState("");
+  const user = useUserStore((state) => state.user);
 
   return (
     <header className="flex items-center w-full py-6 px-0">
@@ -15,7 +17,7 @@ export default function Header() {
           <span className="text-lg font-semibold text-gray-600">N</span>
         </div>
         <div>
-          <p className="font-semibold text-lg">Halo, Naswa</p>
+          <p className="font-semibold text-lg">Halo, {user?.nama || "Tamu"}</p>
           <p className="text-gray-500 text-sm">Bagaimana kabarmu?</p>
         </div>
       </div>

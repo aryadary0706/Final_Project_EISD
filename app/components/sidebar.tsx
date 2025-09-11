@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Home, Search, Clock, User, LogOut } from 'lucide-react';
 import { Separator } from '@radix-ui/react-separator';
 import clsx from 'clsx';
+import { useUserStore } from '@/stores/userStore';
 
 const navItems = [
   { name: 'Beranda', href: '/beranda', icon: <Home className="w-6 h-6" /> },
@@ -18,6 +19,11 @@ const navItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { clearUser } = useUserStore();
+
+  const handleLogout = () => {
+    clearUser();
+  };
 
   return (
     <aside className={styles.container}>
@@ -57,7 +63,7 @@ export default function Sidebar() {
 
       {/* Logout Button */}
       <div className={styles.logoutContainer}>
-        <Button className={styles.logoutButton}>
+        <Button onClick={handleLogout} className={styles.logoutButton}>
           <LogOut className="w-5 h-5" />
           <span>Keluar</span>
         </Button>
