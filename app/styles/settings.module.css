@@ -1,0 +1,42 @@
+
+
+.sidebarlink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* gap-2 */
+  padding-top: 0.75rem; /* py-3 */
+  padding-bottom: 0.75rem; /* py-3 */
+  padding-left: 0.5rem; /* px-2 */
+  padding-right: 0.5rem; /* px-2 */
+  border-radius: 0.5rem; /* rounded-lg */
+  transition-property: background-color; /* transition-colors */
+  transition-duration: 200ms; /* duration-200 */
+}
+
+.sidebarlink:hover {
+  background-color: #edf2ff; /* hover:bg-gray-200 */
+  /* border-left: 5px solid #528cff; */
+}
+
+.PusatAkun {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-top: 0.75rem; /* py-3 */
+    padding-bottom: 0.75rem; /* py-3 */
+    padding-left: 0.5rem; /* px-2 */
+    padding-right: 0.5rem; /* px-2 */
+    border-radius: 0.5rem; /* rounded-lg */
+    transition-duration: 200ms; /* duration-200 */
+}
+
+.PusatAkun:hover{
+    background-color: #edf2ff; /* hover:bg-gray-200 */
+    /* border-left: 5px solid #528cff; */
+}
+
+.textButton{
+    font-size: 8px;
+    color: black;
+}
