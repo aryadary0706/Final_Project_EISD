@@ -14,14 +14,14 @@ export default function Promobanner() {
     <div className="w-full max-w-7xl mx-auto">
       <Carousel
         className="w-full"
-        opts={{ 
+        opts={{
           loop: true,
           align: "start",
         }}
       >
         <CarouselContent className="-ml-2 md:-ml-4">
           <CarouselItem className="pl-2 md:pl-4">
-            <div className="flex items-center justify-center rounded-[12px] overflow-hidden bg-gradient-to-r from-blue-600 to-blue-400 text-white p-6 h-[210px] w-full">
+            <div className="flex items-center justify-center rounded-md overflow-hidden bg-gradient-to-r from-blue-600 to-blue-400 text-white p-6 h-[210px] w-full">
               <div className="text-center">
                 <h3 className="text-2xl font-bold mb-2">Promo Khusus!</h3>
                 <p className="text-lg">Konsultasi dokter gratis untuk 100 pasien pertama</p>

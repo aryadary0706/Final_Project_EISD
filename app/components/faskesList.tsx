@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import style from "@/app/styles/main.module.css";
 import clsx from "clsx";
 import { MapPin, ChevronRight  } from 'lucide-react';
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const mockFacilities = [
   {
@@ -40,18 +41,33 @@ const mockFacilities = [
     name: "RS Mitra Keluarga",
     city: "Bandung",
     distance: "5.7 km",
-  }
+  },
+  {
+    id: 6,
+    type: "Rumah Sakit",
+    name: "RS Mitra Keluarga",
+    city: "Bandung",
+    distance: "5.7 km",
+  },
+  {
+    id: 7,
+    type: "Rumah Sakit",
+    name: "RS Mitra Keluarga",
+    city: "Bandung",
+    distance: "5.7 km",
+  },
 ];
 
 export default function FaskesList() {
   return (
-    <div className="flex flex-row space-x-3">
+    <ScrollArea className="w-[1240px] whitespace-nowrap pb-3">
+    <div className="flex space-x-4 pb-4">
       {mockFacilities.map((facility) => (
         <Card
           key={facility.id}
           className={clsx(
             style.faskesCard,
-            'flex w-[200px] px-1 py-4 flex-col items-start gap-2'
+            'flex w-[200px] h-[210px] flex-shrink-0 px-1 py-4 flex-col items-start gap-2'
           )}
         >
           <CardHeader className="pb-3">
@@ -87,5 +103,7 @@ export default function FaskesList() {
         </Card>
       ))}
     </div>
+    <ScrollBar orientation="horizontal" />
+    </ScrollArea>
   );
 }
