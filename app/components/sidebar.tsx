@@ -9,7 +9,6 @@ import { Home, Search, Clock, User, LogOut, Icon } from 'lucide-react';
 import { Separator } from '@radix-ui/react-separator';
 import clsx from 'clsx';
 import { useUserStore } from '@/stores/userStore';
-import mediQ from "@/public/mediQ.svg";
 
 const navItems = [
   { name: 'Beranda', href: '/beranda', icon: <Home className="w-6 h-6" /> },
@@ -30,7 +29,7 @@ export default function Sidebar() {
     <aside className={styles.container}>
       {/* Logo */}
       <div className={styles.title}>
-        <h1 className={styles.titleTypography}>medi</h1>
+        <h1 className={styles.titleTypography}>mediQ</h1>
       </div>
 
       {/* Menu */}

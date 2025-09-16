@@ -52,13 +52,13 @@ export default function LoginPage() {
         <Image
           src={Rumahsakit}
           alt="Logo"
-          width={620}
-          height={820}
+          width={500}
+          height={700}
         />
       </div>
 
       {/* Right Side (Form) */}
-      <div className="flex flex-col w-3/8 items-start gap-[120px] p-[44px_64px_32px_64px]">
+      <div className="flex flex-col w-3/8 items-start gap-[50px] p-[44px_64px_32px_64px]">
       {/* Logo */}
         <div>
             <h1 className={styles.titleTypography}>medi

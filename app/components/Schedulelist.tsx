@@ -33,7 +33,7 @@ const mockAppointments = [
     href: "#",
     specialty: "Dokter Umum",
     facility: "RS Medic Center",
-    queue: 2,
+    queue: 3,
     date: new Date(2025, 8, 10),
     time: "13:00 WIB - 13:15 WIB",
   },
@@ -42,7 +42,7 @@ const mockAppointments = [
     href: "#",
     specialty: "Dokter Umum",
     facility: "RS Medic Center",
-    queue: 2,
+    queue: 4,
     date: new Date(2025, 8, 12),
     time: "13:00 WIB - 13:15 WIB",
   },
@@ -75,10 +75,10 @@ export default function ScheduleMeet() {
   );
 
   return (
-    <div className="flex w-full flex-col h-full py-6 px-4 lg:px-6 items-start bg-gray-50 border border-l-2 border-gray-200 rounded-sm">
+    <div className="flex w-[580px] lg:w-[400px] flex-col h-full py-6 px-4 lg:px-6 bg-gray-50 border border-l-2 border-gray-200">
       {/* Header */}
       <div className="flex justify-between items-center self-stretch mb-5">
-        <h2 className="font-semibold text-[18px]">Jadwal Temu Mendatang</h2>
+        <h2 className="font-semibold text-[15px]">Jadwal Temu Mendatang</h2>
         <button className="font-light text-blue-400 hover:underline">batalkan</button>
       </div>
 
@@ -87,7 +87,7 @@ export default function ScheduleMeet() {
         {/* MOBILE: Horizontal Scroll (≤ lg) */}
         <div className="lg:hidden">
           {/* Fixed size container for mobile */}
-          <div className="w-[1240px] h-[240px] overflow-hidden">
+          <div className="w-[540px] h-[240px] overflow-hidden">
             <ScrollArea className="w-full h-full">
               <div className="flex gap-6 pr-4 pb-2">
                 {sortedDates.map((date) => (
@@ -114,10 +114,10 @@ export default function ScheduleMeet() {
         </div>
 
         {/* DESKTOP: Vertical Scroll (> lg) */}
-        <div className="hidden lg:flex flex-col h-[890px]">
+        <div className="hidden lg:flex flex-col h-[800px]">
           {/* Fixed size container for desktop */}
           <div className="w-[420px] h-[1024px] overflow-hidden">
-            <ScrollArea className="w-full h-full">
+            <ScrollArea className="w-full h-[800px]">
               <div className="flex flex-col space-y-6 pb-4">
                 {sortedDates.map((date) => (
                   <div key={date} className="flex flex-col">
@@ -145,7 +145,7 @@ export default function ScheduleMeet() {
 
       {/* Action Button */}
       <Button className="flex w-50 lg:w-full justify-between p-[32px] items-center self-stretch bg-blue-500 hover:bg-blue-400">
-        <h3 className="font-semibold text-[16px]">Buat Jadwal Baru</h3>
+        <h3 className="font-medium text-[14 px]">Buat Jadwal Baru</h3>
         <BadgePlus className="w-10 h-10" />
       </Button>
     </div>
@@ -154,9 +154,9 @@ export default function ScheduleMeet() {
 
 function AppointmentCard({ appt, isMobile }: { appt: Appointment; isMobile: boolean }) {
   return (
-    <Link href={appt.href} className="text-left rounded-lg">
+    <Link href={appt.href} className="text-left rounded-md">
       <Card
-        className={`flex flex-col ${isMobile ? "w-[240px] h-[200px]" : "w-[360px] min-h-[180px]"} p-[20px] gap-[4px] rounded-lg border bg-white`}
+        className={`flex flex-col ${isMobile ? "w-[280px] h-[200px]" : "w-[320px] h-[180px]"} p-[20px] gap-[4px] rounded-lg border bg-white`}
       >
         {/* Header */}
         <div className="flex items-center gap-2 mb-4">
@@ -169,7 +169,7 @@ function AppointmentCard({ appt, isMobile }: { appt: Appointment; isMobile: bool
         {/* Body: Two Columns */}
         <div className="flex flex-col md:flex-row h-full">
           {/* Left Column: Queue */}
-          <div className="flex-1 flex flex-col justify-between">
+          <div className="flex-1 flex flex-col justify-start">
             <p className="text-md text-gray-400">Antrian</p>
             <p className="text-4xl font-bold">{appt.queue.toString().padStart(2, "0")}</p>
           </div>
@@ -178,15 +178,15 @@ function AppointmentCard({ appt, isMobile }: { appt: Appointment; isMobile: bool
 
           {/* Right Column: Date & Time */}
           <div className="flex-1 flex flex-col gap-3">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 justify-between">
               <Calendar className="w-4 h-4 text-gray-500" />
-              <p className="text-sm font-medium">
+              <p className="text-xs font-medium">
                 {format(appt.date, "dd MMMM yyyy", { locale: LocaleID })}
               </p>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-gray-500" />
-              <p className="text-sm font-medium">{appt.time}</p>
+              <p className="text-xs font-medium">{appt.time}</p>
             </div>
           </div>
         </div>

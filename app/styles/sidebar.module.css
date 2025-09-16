@@ -1,13 +1,13 @@
 .container {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 240px;
     height: auto;
     padding: 32px 0;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    border: 3px solid #EAEAEA;
+    border-right: 2px solid #EAEAEA;
     background: #FFF;
 }
 
@@ -24,7 +24,7 @@
     flex-direction: row;
     align-items: center;
     font-family: Poppins, sans-serif;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 600;
     line-height: 120%;
     background: linear-gradient(90deg, #59A5F5 0%, #B8DAFE 54.4%, #59A5F5 100%);
@@ -56,11 +56,11 @@
     width: 100%;
     padding: 12px;
     align-items: center;
-    gap: 16px;
+    gap: 2px;
     cursor: pointer;
     text-decoration: none;
     color: #000;
-    border-radius: 8px;
+    font-size:20px;
 }
 
 .navItem:hover {
@@ -103,7 +103,7 @@
 @media (max-width: 1024px) {
     .container {
         display: flex;
-        width: 82; /* Lebar diperkecil */
+        min-width: 85; /* Lebar diperkecil */
         align-items: center;
     }
 
@@ -122,8 +122,8 @@
     }
 
     .navbar {
-        padding: 0; /* Hapus padding agar elemen rata tengah */
-        align-items: center;
+        padding: 0;
+        align-items: start;
     }
 
     .menuTypography {
@@ -147,7 +147,8 @@
     }
 
     .logoutButton {
-        width: auto;
+        width: 60px;
+        height: auto;
         padding: 12px; /* Sesuaikan padding */
         justify-content: center;
     }

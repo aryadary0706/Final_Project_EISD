@@ -69,8 +69,8 @@ export default function LoginPage() {
         <Image
           src={Rumahsakit}
           alt="Logo"
-          width={620}
-          height={820}
+          width={500}
+          height={700}
         />
       </div>
 
