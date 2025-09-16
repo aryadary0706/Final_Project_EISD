@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import style from "@/app/styles/main.module.css";
 import clsx from "clsx";
 import { MapPin, ChevronRight  } from 'lucide-react';
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const mockFacilities = [
   {
@@ -40,21 +41,36 @@ const mockFacilities = [
     name: "RS Mitra Keluarga",
     city: "Bandung",
     distance: "5.7 km",
-  }
+  },
+  {
+    id: 6,
+    type: "Rumah Sakit",
+    name: "RS Mitra Keluarga",
+    city: "Bandung",
+    distance: "5.7 km",
+  },
+  {
+    id: 7,
+    type: "Rumah Sakit",
+    name: "RS Mitra Keluarga",
+    city: "Bandung",
+    distance: "5.7 km",
+  },
 ];
 
 export default function FaskesList() {
   return (
-    <div className="flex flex-row space-x-3">
+    <ScrollArea className="w-[540px] lg:w-[830px] whitespace-nowrap pb-3">
+    <div className="flex space-x-4 pb-4">
       {mockFacilities.map((facility) => (
         <Card
           key={facility.id}
           className={clsx(
             style.faskesCard,
-            'flex w-[200px] px-1 py-4 flex-col items-start gap-2'
+            'flex w-[180px] h-[170px] flex-shrink-0 px-1 py-2 flex-col items-start'
           )}
         >
-          <CardHeader className="pb-3">
+          <CardHeader>
             <div className="flex items-center justify-between">
               <Badge variant="default" className={style.faskesTag}>
                 {facility.type}
@@ -64,10 +80,10 @@ export default function FaskesList() {
           
           <CardContent className="pt-0 space-y-3">
             <div>
-              <CardTitle className="text-[16px] font-light text-gray-900 mb-1">
+              <CardTitle className="text-[14px] font-light text-gray-900 mb-1">
                 {facility.name}
               </CardTitle>
-              <div className="flex items-center text-md text-gray-600">
+              <div className="flex items-center text-[12px] text-gray-600">
                 <MapPin className="w-5 h-5"/>
                 {facility.city}
               </div>
@@ -76,9 +92,9 @@ export default function FaskesList() {
             <Button 
               variant="outline" 
               size="sm" 
-              className="w-full h-10 text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300"
+              className="w-full h-7 text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300"
             >
-              <div className="flex flex-row gap-1">
+              <div className="flex flex-row gap-1 text-xs">
                 <span>Lihat Detail</span>
               <ChevronRight className="w-4 h-4 "/>
               </div>
@@ -87,5 +103,7 @@ export default function FaskesList() {
         </Card>
       ))}
     </div>
+    <ScrollBar orientation="horizontal" />
+    </ScrollArea>
   );
 }

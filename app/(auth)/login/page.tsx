@@ -6,7 +6,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Globe, Facebook } from "lucide-react";
+import { Globe, Facebook, Eye, EyeOff } from "lucide-react";
 import Rumahsakit from "@/public/image_login.png";
 import styles from "@/app/styles/sidebar.module.css";
 import mediQ from "@/public/mediQ.png"
@@ -14,7 +14,7 @@ import { Separator } from "@/components/ui/separator"
 import { useUserStore } from "@/stores/userStore";
 
 const mockUsers = [
-  { id: 1, nama: "Nasywa", email: "john.doe@example.com", password: "password123" },
+  { id: 1, nama: "Nasywa", email: "email", password: "goodpassword" },
   { id: 2, nama: "Jane Smith", email: "jane.smith@example.com", password: "securepassword" },
   { id: 3, nama: "Peter Jones", email: "peter.jones@example.com", password: "strongpassword" }
 ];
@@ -25,6 +25,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     const { setUser } = useUserStore.getState();
@@ -37,8 +38,8 @@ export default function LoginPage() {
     );
 
     if (user) {
-      setUser(user); // simpan ke global store
-      router.push("/beranda"); // pindah ke halaman beranda
+      setUser(user); 
+      router.push("/beranda");
     } else {
       setLoginError("Email atau password salah");
     }
@@ -51,13 +52,13 @@ export default function LoginPage() {
         <Image
           src={Rumahsakit}
           alt="Logo"
-          width={620}
-          height={820}
+          width={500}
+          height={700}
         />
       </div>
 
       {/* Right Side (Form) */}
-      <div className="flex flex-col w-3/8 items-start gap-[120px] p-[44px_64px_32px_64px]">
+      <div className="flex flex-col w-3/8 items-start gap-[50px] p-[44px_64px_32px_64px]">
       {/* Logo */}
         <div>
             <h1 className={styles.titleTypography}>medi
@@ -107,17 +108,24 @@ export default function LoginPage() {
             <label className="text-md font-medium text-gray-700">Kata Sandi</label>
             <div className="relative">
               <Input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Masukkan kata sandi"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="pl-5 w-full py-6"
               />
             </div>
+            <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-2 top-3 text-muted-foreground"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
           </div>
 
           {/* Button Login */}
-          <Button variant="secondary" className="w-full p-7 mt-8">Masuk</Button>
+          <Button onClick={handleLogin} variant="default" className="bg-blue-500 text-xl font-medium w-full p-7 mt-8">Masuk</Button>
 
           {/* Divider */}
           <div className="flex flex-col w-full items-center">

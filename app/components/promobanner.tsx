@@ -11,24 +11,26 @@ import * as React from "react";
 
 export default function Promobanner() {
   return (
-    <div className="w-full max-w-7xl mx-auto">
+    <div className="w-full max-w-[830px] mx-auto justify-start">
       <Carousel
         className="w-full"
-        opts={{ 
+        opts={{
           loop: true,
           align: "start",
         }}
       >
         <CarouselContent className="-ml-2 md:-ml-4">
-          <CarouselItem className="pl-2 md:pl-4">
-            <div className="flex items-center justify-center rounded-[12px] overflow-hidden bg-gradient-to-r from-blue-600 to-blue-400 text-white p-6 h-[210px] w-full">
+          {/* Setiap item memiliki min-width 750px, tapi tetap fluid di layar besar */}
+          <CarouselItem className="pl-2 md:pl-4 min-w-[750px]">
+            <div className="flex items-center justify-center rounded-md overflow-hidden bg-gradient-to-r from-blue-600 to-blue-400 text-white p-6 h-[210px] w-full">
               <div className="text-center">
                 <h3 className="text-2xl font-bold mb-2">Promo Khusus!</h3>
                 <p className="text-lg">Konsultasi dokter gratis untuk 100 pasien pertama</p>
               </div>
             </div>
           </CarouselItem>
-          <CarouselItem className="pl-2 md:pl-4">
+
+          <CarouselItem className="pl-2 md:pl-4 min-w-[750px]">
             <div className="flex items-center justify-center rounded-[12px] overflow-hidden bg-gradient-to-r from-green-600 to-green-400 text-white p-6 h-[207px] w-full">
               <div className="text-center">
                 <h3 className="text-2xl font-bold mb-2">Layanan 24/7</h3>
@@ -36,7 +38,8 @@ export default function Promobanner() {
               </div>
             </div>
           </CarouselItem>
-          <CarouselItem className="pl-2 md:pl-4">
+
+          <CarouselItem className="pl-2 md:pl-4 min-w-[750px]">
             <div className="flex items-center justify-center rounded-[12px] overflow-hidden bg-gradient-to-r from-purple-600 to-purple-400 text-white p-6 h-[207px] w-full">
               <div className="text-center">
                 <h3 className="text-2xl font-bold mb-2">Dokter Terpercaya</h3>
@@ -45,6 +48,7 @@ export default function Promobanner() {
             </div>
           </CarouselItem>
         </CarouselContent>
+
         <CarouselPrevious className="left-4" />
         <CarouselNext className="right-4" />
       </Carousel>

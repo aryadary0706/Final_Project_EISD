@@ -12,6 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import { Eye, EyeOff } from "lucide-react";
 import { Globe, Facebook } from "lucide-react";
 import mediQ from "@/public/mediQ.png"
+import { useUserStore } from "@/stores/userStore";
 
 export default function LoginPage() {
   const [fullName, setFullName] = useState("");
@@ -21,12 +22,45 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
+  const { registerUser } = useUserStore();
+
   const isPasswordValid = password.length >= 8 && /\d/.test(password);
   const isFormValid =
     fullName.trim() !== "" &&
     email.trim() !== "" &&
     isPasswordValid &&
     password === confirmPass;
+
+  const mockUsers = [
+    { id: 1, nama: "Nasywa", email: "email", password: "goodpassword" },
+    { id: 2, nama: "Jane Smith", email: "jane.smith@example.com", password: "securepassword" },
+    { id: 3, nama: "Peter Jones", email: "peter.jones@example.com", password: "strongpassword" }
+  ];
+
+  const currentId = 3;
+  // Handler untuk mendaftarkan pengguna
+  const handleRegister = () => {
+      // Periksa kembali validitas form sebelum mendaftarkan
+      if (isFormValid) {
+        const newUser = {
+          // ID sementara, idealnya dihasilkan dari backend
+          id: currentId + 1,
+          nama: fullName,
+          email: email,
+        };
+        // Panggil fungsi registerUser dari store
+        registerUser(newUser);
+        // Tampilkan notifikasi atau navigasi ke halaman lain setelah berhasil
+        console.log("Pengguna berhasil didaftarkan:", newUser);
+        // Reset form setelah pendaftaran
+        setFullName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPass("");
+      } else {
+        console.error("Form tidak valid");
+      }
+    };
 
   return (
     <div className="min-h-screen flex">
@@ -35,8 +69,8 @@ export default function LoginPage() {
         <Image
           src={Rumahsakit}
           alt="Logo"
-          width={620}
-          height={820}
+          width={500}
+          height={700}
         />
       </div>
 
@@ -114,11 +148,11 @@ export default function LoginPage() {
               </button>
               <div className="mt-2 space-y-1 text-sm text-muted-foreground">
                 <div className="flex items-center space-x-2">
-                  <Checkbox checked={password.length >= 8} readOnly />
+                  <Checkbox checked={password.length >= 8} disabled />
                   <span>Kata sandi minimal 8 karakter</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Checkbox checked={/\d/.test(password)} readOnly />
+                  <Checkbox checked={/\d/.test(password)} disabled />
                   <span>Kata sandi harus mengandung angka (0-9)</span>
                 </div>
               </div>
@@ -146,7 +180,12 @@ export default function LoginPage() {
             </div>
             </div>
 
-            <Button variant="secondary" className="w-full p-6 mt-1" disabled={!isFormValid}>
+            <Button 
+              variant="secondary"
+              className="w-full p-6 mt-1"
+              disabled={!isFormValid}
+              onClick={handleRegister}
+            >
               Buat Akun
             </Button>
 

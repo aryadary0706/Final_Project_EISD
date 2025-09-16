@@ -7,12 +7,12 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex">
       {/* Sidebar kiri (global) */}
       <Sidebar />
 
       {/* Area kanan (dinamis per page) */}
-      <div className="flex flex-1 pl-2">
+      <div className="flex flex-1">
         {children}
     </div>
     </div>

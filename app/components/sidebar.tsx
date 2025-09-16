@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from "@/app/styles/sidebar.module.css";
 import { Button } from '@/components/ui/button';
-import { Home, Search, Clock, User, LogOut } from 'lucide-react';
+import { Home, Search, Clock, User, LogOut, Icon } from 'lucide-react';
 import { Separator } from '@radix-ui/react-separator';
 import clsx from 'clsx';
 import { useUserStore } from '@/stores/userStore';
@@ -63,10 +63,12 @@ export default function Sidebar() {
 
       {/* Logout Button */}
       <div className={styles.logoutContainer}>
-        <Button onClick={handleLogout} className={styles.logoutButton}>
-          <LogOut className="w-5 h-5" />
-          <span>Keluar</span>
-        </Button>
+        <Link href="/login">
+          <Button onClick={handleLogout} className={styles.logoutButton}>
+              <LogOut className="w-5 h-5" />
+            <span>Keluar</span>
+          </Button>
+        </Link>
       </div>
     </aside>
   );
