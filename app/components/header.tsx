@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Search, Bell } from "lucide-react";
 import { useUserStore } from "@/stores/userStore";
+import Link from "next/link";
 
 export default function Header() {
   const [search, setSearch] = useState("");
@@ -17,8 +18,10 @@ export default function Header() {
           <span className="text-base md:text-lg font-semibold text-gray-600">N</span>
         </div>
         <div className="leading-tight">
-          <p className="font-semibold text-sm lg:text-md">Halo, {user?.nama || "Tamu"}</p>
-          <p className="text-gray-500 text-sm lg:text-md">Bagaimana kabarmu?</p>
+          <Link href="/profil">
+            <p className="font-semibold text-sm lg:text-md">Halo, {user?.nama || "Tamu"}</p>
+            <p className="text-gray-500 text-sm lg:text-md">Bagaimana kabarmu?</p>
+          </Link>
         </div>
       </div>
 

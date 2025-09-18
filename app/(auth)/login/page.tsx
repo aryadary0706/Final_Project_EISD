@@ -12,36 +12,26 @@ import styles from "@/app/styles/sidebar.module.css";
 import mediQ from "@/public/mediQ.png"
 import { Separator } from "@/components/ui/separator"
 import { useUserStore } from "@/stores/userStore";
-
-const mockUsers = [
-  { id: 1, nama: "Nasywa", email: "email", password: "goodpassword" },
-  { id: 2, nama: "Jane Smith", email: "jane.smith@example.com", password: "securepassword" },
-  { id: 3, nama: "Peter Jones", email: "peter.jones@example.com", password: "strongpassword" }
-];
-
+import { signIn } from "next-auth/react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState("");
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
-    const { setUser } = useUserStore.getState();
-
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoginError("");
-    
-    const user = mockUsers.find(
-      (u) => u.email === email && u.password === password
-    );
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
 
-    if (user) {
-      setUser(user); 
-      router.push("/beranda");
+    if (result?.error) {
+      alert("Email atau password salah");
     } else {
-      setLoginError("Email atau password salah");
+      // Redirect ke halaman beranda setelah login berhasil
+      window.location.href = "/beranda"; 
     }
   };
 
@@ -86,7 +76,7 @@ export default function LoginPage() {
 
           <div className="flex space-x-1 text-sm items-center">
             <p className="text-black">Belum memiliki akun?</p>
-            <a href="/register" className="text-blue-500 hover:underline">Sign up</a>
+            <a href="/daftar" className="text-blue-500 hover:underline">Sign up</a>
           </div>
 
           {/* Email */}
@@ -114,14 +104,14 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 className="pl-5 w-full py-6"
               />
-            </div>
             <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-2 top-3 text-muted-foreground"
+                className="absolute right-2 top-3 text-muted-foreground pt-1 pr-4"
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
+            </button>
+            </div>
           </div>
 
           {/* Button Login */}
@@ -137,11 +127,11 @@ export default function LoginPage() {
 
           {/* Social Login */}
             <div className="flex gap-2 w-full">
-              <Button onClick={handleLogin} variant="outline" className="flex-1 flex items-center gap-2">
+              <Button onClick={() => signIn("google")} variant="outline" className="flex-1 flex items-center gap-2">
                 <Globe className="h-5 w-5" />
                 Google
               </Button>
-              <Button onClick={handleLogin} variant="outline" className="flex-1 flex items-center gap-2">
+              <Button onClick={() => signIn("facebook")} variant="outline" className="flex-1 flex items-center gap-2">
                 <Facebook className="h-5 w-5 text-blue-600" />
                 Facebook
               </Button>

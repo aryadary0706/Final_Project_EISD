@@ -75,7 +75,7 @@ export default function ScheduleMeet() {
   );
 
   return (
-    <div className="flex w-[580px] lg:w-[400px] flex-col h-full py-6 px-4 lg:px-6 bg-gray-50 border border-l-2 border-gray-200">
+    <div className="flex w-[820px] lg:w-[400px] flex-col h-full py-6 px-4 lg:px-6 bg-gray-50 border border-l-2 border-gray-200">
       {/* Header */}
       <div className="flex justify-between items-center self-stretch mb-5">
         <h2 className="font-semibold text-[15px]">Jadwal Temu Mendatang</h2>
@@ -87,7 +87,7 @@ export default function ScheduleMeet() {
         {/* MOBILE: Horizontal Scroll (≤ lg) */}
         <div className="lg:hidden">
           {/* Fixed size container for mobile */}
-          <div className="w-[540px] h-[240px] overflow-hidden">
+          <div className="w-[768px] h-[240px] overflow-hidden">
             <ScrollArea className="w-full h-full">
               <div className="flex gap-6 pr-4 pb-2">
                 {sortedDates.map((date) => (

@@ -21,7 +21,7 @@ import clsx from 'clsx';
 
 export default function SettingsAccount() {
   return (
-    <Card className="w-96">
+    <Card className="w-84 rounded-0">
       {/* Pengaturan Akun */}
       <CardHeader>
         <CardTitle className="text-xl font-semibold">

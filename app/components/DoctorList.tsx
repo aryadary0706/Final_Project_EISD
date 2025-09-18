@@ -38,7 +38,7 @@ const mockDoctors = [
 
 export default function DoctorList() {
   return (
-    <ScrollArea className="w-[540px] lg:w-[830px] whitespace-nowrap pb-10">
+    <ScrollArea className="w-[820px] lg:w-[830px] whitespace-nowrap pb-10">
     <div className="flex space-x-4 overflow-x-auto pb-2">
       {mockDoctors.map((doctor) => (
         <Link key={doctor.id} href="#" className="w-fit flex-shrink-0">

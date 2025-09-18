@@ -5,47 +5,80 @@ import Promobanner from "@/app/components/promobanner";
 import DoctorList from "@/app/components/DoctorList";
 import FaskesList from "@/app/components/faskesList";
 import ScheduleMeet from "@/app/components/Schedulelist";
-import * as React from "react";
+import { useSession } from "next-auth/react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useUserStore } from "@/stores/userStore";
 
 export default function Beranda() {
-  return (
-    <div className="flex flex-row">
-      {/* Kolom utama */}
-      <div className="flex-1 flex flex-col">
-        <Header />
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
 
-        {/* Konten utama */}
-        <main className="flex-1 mt-4 space-y-8 px-6">
-          <section>
-            <Promobanner/>
-          </section>  
-          <section>
-            <div className="block lg:hidden w-full">
-                <ScheduleMeet/>
-            </div>
-          </section>
-          <section>
-            <h2 className="text-[16px] mb-4 text-lg">
-              Fasilitas Kesehatan Terdekat
-            </h2>
-            <FaskesList />
-          </section>
-          <section>
-            <div>
-              <h2 className="text-[16px] mb-4 text-lg"> 
-                Dokter Pilihan Pasien
+  useEffect(() => {
+      // Cek status sesi setelah komponen terpasang (mounted)
+      if (status === "loading") {
+          setIsLoading(true);
+          return;
+      } else {
+          setIsLoading(false);
+          // Jika sesi tidak terautentikasi, alihkan ke halaman login
+          if (status === "unauthenticated") {
+              router.push("/login");
+          }
+      }
+  }, [status, router]);
+
+  // Tampilkan pesan loading jika sedang dalam proses
+  if (isLoading) {
+      return (
+          <div className="flex justify-center items-center h-screen">
+              <p className="text-xl">Memuat...</p>
+          </div>
+      );
+  }
+
+  if (session) {
+    return (
+      <div className="flex flex-row">
+        {/* Kolom utama */}
+        <div className="flex-1 flex flex-col">
+          <Header />
+
+          {/* Konten utama */}
+          <main className="flex-1 mt-4 space-y-8 px-6">
+            <section>
+              <Promobanner/>
+            </section>  
+            <section>
+              <div className="block lg:hidden w-full">
+                  <ScheduleMeet/>
+              </div>
+            </section>
+            <section>
+              <h2 className="text-[16px] mb-4 text-lg">
+                Fasilitas Kesehatan Terdekat
               </h2>
-              <DoctorList />
-            </div>
-            
-          </section>
-        </main>
-      </div>
+              <FaskesList />
+            </section>
+            <section>
+              <div>
+                <h2 className="text-[16px] mb-4 text-lg"> 
+                  Dokter Pilihan Pasien
+                </h2>
+                <DoctorList />
+              </div>
+              
+            </section>
+          </main>
+        </div>
 
-      {/* Kolom kanan (optional) */}
-      <div className="flex-1 hidden lg:flex">
-          <ScheduleMeet/>
+        {/* Kolom kanan (optional) */}
+        <div className="flex-1 hidden lg:flex">
+            <ScheduleMeet/>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+ 
 }

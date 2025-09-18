@@ -12,9 +12,9 @@ type User = {
   golonganDarah?: string;
   alergi?: string;
   alamat?: {
-    negara: string;
-    kota: string;
-    kodePos: string;
+    negara?: string;
+    kota?: string;
+    kodePos?: string;
   };
 };
 

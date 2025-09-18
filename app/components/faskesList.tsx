@@ -60,7 +60,7 @@ const mockFacilities = [
 
 export default function FaskesList() {
   return (
-    <ScrollArea className="w-[540px] lg:w-[830px] whitespace-nowrap pb-3">
+    <ScrollArea className="w-[820px] lg:w-[830px] whitespace-nowrap pb-3">
     <div className="flex space-x-4 pb-4">
       {mockFacilities.map((facility) => (
         <Card
