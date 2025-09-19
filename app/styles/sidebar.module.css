@@ -110,17 +110,6 @@
     .titleTypography {
         font-size: 0; /* Sembunyikan teks "mediQ" */
     }
-
-    /* Tampilkan hanya huruf 'Q' */
-    /* .titleTypography::before {
-        content: "Q";
-        font-size: 32px;
-        background: linear-gradient(90deg, #59A5F5 0%, #B8DAFE 54.4%, #59A5F5 100%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    } */
-
     .navbar {
         padding: 0;
         align-items: start;

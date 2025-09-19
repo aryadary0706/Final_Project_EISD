@@ -14,25 +14,35 @@ import { Separator } from "@/components/ui/separator"
 import { useUserStore } from "@/stores/userStore";
 import { signIn } from "next-auth/react";
 
+const mockUsers = [
+  { id: 1, name: "Nasywa", email: "email", password: "goodpassword" },
+  { id: 2, name: "Jane Smith", email: "jane.smith@example.com", password: "securepassword" },
+  { id: 3, name: "Peter Jones", email: "peter.jones@example.com", password: "strongpassword" }
+];
+
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState("");
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
+    const { setUser } = useUserStore.getState();
+
     e.preventDefault();
-    const result = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
+    setLoginError("");
+    
+    const user = mockUsers.find(
+      (u) => u.email === email && u.password === password
+    );
 
-    if (result?.error) {
-      alert("Email atau password yang anda masukkan salah");
-    } else {
-      // Redirect ke halaman beranda setelah login berhasil
+    if (user) {
+      setUser(user); 
       router.push("/beranda");
+    } else {
+      console.error("Login gagal: email atau password salah")
+      setLoginError("Email atau password salah");
     }
   };
 

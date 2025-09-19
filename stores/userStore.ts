@@ -23,14 +23,26 @@ type UserState = {
   setUser: (user: User) => void;
   updateUser: (partialUser: Partial<User>) => void;
   clearUser: () => void;
+  registerUser: (user: User) => void;
 };
 
 export const useUserStore = create<UserState>((set) => ({
   user: null,
   setUser: (user) => set({ user }),
   updateUser: (partialUser) =>
-    set((state) =>
-      state.user ? { user: { ...state.user, ...partialUser } } : state
-    ),
-  clearUser: () => set({ user: null })
+  set((state) => {
+    if (!state.user) return state;
+
+    return {
+      user: {
+        ...state.user,
+        ...partialUser,
+        alamat: partialUser.alamat
+          ? { ...state.user.alamat, ...partialUser.alamat }
+          : state.user.alamat,
+      },
+    };
+  }),
+  clearUser: () => set({ user: null }),
+  registerUser: (user) => set({ user }),
 }));

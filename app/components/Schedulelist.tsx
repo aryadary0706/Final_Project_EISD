@@ -126,9 +126,9 @@ export default function ScheduleMeet() {
       </div>
 
       {/* Action Button */}
-      <Button className="flex w-50 lg:w-full justify-between p-[32px] items-center self-stretch bg-blue-500 hover:bg-blue-400">
-        <h3 className="font-medium text-[14 px]">Buat Jadwal Baru</h3>
-        <BadgePlus className="w-10 h-10" />
+      <Button className="w-50 lg:w-full justify-between p-[32px] items-center bg-blue-400 hover:bg-blue-500">
+        <h3 className="font-medium text-[16px]">Buat Jadwal Baru</h3>
+        <BadgePlus className="w-16 h-16" />
       </Button>
     </div>
   );
@@ -149,9 +149,9 @@ function AppointmentCard({ appt, isMobile }: { appt: Appointment; isMobile: bool
         </div>
 
         {/* Body: Two Columns */}
-        <div className="flex flex-col md:flex-row h-full">
+        <div className="flex flex-col md:flex-row h-full items-center">
           {/* Left Column: Queue */}
-          <div className="flex-1 flex flex-col justify-start">
+          <div className="flex-1 flex flex-col">
             <p className="text-md text-gray-400">Antrian</p>
             <p className="text-4xl font-bold">{appt.queue.toString().padStart(2, "0")}</p>
           </div>
@@ -159,8 +159,8 @@ function AppointmentCard({ appt, isMobile }: { appt: Appointment; isMobile: bool
           <Separator/>
 
           {/* Right Column: Date & Time */}
-          <div className="flex-1 flex flex-col gap-3">
-            <div className="flex items-center gap-2 justify-between">
+          <div className="flex-1 flex flex-col gap-3 justify-start">
+            <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-gray-500" />
               <p className="text-xs font-medium">
                 {format(appt.date, "dd MMMM yyyy", { locale: LocaleID })}

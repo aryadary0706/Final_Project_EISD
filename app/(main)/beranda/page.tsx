@@ -5,40 +5,9 @@ import Promobanner from "@/app/components/promobanner";
 import DoctorList from "@/app/components/DoctorList";
 import FaskesList from "@/app/components/faskesList";
 import ScheduleMeet from "@/app/components/Schedulelist";
-import { useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 export default function Beranda() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-      // Cek status sesi setelah komponen terpasang (mounted)
-      if (status === "loading") {
-          setIsLoading(true);
-          return;
-      } else {
-          setIsLoading(false);
-          // Jika sesi tidak terautentikasi, alihkan ke halaman login
-          if (status === "unauthenticated") {
-              router.push("/login");
-          }
-      }
-  }, [status, router]);
-
-  // Tampilkan pesan loading jika sedang dalam proses
-  if (isLoading) {
-      return (
-          <div className="flex justify-center items-center h-screen">
-              <p className="text-xl">Memuat...</p>
-          </div>
-      );
-  }
-
-  if (session) {
     return (
       <div className="flex flex-row w-full">
       {/* Kolom utama */}
@@ -84,6 +53,4 @@ export default function Beranda() {
       </div>
     </div>
     );
-  }
- 
 }

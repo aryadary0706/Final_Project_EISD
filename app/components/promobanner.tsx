@@ -31,7 +31,7 @@ export default function Promobanner() {
           </CarouselItem>
 
           <CarouselItem className="pl-2 md:pl-4 min-w-[120px]">
-            <div className="flex items-center justify-center rounded-[12px] overflow-hidden bg-gradient-to-r from-green-600 to-green-400 text-white p-6 h-[207px] w-full">
+            <div className="flex items-center justify-center rounded-[12px] overflow-hidden bg-gradient-to-r from-green-600 to-green-400 text-white p-6 h-[240px] w-full">
               <div className="text-center">
                 <h3 className="text-2xl font-bold mb-2">Layanan 24/7</h3>
                 <p className="text-lg">Akses layanan kesehatan kapan saja, di mana saja</p>
@@ -40,7 +40,7 @@ export default function Promobanner() {
           </CarouselItem>
 
           <CarouselItem className="pl-2 md:pl-4 min-w-[120px]">
-            <div className="flex items-center justify-center rounded-[12px] overflow-hidden bg-gradient-to-r from-purple-600 to-purple-400 text-white p-6 h-[207px] w-full">
+            <div className="flex items-center justify-center rounded-[12px] overflow-hidden bg-gradient-to-r from-purple-600 to-purple-400 text-white p-6 h-[240px] w-full">
               <div className="text-center">
                 <h3 className="text-2xl font-bold mb-2">Dokter Terpercaya</h3>
                 <p className="text-lg">Tim dokter berpengalaman siap melayani Anda</p>

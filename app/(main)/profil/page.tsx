@@ -25,23 +25,10 @@ export default function ProfilePage() {
   const updateUser = useUserStore((state) => state.updateUser);
   const [UpdateForm, setUpdateForm] = useState(false);
   const [UpdateBotForm, setUpdateBotForm] = useState(false);
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
-  
-  useEffect(() => {
-      // Cek status sesi setelah komponen terpasang (mounted)
-      if (status === "loading") {
-          setIsLoading(true);
-          return;
-      } else {
-          setIsLoading(false);
-          // Jika sesi tidak terautentikasi, alihkan ke halaman login
-          if (status === "unauthenticated") {
-              router.push("/login");
-          }
-      }
-  }, [status, router]);
+
+  const handleAllergiesChange = (value: string) => {
+    updateUser({ alergi: value });
+  };
 
   const handleGenderChange = (gender: string) => {
     setSelectedGender(gender);
@@ -51,10 +38,6 @@ export default function ProfilePage() {
   const handleBloodtypeChange = (bloodtype: string) => {
     setSelectedBloodtype(bloodtype);
     updateUser({ golonganDarah: bloodtype });
-  };
-
-  const handleAllergiesChange = (value: string) => {
-    updateUser({ alergi: value });
   };
 
   const genderOptions = [
@@ -69,16 +52,6 @@ export default function ProfilePage() {
     { value: 'AB', label: 'AB' },
   ];
 
-  // Tampilkan pesan loading jika sedang dalam proses
-  if (isLoading) {
-      return (
-          <div className="flex justify-center items-center h-screen">
-              <p className="text-xl">Memuat...</p>
-          </div>
-      );
-  }
-
-  if (session){
       return (
         <div className='flex flex-row'>
         <main className="flex flex-col items-start px-6 pt-11 pb-8 gap-4">
@@ -290,10 +263,7 @@ export default function ProfilePage() {
                   readOnly={!UpdateBotForm}
                   onChange={(e) => {
                     updateUser({
-                      alamat: {
-                        ...user?.alamat, // penting! jaga field lain tetap ada
-                        negara: e.target.value,
-                      },
+                      alamat: { negara: e.target.value },
                     });
                   }}
                   />
@@ -308,10 +278,7 @@ export default function ProfilePage() {
                   readOnly={!UpdateBotForm}
                   onChange={(e) => {
                     updateUser({
-                      alamat: {
-                        ...user?.alamat,
-                        kota: e.target.value,
-                      },
+                      alamat: { kota: e.target.value },
                     });
                   }}
                   />
@@ -327,10 +294,7 @@ export default function ProfilePage() {
                 readOnly={!UpdateBotForm}
                 onChange={(e) => {
                   updateUser({
-                    alamat: {
-                      ...user?.alamat,
-                      kodePos: e.target.value,
-                    },
+                    alamat: { kodePos: e.target.value },
                   });
                 }}
                 />
@@ -349,5 +313,4 @@ export default function ProfilePage() {
       </div>
       
     );
-  }
 }

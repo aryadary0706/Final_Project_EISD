@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google"; // Import Poppins
 import "./globals.css";
-import { Providers } from "./providers";
 
 
 // Definisikan Poppins dengan varian yang dibutuhkan
@@ -27,9 +26,7 @@ export default function RootLayout({
     <html lang="en">
       {/* Terapkan variabel font ke body */}
       <body className={`${poppins.variable} font-sans antialiased`}>
-          <Providers>
             {children}
-          </Providers>
       </body>
     </html>
   );

@@ -9,7 +9,6 @@ import { Home, Search, Clock, User, LogOut, Icon } from 'lucide-react';
 import { Separator } from '@radix-ui/react-separator';
 import clsx from 'clsx';
 import { useUserStore } from '@/stores/userStore';
-import { signOut } from 'next-auth/react';
 
 const navItems = [
   { name: 'Beranda', href: '/beranda', icon: <Home className="w-6 h-6" /> },
@@ -20,19 +19,10 @@ const navItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { user } = useUserStore(); // ✅ Ambil user dari store
+  const { clearUser } = useUserStore(); // ✅ Ambil user dari store
 
-  const handleLogout = async () => {
-    // Panggil fungsi signOut untuk mengakhiri sesi
-    await signOut({ callbackUrl: '/login' });
-  };
-
-  // ✅ Fungsi untuk dapatkan href yang benar berdasarkan user
-  const getHref = (item: (typeof navItems)[0]) => {
-    if (item.name === 'Profil' && (!user || user.name === "Tamu")) {
-      return '/login'; // Redirect tamu ke login
-    }
-    return item.href;
+  const handleLogout = () => {
+    clearUser();
   };
 
   return (
@@ -53,17 +43,15 @@ export default function Sidebar() {
         <h4 className={styles.menuTypography}>Menu</h4>
         <nav className="flex flex-col space-y-2 w-full">
           {navItems.map((item) => {
-            const targetHref = getHref(item); // ✅ Dapatkan href yang benar
-
             // Perbaiki logika active berdasarkan targetHref, bukan item.href
-            const isActive = pathname === targetHref || 
-              (targetHref === '/' && pathname === '/') ||
-              (targetHref !== '/' && pathname.startsWith(targetHref));
+            const isActive = pathname === item.href || 
+              (item.href === '/' && pathname === '/') ||
+              (item.href !== '/' && pathname.startsWith(item.href));
 
             return (
               <Link
                 key={item.name}
-                href={targetHref} // ✅ Pakai href yang sudah disesuaikan
+                href={item.href} // ✅ Pakai href yang sudah disesuaikan
                 className={clsx(styles.navItem, {
                   [styles.activeNavItem]: isActive,
                 })}

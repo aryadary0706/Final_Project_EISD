@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { useUserStore } from "@/stores/userStore";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,8 @@ export default function LoginPage() {
   const [showConfirm, setShowConfirm] = useState(false);
   const router = useRouter();
 
+  const { registerUser } = useUserStore();
+
   const isPasswordValid = password.length >= 8 && /\d/.test(password);
   const isFormValid =
     fullName.trim() !== "" &&
@@ -30,51 +32,30 @@ export default function LoginPage() {
     isPasswordValid &&
     password === confirmPass;
 
-  const handleRegister = async () => {
-    if (!isFormValid) {
-      console.error("Form tidak valid");
-      return;
-    }
-
-    try {
-      // 1. Kirim data ke API register
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+  const currentId = 3;
+  // Handler untuk mendaftarkan pengguna
+  const handleRegister = () => {
+      // Periksa kembali validitas form sebelum mendaftarkan
+      if (isFormValid) {
+        const newUser = {
+          // ID sementara, idealnya dihasilkan dari backend
+          id: currentId + 1,
           name: fullName,
           email: email,
-          password: password,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        alert(data.error || "Gagal mendaftar");
-        return;
-      }
-
-      // 2. Login otomatis setelah registrasi
-      const signInResult = await signIn("credentials", {
-        redirect: false,
-        email: email,
-        password: password,
-      });
-
-      if (signInResult?.error) {
-        alert("Registrasi berhasil, tapi login gagal. Silakan login manual.");
+        };
+        // Panggil fungsi registerUser dari store
+        registerUser(newUser);
+        // Tampilkan notifikasi atau navigasi ke halaman lain setelah berhasil
+        console.log("Pengguna berhasil didaftarkan:", newUser);
+        // Reset form setelah pendaftaran
+        setFullName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPass("");
       } else {
-        console.log("✅ Registrasi & login berhasil!");
-        router.push("/"); // Redirect ke halaman utama
+        console.error("Form tidak valid");
       }
-    } catch (error: any) {
-      console.error("Error:", error);
-      alert("Terjadi kesalahan. Silakan coba lagi.");
-    }
-  };
+    };
 
   return (
     <div className="min-h-screen flex">
