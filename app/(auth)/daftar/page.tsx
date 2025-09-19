@@ -1,7 +1,8 @@
-// app/(auth)/login/page.tsx
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,8 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Eye, EyeOff } from "lucide-react";
 import { Globe, Facebook } from "lucide-react";
-import mediQ from "@/public/mediQ.png"
-import { useUserStore } from "@/stores/userStore";
+import mediQ from "@/public/mediQ.png";
 
 export default function LoginPage() {
   const [fullName, setFullName] = useState("");
@@ -21,8 +21,7 @@ export default function LoginPage() {
   const [confirmPass, setConfirmPass] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-
-  const { registerUser } = useUserStore();
+  const router = useRouter();
 
   const isPasswordValid = password.length >= 8 && /\d/.test(password);
   const isFormValid =
@@ -31,36 +30,51 @@ export default function LoginPage() {
     isPasswordValid &&
     password === confirmPass;
 
-  const mockUsers = [
-    { id: 1, nama: "Nasywa", email: "email", password: "goodpassword" },
-    { id: 2, nama: "Jane Smith", email: "jane.smith@example.com", password: "securepassword" },
-    { id: 3, nama: "Peter Jones", email: "peter.jones@example.com", password: "strongpassword" }
-  ];
+  const handleRegister = async () => {
+    if (!isFormValid) {
+      console.error("Form tidak valid");
+      return;
+    }
 
-  const currentId = 3;
-  // Handler untuk mendaftarkan pengguna
-  const handleRegister = () => {
-      // Periksa kembali validitas form sebelum mendaftarkan
-      if (isFormValid) {
-        const newUser = {
-          // ID sementara, idealnya dihasilkan dari backend
-          id: currentId + 1,
-          nama: fullName,
+    try {
+      // 1. Kirim data ke API register
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: fullName,
           email: email,
-        };
-        // Panggil fungsi registerUser dari store
-        registerUser(newUser);
-        // Tampilkan notifikasi atau navigasi ke halaman lain setelah berhasil
-        console.log("Pengguna berhasil didaftarkan:", newUser);
-        // Reset form setelah pendaftaran
-        setFullName("");
-        setEmail("");
-        setPassword("");
-        setConfirmPass("");
-      } else {
-        console.error("Form tidak valid");
+          password: password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.error || "Gagal mendaftar");
+        return;
       }
-    };
+
+      // 2. Login otomatis setelah registrasi
+      const signInResult = await signIn("credentials", {
+        redirect: false,
+        email: email,
+        password: password,
+      });
+
+      if (signInResult?.error) {
+        alert("Registrasi berhasil, tapi login gagal. Silakan login manual.");
+      } else {
+        console.log("✅ Registrasi & login berhasil!");
+        router.push("/"); // Redirect ke halaman utama
+      }
+    } catch (error: any) {
+      console.error("Error:", error);
+      alert("Terjadi kesalahan. Silakan coba lagi.");
+    }
+  };
 
   return (
     <div className="min-h-screen flex">
@@ -76,17 +90,18 @@ export default function LoginPage() {
 
       {/* Right Side (Form) */}
       <div className="flex flex-col w-3/8 items-start gap-[32px] p-[44px_64px_32px_64px]">
-      {/* Logo */}
+        {/* Logo */}
         <div>
-            <h1 className={styles.titleTypography}>medi
+          <h1 className={styles.titleTypography}>
+            medi
             <Image
-                src={mediQ}
-                alt="Q"
-                width={26}
-                height={32}
-                className="ml-1"
+              src={mediQ}
+              alt="Q"
+              width={26}
+              height={32}
+              className="ml-1"
             />
-            </h1>
+          </h1>
         </div>
         <div className="flex flex-col items-start self-stretch gap-[32px] max-w-xl">
           {/* Header */}
@@ -116,9 +131,9 @@ export default function LoginPage() {
             />
           </div>
 
-            {/* Email */}
-            <div className="space-y-1 w-full">
-              <label className="text-md font-[600px] text-gray-700"> Email</label>
+          {/* Email */}
+          <div className="space-y-1 w-full">
+            <label className="text-md font-[600px] text-gray-700"> Email</label>
             <Input
               type="email"
               placeholder="mediQ@gmail.com"
@@ -126,11 +141,11 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               className="pl-5 w-full py-5"
             />
-            </div>
+          </div>
 
-           {/* Password */}
-           <div className="space-y-1 w-full">
-              <label className="text-md font-[600px] text-gray-700"> Kata Sandi</label>
+          {/* Password */}
+          <div className="space-y-1 w-full">
+            <label className="text-md font-[600px] text-gray-700"> Kata Sandi</label>
             <div className="relative">
               <Input
                 type={showPassword ? "text" : "password"}
@@ -157,12 +172,12 @@ export default function LoginPage() {
                 </div>
               </div>
             </div>
-           </div>
-           
-            {/* Confirm Password */}
-            <div className="w-full">
-              <label className="text-md font-[600px] text-gray-700">Konfirmasi Kata Sandi</label>
-              <div className="relative">
+          </div>
+
+          {/* Confirm Password */}
+          <div className="w-full">
+            <label className="text-md font-[600px] text-gray-700">Konfirmasi Kata Sandi</label>
+            <div className="relative">
               <Input
                 type={showConfirm ? "text" : "password"}
                 placeholder="Masukkan kata sandi"
@@ -178,40 +193,39 @@ export default function LoginPage() {
                 {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
-            </div>
+          </div>
 
-            <Button 
-              variant="secondary"
-              className="w-full p-6 mt-1"
-              disabled={!isFormValid}
-              onClick={handleRegister}
-            >
-              Buat Akun
-            </Button>
+          <Button
+            variant="secondary"
+            className="w-full p-6 mt-1"
+            disabled={!isFormValid}
+            onClick={handleRegister}
+          >
+            Buat Akun
+          </Button>
 
-            {/* Divider */}
-            <div className="flex flex-col w-full items-center">
-              <div className="flex items-center pt-1 pb-3">
+          {/* Divider */}
+          <div className="flex flex-col w-full items-center">
+            <div className="flex items-center pt-1 pb-3">
               <Separator className="flex-1" />
               <span className="text-md text-gray-600">Atau lanjutkan dengan</span>
               <Separator className="flex-1" />
             </div>
 
             {/* Social Login */}
-              <div className="flex gap-2 w-full">
-                <Button variant="outline" className="flex-1 flex items-center gap-2">
-                  <Globe className="h-5 w-5" />
-                  Google
-                </Button>
-                <Button variant="outline" className="flex-1 flex items-center gap-2">
-                  <Facebook className="h-5 w-5 text-blue-600" />
-                  Facebook
-                </Button>
-              </div>
+            <div className="flex gap-2 w-full">
+              <Button variant="outline" className="flex-1 flex items-center gap-2">
+                <Globe className="h-5 w-5" />
+                Google
+              </Button>
+              <Button variant="outline" className="flex-1 flex items-center gap-2">
+                <Facebook className="h-5 w-5 text-blue-600" />
+                Facebook
+              </Button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
-

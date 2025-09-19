@@ -27,25 +27,7 @@ const mockAppointments = [
     queue: 2,
     date: new Date(2025, 8, 7),
     time: "13:00 WIB - 13:15 WIB",
-  },
-  {
-    id: 3,
-    href: "#",
-    specialty: "Dokter Umum",
-    facility: "RS Medic Center",
-    queue: 3,
-    date: new Date(2025, 8, 10),
-    time: "13:00 WIB - 13:15 WIB",
-  },
-  {
-    id: 4,
-    href: "#",
-    specialty: "Dokter Umum",
-    facility: "RS Medic Center",
-    queue: 4,
-    date: new Date(2025, 8, 12),
-    time: "13:00 WIB - 13:15 WIB",
-  },
+  }
 ];
 
 type Appointment = {
@@ -75,7 +57,7 @@ export default function ScheduleMeet() {
   );
 
   return (
-    <div className="flex w-[820px] lg:w-[400px] flex-col h-full py-6 px-4 lg:px-6 bg-gray-50 border border-l-2 border-gray-200">
+    <div className="justify-end flex w-full lg:h-full flex-col h-full py-6 px-4 bg-gray-50 border-l-2 border-gray-200">
       {/* Header */}
       <div className="flex justify-between items-center self-stretch mb-5">
         <h2 className="font-semibold text-[15px]">Jadwal Temu Mendatang</h2>
@@ -87,7 +69,7 @@ export default function ScheduleMeet() {
         {/* MOBILE: Horizontal Scroll (≤ lg) */}
         <div className="lg:hidden">
           {/* Fixed size container for mobile */}
-          <div className="w-[768px] h-[240px] overflow-hidden">
+          <div className="w-full h-[240px] overflow-hidden">
             <ScrollArea className="w-full h-full">
               <div className="flex gap-6 pr-4 pb-2">
                 {sortedDates.map((date) => (
@@ -114,11 +96,11 @@ export default function ScheduleMeet() {
         </div>
 
         {/* DESKTOP: Vertical Scroll (> lg) */}
-        <div className="hidden lg:flex flex-col h-[800px]">
+        <div className="hidden lg:flex flex-col">
           {/* Fixed size container for desktop */}
-          <div className="w-[420px] h-[1024px] overflow-hidden">
-            <ScrollArea className="w-full h-[800px]">
-              <div className="flex flex-col space-y-6 pb-4">
+          <div className="w-full h-full">
+            <ScrollArea className="h-[100vh]">
+              <div className="flex flex-col space-y-6 pb-4 items-center">
                 {sortedDates.map((date) => (
                   <div key={date} className="flex flex-col">
                     {/* Tanggal */}
@@ -156,7 +138,7 @@ function AppointmentCard({ appt, isMobile }: { appt: Appointment; isMobile: bool
   return (
     <Link href={appt.href} className="text-left rounded-md">
       <Card
-        className={`flex flex-col ${isMobile ? "w-[280px] h-[200px]" : "w-[320px] h-[180px]"} p-[20px] gap-[4px] rounded-lg border bg-white`}
+        className={`flex flex-col ${isMobile ? "w-[280px] h-[200px]" : "w-[350px] h-[180px]"} p-[20px] gap-[4px] rounded-lg border bg-white`}
       >
         {/* Header */}
         <div className="flex items-center gap-2 mb-4">

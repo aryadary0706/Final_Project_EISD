@@ -18,6 +18,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,10 +29,10 @@ export default function LoginPage() {
     });
 
     if (result?.error) {
-      alert("Email atau password salah");
+      alert("Email atau password yang anda masukkan salah");
     } else {
       // Redirect ke halaman beranda setelah login berhasil
-      window.location.href = "/beranda"; 
+      router.push("/beranda");
     }
   };
 
@@ -127,11 +128,11 @@ export default function LoginPage() {
 
           {/* Social Login */}
             <div className="flex gap-2 w-full">
-              <Button onClick={() => signIn("google")} variant="outline" className="flex-1 flex items-center gap-2">
+              <Button variant="outline" className="flex-1 flex items-center gap-2">
                 <Globe className="h-5 w-5" />
                 Google
               </Button>
-              <Button onClick={() => signIn("facebook")} variant="outline" className="flex-1 flex items-center gap-2">
+              <Button variant="outline" className="flex-1 flex items-center gap-2">
                 <Facebook className="h-5 w-5 text-blue-600" />
                 Facebook
               </Button>

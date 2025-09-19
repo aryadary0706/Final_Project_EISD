@@ -20,7 +20,7 @@ const navItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { clearUser, user } = useUserStore(); // ✅ Ambil user dari store
+  const { user } = useUserStore(); // ✅ Ambil user dari store
 
   const handleLogout = async () => {
     // Panggil fungsi signOut untuk mengakhiri sesi
@@ -29,7 +29,7 @@ export default function Sidebar() {
 
   // ✅ Fungsi untuk dapatkan href yang benar berdasarkan user
   const getHref = (item: (typeof navItems)[0]) => {
-    if (item.name === 'Profil' && (!user || user.nama === "Tamu")) {
+    if (item.name === 'Profil' && (!user || user.name === "Tamu")) {
       return '/login'; // Redirect tamu ke login
     }
     return item.href;

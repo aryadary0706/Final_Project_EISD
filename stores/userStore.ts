@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 type User = {
   id: number;
-  nama: string;
+  name: string;
   email: string;
   umur?: number;
   beratBadan?: number;
@@ -23,7 +23,6 @@ type UserState = {
   setUser: (user: User) => void;
   updateUser: (partialUser: Partial<User>) => void;
   clearUser: () => void;
-  registerUser: (user: User) => void;
 };
 
 export const useUserStore = create<UserState>((set) => ({
@@ -33,6 +32,5 @@ export const useUserStore = create<UserState>((set) => ({
     set((state) =>
       state.user ? { user: { ...state.user, ...partialUser } } : state
     ),
-  clearUser: () => set({ user: null }),
-  registerUser: (user) => set({ user }),
+  clearUser: () => set({ user: null })
 }));

@@ -11,10 +11,10 @@ export default function MainLayout({
       {/* Sidebar kiri (global) */}
       <Sidebar />
 
-      {/* Area kanan (dinamis per page) */}
-      <div className="flex flex-1">
-        {children}
-    </div>
+        {/* Area kanan (dinamis per page) */}
+        <div className="w-full">
+          {children}
+      </div>
     </div>
   );
 }

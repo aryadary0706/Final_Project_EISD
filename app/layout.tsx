@@ -27,9 +27,9 @@ export default function RootLayout({
     <html lang="en">
       {/* Terapkan variabel font ke body */}
       <body className={`${poppins.variable} font-sans antialiased`}>
-        <Providers>
-          {children}
-        </Providers>
+          <Providers>
+            {children}
+          </Providers>
       </body>
     </html>
   );

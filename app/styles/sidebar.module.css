@@ -1,6 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     width: 215px;
     height: auto;
     padding: 32px 0;
@@ -102,7 +103,7 @@
 @media (max-width: 1024px) {
     .container {
         display: flex;
-        min-width: 85; /* Lebar diperkecil */
+        width: 85px; /* Lebar diperkecil */
         align-items: center;
     }
 
@@ -111,14 +112,14 @@
     }
 
     /* Tampilkan hanya huruf 'Q' */
-    .titleTypography::before {
+    /* .titleTypography::before {
         content: "Q";
-        font-size: 32px; /* Atur ukuran font untuk huruf 'Q' */
+        font-size: 32px;
         background: linear-gradient(90deg, #59A5F5 0%, #B8DAFE 54.4%, #59A5F5 100%);
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-    }
+    } */
 
     .navbar {
         padding: 0;
