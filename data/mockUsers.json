@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Jane Doe",
+    "email": "jane.doe@example.com",
+    "umur": 32,
+    "beratBadan": 65,
+    "tinggiBadan": 165,
+    "gender": "perempuan",
+    "golonganDarah": "A+",
+    "alergi": "Kacang",
+    "alamat": {
+      "negara": "Indonesia",
+      "kota": "Jakarta",
+      "kodePos": "10110"
+    }
+  },
+  {
+    "id": 2,
+    "name": "John Smith",
+    "email": "john.smith@example.com",
+    "umur": 45,
+    "beratBadan": 80,
+    "tinggiBadan": 178,
+    "gender": "laki-laki",
+    "golonganDarah": "B-",
+    "alergi": "Debu",
+    "alamat": {
+      "negara": "Indonesia",
+      "kota": "Bandung",
+      "kodePos": "40111"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Emily White",
+    "email": "emily.white@example.com",
+    "umur": 28,
+    "beratBadan": 58,
+    "tinggiBadan": 160,
+    "gender": "perempuan",
+    "golonganDarah": "O+",
+    "alergi": null,
+    "alamat": {
+      "negara": "Indonesia",
+      "kota": "Surabaya",
+      "kodePos": "60112"
+    }
+  }
+]

@@ -2,7 +2,7 @@
 
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { compareAsc, format } from "date-fns";
 import { id as LocaleID } from "date-fns/locale";
 import { Calendar, Clock, BadgePlus } from "lucide-react";
@@ -22,7 +22,7 @@ const mockAppointments = [
   {
     id: 2,
     href: "#",
-    specialty: "Dokter Umum",
+    specialty: "Psikiater",
     facility: "RS Medic Center",
     queue: 2,
     date: new Date(2025, 8, 7),
@@ -138,26 +138,23 @@ function AppointmentCard({ appt, isMobile }: { appt: Appointment; isMobile: bool
   return (
     <Link href={appt.href} className="text-left rounded-md">
       <Card
-        className={`flex flex-col ${isMobile ? "w-[280px] h-[200px]" : "w-[350px] h-[180px]"} p-[20px] gap-[4px] rounded-lg border bg-white`}
+        className={`flex flex-col ${isMobile ? "w-[280px] h-[200px]" : "w-[320px] h-[180px]"} p-[16px] gap-[4px] rounded-lg border bg-white`}
       >
         {/* Header */}
-        <div className="flex items-center gap-2 mb-4">
+        <CardHeader className="flex items-center gap-2 p-1 mb-4 border-b-1">
           <div>
-            <h2 className="text-blue-700 text-base font-semibold">{appt.specialty}</h2>
+            <h2 className="text-blue-400 text-md font-semibold">{appt.specialty}</h2>
             <p className="text-gray-500 text-sm">{appt.facility} - Bandung</p>
           </div>
-        </div>
+        </CardHeader>
 
         {/* Body: Two Columns */}
-        <div className="flex flex-col md:flex-row h-full items-center">
+        <div className="flex flex-row gap-0 h-full items-center">
           {/* Left Column: Queue */}
           <div className="flex-1 flex flex-col">
             <p className="text-md text-gray-400">Antrian</p>
             <p className="text-4xl font-bold">{appt.queue.toString().padStart(2, "0")}</p>
           </div>
-
-          <Separator/>
-
           {/* Right Column: Date & Time */}
           <div className="flex-1 flex flex-col gap-3 justify-start">
             <div className="flex items-center gap-2">

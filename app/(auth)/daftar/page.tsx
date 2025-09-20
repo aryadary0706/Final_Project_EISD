@@ -7,12 +7,12 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Rumahsakit from "@/public/image_login.png";
-import styles from "@/app/styles/sidebar.module.css";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Eye, EyeOff } from "lucide-react";
 import { Globe, Facebook } from "lucide-react";
 import mediQ from "@/public/mediQ.png";
+import { mockUsers } from "@/data/mockUsers.json";
 
 export default function LoginPage() {
   const [fullName, setFullName] = useState("");
@@ -25,6 +25,8 @@ export default function LoginPage() {
 
   const { registerUser } = useUserStore();
 
+  let mockUsersList = mockUsers
+
   const isPasswordValid = password.length >= 8 && /\d/.test(password);
   const isFormValid =
     fullName.trim() !== "" &&
@@ -32,14 +34,14 @@ export default function LoginPage() {
     isPasswordValid &&
     password === confirmPass;
 
-  const currentId = 3;
   // Handler untuk mendaftarkan pengguna
   const handleRegister = () => {
       // Periksa kembali validitas form sebelum mendaftarkan
       if (isFormValid) {
+        const lastId = mockUsersList.length > 0 ? mockUsers[mockUsers.length - 1].id : 0;
         const newUser = {
           // ID sementara, idealnya dihasilkan dari backend
-          id: currentId + 1,
+          id: lastId + 1,
           name: fullName,
           email: email,
         };
@@ -55,7 +57,7 @@ export default function LoginPage() {
       } else {
         console.error("Form tidak valid");
       }
-    };
+  };
 
   return (
     <div className="min-h-screen flex">
@@ -70,10 +72,10 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side (Form) */}
-      <div className="flex flex-col w-3/8 items-start gap-[32px] p-[44px_64px_32px_64px]">
+      <div className="flex flex-col w-full md:w-3/8 items-start gap-[32px] p-[44px_64px_32px_64px]">
         {/* Logo */}
         <div>
-          <h1 className={styles.titleTypography}>
+          <h1 className="flex flex-row font-poppins text-2xl font-semibold leading-tight bg-gradient-to-r from-blue-400 via-blue-200 to-blue-400 bg-clip-text text-transparent">
             medi
             <Image
               src={mediQ}

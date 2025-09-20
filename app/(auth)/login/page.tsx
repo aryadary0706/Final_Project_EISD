@@ -13,12 +13,9 @@ import mediQ from "@/public/mediQ.png"
 import { Separator } from "@/components/ui/separator"
 import { useUserStore } from "@/stores/userStore";
 import { signIn } from "next-auth/react";
+import { mockUsers } from "@/data/mockUsers.json";
 
-const mockUsers = [
-  { id: 1, name: "Nasywa", email: "email", password: "goodpassword" },
-  { id: 2, name: "Jane Smith", email: "jane.smith@example.com", password: "securepassword" },
-  { id: 3, name: "Peter Jones", email: "peter.jones@example.com", password: "strongpassword" }
-];
+const mockUsersList = mockUsers
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -37,7 +34,7 @@ export default function LoginPage() {
       (u) => u.email === email && u.password === password
     );
 
-    if (user) {
+    if (user && user.password === password) {
       setUser(user); 
       router.push("/beranda");
     } else {
@@ -59,10 +56,10 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side (Form) */}
-      <div className="flex flex-col w-3/8 items-start gap-[50px] p-[44px_64px_32px_64px]">
+      <div className="flex flex-col w-full md:w-3/8 items-start gap-[50px] p-[44px_64px_32px_64px]">
       {/* Logo */}
         <div>
-            <h1 className={styles.titleTypography}>medi
+            <h1 className="flex flex-row font-poppins text-2xl font-semibold leading-tight bg-gradient-to-r from-blue-400 via-blue-200 to-blue-400 bg-clip-text text-transparent">medi
             <Image
                 src={mediQ}
                 alt="Q"
