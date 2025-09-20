@@ -12,7 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import { Eye, EyeOff } from "lucide-react";
 import { Globe, Facebook } from "lucide-react";
 import mediQ from "@/public/mediQ.png";
-import { mockUsers } from "@/data/mockUsers.json";
+import mockUsers from "@/data/mockUsers.json";
 
 export default function LoginPage() {
   const [fullName, setFullName] = useState("");
@@ -107,7 +107,7 @@ export default function LoginPage() {
           <div className="space-y-1 w-full">
             <label className="text-md font-[600px] text-gray-700"> Nama</label>
             <Input
-              placeholder="John Doe"
+              placeholder="Nama Lengkap"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               className="pl-5 w-full py-5"

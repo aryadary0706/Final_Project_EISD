@@ -13,7 +13,7 @@ import mediQ from "@/public/mediQ.png"
 import { Separator } from "@/components/ui/separator"
 import { useUserStore } from "@/stores/userStore";
 import { signIn } from "next-auth/react";
-import { mockUsers } from "@/data/mockUsers.json";
+import mockUsers from "@/data/mockUsers.json";
 
 const mockUsersList = mockUsers
 
