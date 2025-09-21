@@ -14,7 +14,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { Globe, Facebook } from "lucide-react";
 import mediQ from "@/public/mediQ.png";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -89,7 +89,7 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side (Form) */}
-      <div className="flex flex-col w-3/8 items-start gap-[32px] p-[44px_64px_32px_64px]">
+      <div className="flex flex-col w-full md:w-3/8 items-start gap-[32px] p-[44px_64px_32px_64px]">
         {/* Logo */}
         <div>
           <h1 className={styles.titleTypography}>

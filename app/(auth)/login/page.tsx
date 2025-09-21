@@ -11,28 +11,34 @@ import Rumahsakit from "@/public/image_login.png";
 import styles from "@/app/styles/sidebar.module.css";
 import mediQ from "@/public/mediQ.png"
 import { Separator } from "@/components/ui/separator"
-import { useUserStore } from "@/stores/userStore";
 import { signIn } from "next-auth/react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const result = await signIn("credentials", {
-      redirect: false,
+    if (!email || !password) {
+      alert("Email dan password wajib diisi!");
+      return;
+    } 
+    const result = await signIn('credentials', {
+      redirect: false, // Penting: mencegah redirect otomatis
       email,
       password,
     });
 
-    if (result?.error) {
-      alert("Email atau password yang anda masukkan salah");
+    if (result?.ok) {
+      // Login berhasil, arahkan ke halaman dashboard
+      setError(null)
+      router.push('/beranda');
     } else {
-      // Redirect ke halaman beranda setelah login berhasil
-      router.push("/beranda");
+      // Login gagal, tampilkan pesan error
+      setError('Email atau password salah!');
     }
   };
 
@@ -49,7 +55,7 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side (Form) */}
-      <div className="flex flex-col w-3/8 items-start gap-[50px] p-[44px_64px_32px_64px]">
+      <div className="flex flex-col w-full md:w-3/8 items-start gap-[50px] p-[44px_64px_32px_64px]">
       {/* Logo */}
         <div>
             <h1 className={styles.titleTypography}>medi
@@ -80,44 +86,48 @@ export default function LoginPage() {
             <a href="/daftar" className="text-blue-500 hover:underline">Sign up</a>
           </div>
 
-          {/* Email */}
-          <div className="space-y-1 w-full">
-            <label className="text-md font-medium text-gray-700">Email</label>
-            <div className="relative">
-              <Input
-                type="email"
-                placeholder="masukkan email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="pl-5 w-full py-6"
-              />
+          <form onSubmit={handleSubmit}>
+            {/* Email */}
+            <div className="space-y-1 w-full">
+              <label htmlFor="email" className="text-md font-medium text-gray-700">Email</label>
+              <div className="relative">
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="masukkan email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="pl-5 w-full py-6"
+                  />
+              </div>
             </div>
-          </div>
 
-          {/* Password */}
-          <div className="space-y-1 w-full">
-            <label className="text-md font-medium text-gray-700">Kata Sandi</label>
-            <div className="relative">
-              <Input
-                type={showPassword ? "text" : "password"}
-                placeholder="Masukkan kata sandi"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="pl-5 w-full py-6"
-              />
-            <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-2 top-3 text-muted-foreground pt-1 pr-4"
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
+          
+            {/* Password */}
+            <div className="space-y-1 w-full">
+              <label htmlFor="password" className="text-md font-medium text-gray-700">Kata Sandi</label>
+              <div className="relative">
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Masukkan kata sandi"
+                  value={password}
+                  id="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="pl-5 w-full py-6"
+                />
+              <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-2 top-3 text-muted-foreground pt-1 pr-4"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+              </div>
             </div>
-          </div>
 
-          {/* Button Login */}
-          <Button onClick={handleLogin} variant="default" className="bg-blue-500 text-xl font-medium w-full p-7 mt-8">Masuk</Button>
-
+            {/* Button Login */}
+            <Button type="submit" variant="default" className="bg-blue-500 text-xl font-medium w-full p-7 mt-8">Masuk</Button>
+          </form>
           {/* Divider */}
           <div className="flex flex-col w-full items-center">
             <div className="flex items-center pt-3 pb-3">

@@ -14,7 +14,7 @@ export default function Beranda() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-
+  
   useEffect(() => {
       // Cek status sesi setelah komponen terpasang (mounted)
       if (status === "loading") {
@@ -32,7 +32,7 @@ export default function Beranda() {
   // Tampilkan pesan loading jika sedang dalam proses
   if (isLoading) {
       return (
-          <div className="flex justify-center items-center h-screen">
+          <div className="flex justify-center h-screen">
               <p className="text-xl">Memuat...</p>
           </div>
       );
@@ -43,7 +43,7 @@ export default function Beranda() {
       <div className="flex flex-row w-full">
       {/* Kolom utama */}
       <div className="flex-1 flex flex-col">
-        <Header />
+        <Header username={session.user?.name ?? "Guest"}/>
         {/* Konten utama */}
         <main className="flex-1 mt-4 space-y-8 px-6">
           <section className="items-center">

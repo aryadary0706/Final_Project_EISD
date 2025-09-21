@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google"; // Import Poppins
 import "./globals.css";
 import { Providers } from "./providers";
+import { SessionToZustandSync } from "./components/sessionSync";
 
 
 // Definisikan Poppins dengan varian yang dibutuhkan
@@ -28,6 +29,7 @@ export default function RootLayout({
       {/* Terapkan variabel font ke body */}
       <body className={`${poppins.variable} font-sans antialiased`}>
           <Providers>
+            <SessionToZustandSync/>
             {children}
           </Providers>
       </body>

@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Search, Bell } from "lucide-react";
-import { useUserStore } from "@/stores/userStore";
 
-export default function Header() {
+type HeaderProps = {
+  username: string;
+};
+
+export default function Header({ username } : HeaderProps) {
   const [search, setSearch] = useState("");
-  const user = useUserStore((state) => state.user);
 
   return (
     <header className="flex md:w-full w-full items-center px-6 pt-8">
@@ -16,7 +18,7 @@ export default function Header() {
         <div className="flex h-12 w-12 items-center rounded-full bg-gray-200 md:h-13 md:w-13" />
         <div className="hidden leading-tight sm:block">
           <p className="text-sm font-semibold md:text-md">
-            Halo, {user?.name || "Pasien"}
+            Halo, {username}
           </p>
           <p className="text-xs text-gray-500 md:text-sm">
             Bagaimana kabarmu?

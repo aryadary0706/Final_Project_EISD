@@ -72,7 +72,7 @@ export default function ProfilePage() {
   // Tampilkan pesan loading jika sedang dalam proses
   if (isLoading) {
       return (
-          <div className="flex justify-center items-center h-screen">
+          <div className="flex justify-center h-screen">
               <p className="text-xl">Memuat...</p>
           </div>
       );
