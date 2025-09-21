@@ -63,9 +63,9 @@ export default function ScheduleMeet() {
   );
 
   return (
-    <div className="justify-end flex w-full lg:h-full flex-col h-full py-10 px-6 bg-gray-50 border-l-2 border-gray-200">
+    <div className="justify-end flex w-full flex-col h-screen px-6 bg-gray-50 border-l-2 border-gray-200">
       {/* Header */}
-      <div className="flex justify-between items-center self-stretch mb-5">
+      <div className="flex justify-between items-center self-stretch mb-5 py-6">
         <h2 className="font-semibold text-[15px]">Jadwal Temu Mendatang</h2>
         <button className="font-light text-blue-400 hover:underline">batalkan</button>
       </div>
@@ -105,7 +105,7 @@ export default function ScheduleMeet() {
         <div className="hidden lg:flex flex-col">
           {/* Fixed size container for desktop */}
           <div className="w-full h-full">
-            <ScrollArea className="h-[100vh]">
+            <ScrollArea className="flex-1">
               <div className="flex flex-col space-y-6 pb-4 items-center">
                 {sortedDates.map((date) => (
                   <div key={date} className="flex flex-col">
@@ -132,7 +132,7 @@ export default function ScheduleMeet() {
       </div>
 
       {/* Action Button */}
-      <Button className="w-50 lg:w-full justify-between p-[32px] items-center bg-blue-400 hover:bg-blue-500">
+      <Button className="w-50 lg:w-full justify-between p-[32px] mb-6 items-center bg-blue-400 hover:bg-blue-500">
         <h3 className="font-medium text-[16px]">Buat Jadwal Baru</h3>
         <BadgePlus className="w-16 h-16" />
       </Button>

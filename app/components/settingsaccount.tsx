@@ -21,23 +21,23 @@ import clsx from 'clsx';
 
 export default function SettingsAccount() {
   return (
-    <Card className="w-84 rounded-0">
+    <Card className="w-78 rounded-0 h-[100vh] gap-3">
       {/* Pengaturan Akun */}
-      <CardHeader>
-        <CardTitle className="text-xl font-semibold">
+      <div className='gap-0 py-2 px-7'>
+        <CardTitle className="text-md font-semibold">
           Pengaturan Akun
         </CardTitle>
-      </CardHeader>
-      <CardContent className="px-4 py-2">
+      </div>
+      <CardContent className="px-4">
         <Link
-          href="/profile/account"
+          href="#"
           className={styles.PusatAkun}
         >
           <div className="flex items-center gap-4">
             <User className="h-5 w-5 text-gray-800" />
-            <span className="text-base font-medium text-gray-800">
+            <span className="text-sm font-medium text-gray-800">
               Pusat Akun
-              <span className="text-sm text-gray-500 font-normal ml-1 block mt-1">
+              <span className="text-xs text-gray-500 font-normal ml-1 block mt-1">
                 Kata sandi, keamanan, dan detail pribadi
               </span>
             </span>
@@ -49,65 +49,65 @@ export default function SettingsAccount() {
       <div className="border-t border-gray-200 my-2"></div>
 
       {/* Informasi & Layanan */}
-      <CardHeader>
-        <CardTitle className="text-xl font-semibold text-gray-700">
+      <div className='gap-0 py-1 px-7'>
+        <CardTitle className="text-md font-semibold text-gray-700">
           Informasi & Layanan
         </CardTitle>
-      </CardHeader>
-      <CardContent className="px-4 py-2 flex flex-col gap-1">
+      </div>
+      <div className="px-4 py-0.5 flex flex-col gap-0.5">
         <Link
           href="/accessibility"
           className={styles.sidebarlink}
         >
           <Handshake className="h-5 w-5 text-gray-800" />
-          <span className="text-base font-medium text-gray-800">Aksesibilitas</span>
+          <span className="text-sm font-medium text-gray-800">Aksesibilitas</span>
         </Link>
         <Link
           href="/notifications"
           className={styles.sidebarlink}
         >
           <Bell className="h-5 w-5 text-gray-800" />
-          <span className="text-base font-medium text-gray-800">Notifikasi</span>
+          <span className="text-sm font-medium text-gray-800">Notifikasi</span>
         </Link>
         <Link
           href="/settings/display"
           className={styles.sidebarlink}
         >
           <Globe className="h-5 w-5 text-gray-800" />
-          <span className="text-base font-medium text-gray-800">Bahasa & Tampilan</span>
+          <span className="text-sm font-medium text-gray-800">Bahasa & Tampilan</span>
         </Link>
         <Link
           href="/privacy"
           className={styles.sidebarlink}
         >
           <Shield className="h-5 w-5 text-gray-800" />
-          <span className="text-base font-medium text-gray-800">Privasi</span>
+          <span className="text-sm font-medium text-gray-800">Privasi</span>
         </Link>
         <Link
           href="/help"
           className={styles.sidebarlink}
         >
           <HelpCircle className="h-5 w-5 text-gray-800" />
-          <span className="text-base font-medium text-gray-800">Bantuan</span>
+          <span className="text-sm font-medium text-gray-800">Bantuan</span>
         </Link>
         <Link
           href="/permissions"
           className={styles.sidebarlink}
         >
           <Key className="h-5 w-5 text-gray-800" />
-          <span className="text-base font-medium text-gray-800">Izin aplikasi & Website</span>
+          <span className="text-sm font-medium text-gray-800">Izin aplikasi & Website</span>
         </Link>
-      </CardContent>
+      </div>
 
       <div className="border-t border-gray-200 my-2"></div>
 
       {/* Login */}
-      <CardHeader>
-        <CardTitle className="text-xl font-semibold text-gray-800">
+      <div className='gap-0 py-1 px-7'>
+        <div className="text-md font-semibold text-gray-800">
           Login
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="px-4 flex flex-col gap-2">
+        </div>
+      </div>
+      <div className="px-4 flex flex-col">
         <Link
           href="/daftar"
           className={clsx(
@@ -116,7 +116,7 @@ export default function SettingsAccount() {
           )}
         >
           <Plus className="h-5 w-5" />
-          <span className="text-base font-medium">Tambah Akun</span>
+          <span className="text-md font-sm">Tambah Akun</span>
         </Link>
         <Link
           href="/daftar"
@@ -126,16 +126,16 @@ export default function SettingsAccount() {
           )}
         >
           <XCircle className="h-5 w-5" />
-          <span className="text-base font-medium">Hapus Akun</span>
+          <span className="text-md font-sm">Hapus Akun</span>
         </Link>
         <Link
           href="/login"
           className={styles.sidebarlink}
         >
           <LogOut className="h-5 w-5" />
-          <span className="text-base font-medium">Keluar</span>
+          <span className="text-md font-sm">Keluar</span>
         </Link>
-      </CardContent>
+      </div>
     </Card>
   );
 }

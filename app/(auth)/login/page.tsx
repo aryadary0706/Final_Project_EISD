@@ -38,7 +38,7 @@ export default function LoginPage() {
       setUser(user); 
       router.push("/beranda");
     } else {
-      console.error("Login gagal: email atau password salah")
+      alert("Login gagal: email atau password salah")
       setLoginError("Email atau password salah");
     }
   };

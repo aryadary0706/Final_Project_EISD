@@ -27,7 +27,7 @@
                 <h2 className="text-[14px] text-lg">
                   Fasilitas Kesehatan Terdekat
                 </h2>
-                <ScrollArea className="flex w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-[860px] whitespace-nowrap pb-3 mt-5">
+                <ScrollArea className="flex w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-[900px] whitespace-nowrap pb-3 mt-5">
                   <FaskesList />
                   <ScrollBar orientation="horizontal" />
                 </ScrollArea>
@@ -36,7 +36,7 @@
                   <h2 className="text-[14px] text-lg"> 
                     Dokter Pilihan Pasien
                   </h2>
-                  <ScrollArea className="flex w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-[860px]whitespace-nowrap pb-3 mt-5">
+                  <ScrollArea className="flex w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-[900px]whitespace-nowrap pb-3 mt-5">
                     <DoctorList />
                   <ScrollBar orientation="horizontal" />
                   </ScrollArea>   
@@ -45,7 +45,7 @@
           </div>
 
         {/* Kolom kanan (optional) */}
-        <div className="hidden lg:flex w-[380px] shrink-0">
+        <div className="hidden lg:flex w-[380px] shrink-0 sticky top-0 h-screen">
             <ScheduleMeet/>
         </div>
       </div>

@@ -11,11 +11,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Mars, Venus } from 'lucide-react';
 import Link from 'next/link';
 import { Edit, MapPin } from 'lucide-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SettingsAccount from '@/app/components/settingsaccount';
 import { useUserStore } from "@/stores/userStore";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
   const [selectedGender, setSelectedGender] = useState('perempuan');
@@ -307,7 +305,7 @@ export default function ProfilePage() {
             Setiap informasi pribadi yang Anda berikan akan terlindungi. Kami menjaga kerahasiaan data pribadi Anda dan tidak akan menyebarluaskan kepada pihak yang tidak berkepentingan. Informasi pribadi dipergunakan semata-mata untuk keperluan administrasi, penjadwalan, serta kelancaran komunikasi antara pasien dan tenaga medis.
           </footer>
         </main>
-        <div className='flex ml-4'>
+        <div className='flex ml-4 sticky top-0 h-screen'>
             <SettingsAccount/>
         </div>
       </div>

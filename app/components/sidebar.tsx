@@ -11,7 +11,7 @@ import clsx from 'clsx';
 import { useUserStore } from '@/stores/userStore';
 
 const navItems = [
-  { name: 'Beranda', href: '/beranda', icon: <Home className="w-4 h-4" /> },
+  { name: 'Beranda', href: '/beranda', icon: <Home className="w-5 h-5" /> },
   { name: 'Telusuri', href: '/search', icon: <Search className="w-4 h-4" /> },
   { name: 'Riwayat', href: '/riwayat', icon: <Clock className="w-4 h-4" /> },
   { name: 'Profil', href: '/profil', icon: <User className="w-4 h-4" /> }, // Tetap tulis '/profil' sebagai default
