@@ -14,6 +14,8 @@ const mockAppointments = [
     id: 1,
     href: "#",
     specialty: "Dokter Umum",
+    doctor: "Dr. Clara Wulandari, M.Ked",
+    status: "dibatalkan",
     facility: "RS Medic Center",
     queue: 1,
     date: new Date(2025, 8, 6),
@@ -23,6 +25,8 @@ const mockAppointments = [
     id: 2,
     href: "#",
     specialty: "Psikiater",
+    doctor: "Dr. Clara Wulandari, M.Ked",
+    status: "berhasil",
     facility: "RS Medic Center",
     queue: 2,
     date: new Date(2025, 8, 7),
@@ -34,6 +38,8 @@ type Appointment = {
   id: number;
   href: string;
   specialty: string;
+  doctor: string;
+  status: string
   facility: string;
   queue: number;
   date: Date;
@@ -57,7 +63,7 @@ export default function ScheduleMeet() {
   );
 
   return (
-    <div className="justify-end flex w-full lg:h-full flex-col h-full py-6 px-4 bg-gray-50 border-l-2 border-gray-200">
+    <div className="justify-end flex w-full lg:h-full flex-col h-full py-10 px-6 bg-gray-50 border-l-2 border-gray-200">
       {/* Header */}
       <div className="flex justify-between items-center self-stretch mb-5">
         <h2 className="font-semibold text-[15px]">Jadwal Temu Mendatang</h2>

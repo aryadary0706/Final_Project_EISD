@@ -11,10 +11,10 @@ import clsx from 'clsx';
 import { useUserStore } from '@/stores/userStore';
 
 const navItems = [
-  { name: 'Beranda', href: '/beranda', icon: <Home className="w-6 h-6" /> },
-  { name: 'Telusuri', href: '/search', icon: <Search className="w-6 h-6" /> },
-  { name: 'Riwayat', href: '/riwayat', icon: <Clock className="w-6 h-6" /> },
-  { name: 'Profil', href: '/profil', icon: <User className="w-6 h-6" /> }, // Tetap tulis '/profil' sebagai default
+  { name: 'Beranda', href: '/beranda', icon: <Home className="w-4 h-4" /> },
+  { name: 'Telusuri', href: '/search', icon: <Search className="w-4 h-4" /> },
+  { name: 'Riwayat', href: '/riwayat', icon: <Clock className="w-4 h-4" /> },
+  { name: 'Profil', href: '/profil', icon: <User className="w-4 h-4" /> }, // Tetap tulis '/profil' sebagai default
 ];
 
 export default function Sidebar() {
