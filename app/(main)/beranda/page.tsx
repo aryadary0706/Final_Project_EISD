@@ -11,15 +11,15 @@
       return (
         <div className="flex flex-row w-full">
         {/* Kolom utama */}
-          <div className="flex-1 flex flex-col">
+          <div className="flex flex-col">
             <Header />
             {/* Konten utama */}
-            <main className="flex-1 mt-4 space-y-4 px-6 w-full">
-              <section className="items-center">
+            <main className="flex-1 mt-4 space-y-4 px-6">
+              <section className="hidden md:flex items-center w-full">
                 <Promobanner/>
               </section>  
               <section>
-                <div className="block lg:hidden w-full">
+                <div className="block xl:hidden w-full">
                     <ScheduleMeet/>
                 </div>
               </section>
@@ -27,7 +27,7 @@
                 <h2 className="text-[14px] text-lg">
                   Fasilitas Kesehatan Terdekat
                 </h2>
-                <ScrollArea className="flex w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-[900px] whitespace-nowrap pb-3 mt-5">
+                <ScrollArea className="flex w-full sm:max-w-xl md:max-w-3xl lg:max-w-3xl xl:max-w-[900px] whitespace-nowrap pb-3 mt-5">
                   <FaskesList />
                   <ScrollBar orientation="horizontal" />
                 </ScrollArea>
@@ -36,7 +36,7 @@
                   <h2 className="text-[14px] text-lg"> 
                     Dokter Pilihan Pasien
                   </h2>
-                  <ScrollArea className="flex w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-[900px]whitespace-nowrap pb-3 mt-5">
+                  <ScrollArea className="flex w-full sm:max-w-xl md:max-w-3xl lg:max-w-3xl xl:max-w-full whitespace-nowrap pb-3 mt-5">
                     <DoctorList />
                   <ScrollBar orientation="horizontal" />
                   </ScrollArea>   
@@ -45,7 +45,7 @@
           </div>
 
         {/* Kolom kanan (optional) */}
-        <div className="hidden lg:flex w-[380px] shrink-0 sticky top-0 h-screen">
+        <div className="hidden xl:flex w-[380px] shrink-0 sticky top-0 h-screen">
             <ScheduleMeet/>
         </div>
       </div>

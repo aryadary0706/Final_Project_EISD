@@ -25,8 +25,6 @@ export default function LoginPage() {
 
   const { registerUser } = useUserStore();
 
-  let mockUsersList = mockUsers
-
   const isPasswordValid = password.length >= 8 && /\d/.test(password);
   const isFormValid =
     fullName.trim() !== "" &&
@@ -38,7 +36,7 @@ export default function LoginPage() {
   const handleRegister = () => {
       // Periksa kembali validitas form sebelum mendaftarkan
       if (isFormValid) {
-        const lastId = mockUsersList.length > 0 ? mockUsers[mockUsers.length - 1].id : 0;
+        const lastId = mockUsers.length > 0 ? mockUsers[mockUsers.length - 1].id : 0;
         const newUser = {
           // ID sementara, idealnya dihasilkan dari backend
           id: lastId + 1,
@@ -47,13 +45,12 @@ export default function LoginPage() {
         };
         // Panggil fungsi registerUser dari store
         registerUser(newUser);
-        // Tampilkan notifikasi atau navigasi ke halaman lain setelah berhasil
-        console.log("Pengguna berhasil didaftarkan:", newUser);
-        // Reset form setelah pendaftaran
+
         setFullName("");
         setEmail("");
         setPassword("");
         setConfirmPass("");
+        router.push("/login")
       } else {
         console.error("Form tidak valid");
       }
@@ -179,8 +176,8 @@ export default function LoginPage() {
           </div>
 
           <Button
-            variant="secondary"
-            className="w-full p-6 mt-1"
+            variant="default"
+            className="w-full p-6 mt-1 bg-blue-300"
             disabled={!isFormValid}
             onClick={handleRegister}
           >

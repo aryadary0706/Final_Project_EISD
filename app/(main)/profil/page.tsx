@@ -91,7 +91,7 @@ export default function ProfilePage() {
                 <div>
                   <Label className="mb-3 font-semibold text-[16px]" htmlFor="nama-lengkap">Nama Lengkap</Label>
                   <Input 
-                  className="p-6" 
+                  className={clsx("p-6", UpdateForm ? "bg-gray-300" : "bg-white")} 
                   id="nama-lengkap" 
                   placeholder='Nama Lengkap'
                   value={user?.name   || ""} 
@@ -109,7 +109,7 @@ export default function ProfilePage() {
                     id="umur-pasien" 
                     value={user?.umur ?? ""}
                     placeholder='umur'
-                    className="p-6 w-full" 
+                    className={clsx("p-6", UpdateForm ? "bg-gray-300" : "bg-white")} 
                     readOnly = {!UpdateForm}
                     onChange={(e) => {
                       const val = e.target.value;
@@ -129,7 +129,7 @@ export default function ProfilePage() {
                     id="berat-badan" 
                     value={user?.beratBadan ?? ""}
                     placeholder='Berat Badan' 
-                    className="w-full p-6" 
+                    className={clsx("w-full p-6", UpdateForm ? "bg-gray-300" : "bg-white" )}
                     readOnly ={!UpdateForm}
                     onChange={(e) => {
                       const val = e.target.value;
@@ -146,7 +146,7 @@ export default function ProfilePage() {
                     id="tinggi-badan" 
                     value={user?.tinggiBadan ?? ""}
                     placeholder='tinggi badan'
-                    className="w-full p-6" 
+                    className={clsx("w-full p-6", UpdateForm ? "bg-gray-300" : "bg-white" )}
                     readOnly = {!UpdateForm}
                     onChange={(e) => {
                       const val = e.target.value;
@@ -164,11 +164,7 @@ export default function ProfilePage() {
                     <label
                     key={option.value}
                     htmlFor={`gender-${option.value}`}
-                    className={`
-                      relative flex flex-col items-start justify-center p-4 rounded-lg cursor-pointer
-                      border-2
-                      ${selectedGender === option.value ? 'border-blue-500 text-blue-500' : 'border-gray-300 text-gray-400'}
-                      `}
+                      className={clsx("relative flex flex-col items-start justify-center p-4 rounded-lg cursor-pointer border-2", selectedGender === option.value ? 'border-blue-500 text-blue-500' : 'border-gray-300 text-gray-400', UpdateForm ? "bg-gray-300" : "bg-white" )}
                       >
                       <input
                         type="checkbox"
@@ -198,7 +194,7 @@ export default function ProfilePage() {
                   {bloodTypeOptions.map((option) => (
                     <div key={option.value} className="flex items-center space-x-2">
                       <RadioGroupItem value={option.value} id={`blood-${option.value}`} />
-                      <Label className="text-lg" htmlFor={`blood-${option.value}`}>{option.label}</Label>
+                      <Label className={"text-lg"} htmlFor={`blood-${option.value}`}>{option.label}</Label>
                     </div>
                   ))}
                 </RadioGroup>
@@ -217,7 +213,7 @@ export default function ProfilePage() {
                   const val = e.target.value;
                   handleAllergiesChange(val);
                 }}
-                className="relative flex h-25 rounded-md border-2 focus:border-blue-500"
+                className={clsx("relative flex h-25 rounded-md border-2 focus:border-blue-500", UpdateForm ? "bg-gray-300" : "bg-white")}
                 />
               </div>
               <div className="flex items-center space-x-2 mb-2">
@@ -244,7 +240,7 @@ export default function ProfilePage() {
                   "ring-1 ring-gray-300 transition-all duration-300",
                   UpdateBotForm && "ring-2 ring-blue-400"
                 )}>
-                <Edit className="h-4 w-4 mr-2" />
+                <Edit className="h-4 w-4 mr-2"/>
                 Edit
               </Button>
             </CardHeader>
@@ -255,7 +251,7 @@ export default function ProfilePage() {
                 <div className='gap-4'>
                   <Label className="block mb-1 text-[16px]" htmlFor="negara">Negara</Label>
                   <Input
-                  className="p-6"
+                  className={clsx("p-6", UpdateBotForm ? "bg-gray-300" : "bg-white")}
                   id="negara"
                   value={user?.alamat?.negara || ""}
                   readOnly={!UpdateBotForm}
@@ -270,7 +266,7 @@ export default function ProfilePage() {
                 <div>
                   <Label className="block mb-1 text-[16px]" htmlFor="kota">Kota</Label>
                   <Input
-                  className="p-6"
+                  className={clsx("p-6", UpdateBotForm ? "bg-gray-300" : "bg-white")}
                   id="kota"
                   value={user?.alamat?.kota || ""}
                   readOnly={!UpdateBotForm}
@@ -286,7 +282,7 @@ export default function ProfilePage() {
               <div>
                 <Label className="block mb-1 text-[16px]" htmlFor="kode-pos">Kode POS</Label>
                 <Input
-                className="p-6"
+                className={clsx("p-6", UpdateBotForm ? "bg-gray-300" : "bg-white")}
                 id="kode-pos"
                 value={user?.alamat?.kodePos || ""}
                 readOnly={!UpdateBotForm}

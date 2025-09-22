@@ -63,7 +63,7 @@ export default function ScheduleMeet() {
   );
 
   return (
-    <div className="justify-end flex w-full flex-col h-screen px-6 bg-gray-50 border-l-2 border-gray-200">
+    <div className="justify-end flex sm:w-xl md:w-4xl lg:w-full flex-col lg:h-[420px] xl:h-screen px-6 bg-gray-50 border-2 border-gray-200">
       {/* Header */}
       <div className="flex justify-between items-center self-stretch mb-5 py-6">
         <h2 className="font-semibold text-[15px]">Jadwal Temu Mendatang</h2>
@@ -71,13 +71,13 @@ export default function ScheduleMeet() {
       </div>
 
       {/* Schedule Card List — SCROLLABLE CONTAINER */}
-      <div className="flex flex-col space-y-6 mb-1 w-full h-full">
+      <div className="flex flex-col space-y-6 mb-0 w-full h-full">
         {/* MOBILE: Horizontal Scroll (≤ lg) */}
-        <div className="lg:hidden">
+        <div className="xl:hidden">
           {/* Fixed size container for mobile */}
-          <div className="w-full h-[240px] overflow-hidden">
-            <ScrollArea className="w-full h-full">
-              <div className="flex gap-6 pr-4 pb-2">
+          <div className="w-full h-[280px] overflow-hidden">
+            <ScrollArea className="w-full h-xl">
+              <div className="flex gap-6 pr-4 pb-4">
                 {sortedDates.map((date) => (
                   <div key={date} className="flex-shrink-0 flex flex-col">
                     {/* Tanggal */}
@@ -102,7 +102,7 @@ export default function ScheduleMeet() {
         </div>
 
         {/* DESKTOP: Vertical Scroll (> lg) */}
-        <div className="hidden lg:flex flex-col">
+        <div className="hidden xl:flex flex-col">
           {/* Fixed size container for desktop */}
           <div className="w-full h-full">
             <ScrollArea className="flex-1">
@@ -132,7 +132,7 @@ export default function ScheduleMeet() {
       </div>
 
       {/* Action Button */}
-      <Button className="w-50 lg:w-full justify-between p-[32px] mb-6 items-center bg-blue-400 hover:bg-blue-500">
+      <Button className="w-50 xl:w-full justify-between p-[24px] xl:p-[32px] mb-6 items-center bg-blue-400 hover:bg-blue-500">
         <h3 className="font-medium text-[16px]">Buat Jadwal Baru</h3>
         <BadgePlus className="w-16 h-16" />
       </Button>

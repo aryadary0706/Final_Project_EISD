@@ -9,7 +9,7 @@ const AboutUs = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="flex h-18 py-8 px-10 gap-2 justify-between items-center bg-white">
+      <header className="flex h-18 py-8 px-10 gap-2 justify-between items-center border border-b-2 shadow-lg bg-white">
         <div className="flex items-center gap-1">
           <h1 className={styles.titleTypography}>medi</h1>
           <img
@@ -40,10 +40,10 @@ const AboutUs = () => {
           <p className="mt-5 text-gray-400 text-sm">Sahabat akses kesehatan</p>
 
           <div className="mt-7 flex flex-row gap-6 justify-center">
-            <Button variant="default" className="bg-gradient-to-r from-blue-300 via-blue-200 to-blue-300 p-6 rounded-4xl w-47 justify-between text-black">
+            <Button variant="default" className="bg-gradient-to-r from-blue-300 via-blue-200 to-blue-300 p-6 rounded-4xl w-47 justify-between text-black shadow-md">
               Hubungi Kami<CircleArrowRight />
             </Button>
-            <Button variant="outline" className="bg-gray-50 rounded-4xl w-47 justify-between p-6">
+            <Button variant="outline" className="bg-gray-50 rounded-4xl w-47 justify-between p-6 shadow-md">
               Sign Up<CircleArrowRight />
             </Button>
           </div>
@@ -65,6 +65,7 @@ const AboutUs = () => {
                   className="inline-block align-middle"
                   width={30}
                   height={30}
+                  loading="lazy"
                 />
               </span>
             </h1>

@@ -22,11 +22,14 @@
 }
 
 .doctordescription {
-    padding: 16px;
-    flex-direction: column;
+    display: flex;
+    flex-direction: column; 
     align-items: flex-start;
-    gap: 16px;
-    align-self: stretch;
+    width: 227px;
+    height: 313px;
+    padding: 14px;
+    gap: 8px;
+    flex: 1;
 }
 
 .doctorimage {

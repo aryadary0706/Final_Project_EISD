@@ -106,7 +106,7 @@
 @media (max-width: 1024px) {
     .container {
         display: flex;
-        width: 85px; /* Lebar diperkecil */
+        width: 55px; /* Lebar diperkecil */
         align-items: center;
     }
 
@@ -139,9 +139,9 @@
     }
 
     .logoutButton {
-        width: 60px;
+        width: 35px;
         height: auto;
-        padding: 12px; /* Sesuaikan padding */
+        padding: 10px; /* Sesuaikan padding */
         justify-content: center;
     }
 

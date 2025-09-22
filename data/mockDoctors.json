@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "dr. Arief Nugroho, Sp.JP",
+    "specialty": "Spesialis Jantung dan Pembuluh Darah",
+    "rating": "5.0",
+    "totalPatients": "450+",
+    "image": "beranda/doctor2.png"
+  },
+  {
+    "id": 2,
+    "name": "dr. Ratna Dewi Sp.A",
+    "specialty": "Spesialis Anak",
+    "rating": "4.9",
+    "totalPatients": "450+",
+    "image": "beranda/doctor1.png"
+  },
+  {
+    "id": 3,
+    "name": "dr. Andini Pratama, Sp.PD",
+    "specialty": "Spesialias Penyakit Dalam",
+    "rating": "5.0",
+    "totalPatients": "450+",
+    "image": "beranda/doctor3.png"
+  }
+]
