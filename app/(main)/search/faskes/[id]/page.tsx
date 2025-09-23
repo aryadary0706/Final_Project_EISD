@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { MapPin, Phone, ChevronLeft } from "lucide-react";
@@ -5,13 +7,16 @@ import DoctorList from "@/app/components/DoctorList";
 import ReviewList from "@/app/components/ReviewList";
 import PoliCategory from "@/app/components/KategoriPoli";
 import Link from "next/link";
+import mockDoctors from "@/data/mockDoctors.json";
+import DoctorListBySpeciality from "@/app/components/DoctorsFromCategory";
+import { useState } from "react";
 
-export default async function FaskesPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export default function FaskesPage({ params }: { params: Promise<{ id: string }> }) {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   //data dummy
   const faskes = {
-    id,
+    id: "1",
     name: "Rumah Sakit Medic Center",
     address: "Jl. Merdeka No.123, Bandung, Jawa Barat",
     phone: "(022) 5678 999",
@@ -73,23 +78,33 @@ export default async function FaskesPage({ params }: { params: Promise<{ id: str
         {/* kategori poli */}
         <div className="bg-white">
           <h3 className="text-lg font-semibold mb-4">Kategori Poli</h3>
-          <PoliCategory categories={faskes.categories} />
+          <PoliCategory 
+            categories={faskes.categories} 
+            onCategoryClick={(label) => setSelectedCategory(label)} 
+          />
         </div>
 
         {/* Dokter */}
         <section>
           <h2 className="text-lg font-semibold mb-4">Dokter Pilihan Pasien</h2>
-          <ScrollArea className="w-full whitespace-nowrap pb-3">
+          <ScrollArea className="w-[920px] whitespace-nowrap pb-3">
             <DoctorList />
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </section>
       </div>
 
-      {/* Bagian kanan - Review */}
-      <aside className="flex w-[380px] shrink-0 h-screen sticky top-0">
-        <div >
-          <ReviewList />
+      {/* Bagian kanan - Review / Doctor by Category */}
+      <aside className="flex w-[340px] shrink-0 h-screen sticky top-0">
+        <div className="w-full">
+          {selectedCategory ? (
+            <DoctorListBySpeciality
+              speciality={selectedCategory}
+              onClose={() => setSelectedCategory(null)} // ✅ reset ke ReviewList
+            />
+          ) : (
+            <ReviewList />
+          )}
         </div>
       </aside>
     </div>

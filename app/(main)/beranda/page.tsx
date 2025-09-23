@@ -11,7 +11,7 @@
       return (
         <div className="flex flex-row w-full">
         {/* Kolom utama */}
-          <div className="flex flex-col">
+          <div className="flex flex-col py-2">
             <Header />
             {/* Konten utama */}
             <main className="flex-1 mt-4 space-y-4 px-6">
@@ -36,7 +36,7 @@
                   <h2 className="text-[14px] text-lg"> 
                     Dokter Pilihan Pasien
                   </h2>
-                  <ScrollArea className="flex w-full sm:max-w-xl md:max-w-3xl lg:max-w-3xl xl:max-w-full whitespace-nowrap pb-3 mt-5">
+                  <ScrollArea className="flex w-full sm:max-w-xl md:max-w-3xl lg:max-w-3xl xl:max-w-[900px] whitespace-nowrap pb-3 mt-5">
                     <DoctorList />
                   <ScrollBar orientation="horizontal" />
                   </ScrollArea>   

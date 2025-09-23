@@ -1,22 +1,36 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 
-export default function PoliCategory({ categories }: { categories: { src: string; alt: string; label: string }[] }) {
+type Category = {
+  src: string;
+  alt: string;
+  label: string;
+};
+
+export default function PoliCategory({
+  categories,
+  onCategoryClick, // ✅ tambahkan props ini
+}: {
+  categories: Category[];
+  onCategoryClick: (label: string) => void; // ✅ definisi tipe
+}) {
   return (
-    <div className="flex flex-row gap-0">
-      {categories.map((category, index) => (
-        <div key={index} className="flex flex-col items-center px-3 border-x-1 gap-2">
-          <Link href="#">
-            <div className="relative w-18 h-18 rounded-full bg-blue-400 flex items-center justify-center">
-              <Image src={category.src} alt={category.alt} width={30} height={30} />
+    <div className="flex flex-row gap-4">
+      {categories.map((cat) => (
+        <div key={cat.label} className="flex flex-col items-center gap-2">
+            <button
+              onClick={() => onCategoryClick(cat.label)} // ✅ panggil callback
+              className="relative flex items-center justify-center w-18 h-18 bg-blue-400 rounded-full hover:bg-blue-300 transition"
+            >
+              <Image src={cat.src} alt={cat.alt} width={35} height={35} />
+            </button>
+            <div className="w-[80px] text-center">
+              <p className="text-sm font-medium text-gray-900">{cat.label}</p>
             </div>
-          </Link>
-          <div className="w-[100px] text-center">
-            <p className="text-xs font-medium text-gray-900">{category.label}</p>
           </div>
-        </div>
+
+        
       ))}
     </div>
   );

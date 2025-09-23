@@ -2,38 +2,9 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import Image from "next/image";
 import { Star } from "lucide-react";
-import image1 from "@/public/beranda/doctor1.png"
-import image2 from "@/public/beranda/doctor2.png"
-import image3 from "@/public/beranda/doctor3.png"
 import style from "@/app/styles/main.module.css"
 import clsx from "clsx";
-
-const mockDoctors = [
-  {
-    id: "1",
-    name: "dr. Arief Nugroho, Sp.JP",
-    specialty: "Spesialis Jantung dan Pembuluh Darah",
-    rating: "5.0",
-    totalPatients: "450+",
-    image: image2
-  },
-  {
-    id:"2",
-    name: "dr. Ratna Dewi Sp.A",
-    specialty: "Spesialis Anak",
-    rating: "4.9",
-    totalPatients: "450+",
-    image: image3
-  },
-  {
-    id: "3  ",
-    name: "dr. Andini Pratama, Sp.PD",
-    specialty: "Spesialias Penyakit Dalam",
-    rating: "5.0",
-    totalPatients: "450+",
-    image: image1
-  }
-];
+import mockDoctors from "@/data/mockDoctors.json"
 
 export default function DoctorList() {
   return (
