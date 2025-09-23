@@ -12,13 +12,7 @@ import styles from "@/app/styles/sidebar.module.css";
 import mediQ from "@/public/mediQ.png"
 import { Separator } from "@/components/ui/separator"
 import { useUserStore } from "@/stores/userStore";
-
-const mockUsers = [
-  { id: 1, nama: "Nasywa", email: "email", password: "goodpassword" },
-  { id: 2, nama: "Jane Smith", email: "jane.smith@example.com", password: "securepassword" },
-  { id: 3, nama: "Peter Jones", email: "peter.jones@example.com", password: "strongpassword" }
-];
-
+import mockUsers from "@/data/mockUsers.json";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -37,10 +31,11 @@ export default function LoginPage() {
       (u) => u.email === email && u.password === password
     );
 
-    if (user) {
+    if (user && user.password === password) {
       setUser(user); 
       router.push("/beranda");
     } else {
+      alert("Login gagal: email atau password salah")
       setLoginError("Email atau password salah");
     }
   };
@@ -58,10 +53,10 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side (Form) */}
-      <div className="flex flex-col w-3/8 items-start gap-[50px] p-[44px_64px_32px_64px]">
+      <div className="flex flex-col w-full md:w-3/8 items-start gap-[50px] p-[44px_64px_32px_64px]">
       {/* Logo */}
         <div>
-            <h1 className={styles.titleTypography}>medi
+            <h1 className="flex flex-row font-poppins text-2xl font-semibold leading-tight bg-gradient-to-r from-blue-400 via-blue-200 to-blue-400 bg-clip-text text-transparent">medi
             <Image
                 src={mediQ}
                 alt="Q"
@@ -86,7 +81,7 @@ export default function LoginPage() {
 
           <div className="flex space-x-1 text-sm items-center">
             <p className="text-black">Belum memiliki akun?</p>
-            <a href="/register" className="text-blue-500 hover:underline">Sign up</a>
+            <a href="/daftar" className="text-blue-500 hover:underline">Sign up</a>
           </div>
 
           {/* Email */}
@@ -114,14 +109,14 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 className="pl-5 w-full py-6"
               />
-            </div>
             <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-2 top-3 text-muted-foreground"
+                className="absolute right-2 top-3 text-muted-foreground pt-1 pr-4"
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
+            </button>
+            </div>
           </div>
 
           {/* Button Login */}
@@ -137,11 +132,11 @@ export default function LoginPage() {
 
           {/* Social Login */}
             <div className="flex gap-2 w-full">
-              <Button onClick={handleLogin} variant="outline" className="flex-1 flex items-center gap-2">
+              <Button variant="outline" className="flex-1 flex items-center gap-2">
                 <Globe className="h-5 w-5" />
                 Google
               </Button>
-              <Button onClick={handleLogin} variant="outline" className="flex-1 flex items-center gap-2">
+              <Button variant="outline" className="flex-1 flex items-center gap-2">
                 <Facebook className="h-5 w-5 text-blue-600" />
                 Facebook
               </Button>

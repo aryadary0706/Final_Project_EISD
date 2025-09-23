@@ -1,18 +1,18 @@
-// app/(auth)/login/page.tsx
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useUserStore } from "@/stores/userStore";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Rumahsakit from "@/public/image_login.png";
-import styles from "@/app/styles/sidebar.module.css";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Eye, EyeOff } from "lucide-react";
 import { Globe, Facebook } from "lucide-react";
-import mediQ from "@/public/mediQ.png"
-import { useUserStore } from "@/stores/userStore";
+import mediQ from "@/public/mediQ.png";
+import mockUsers from "@/data/mockUsers.json";
 
 export default function LoginPage() {
   const [fullName, setFullName] = useState("");
@@ -21,6 +21,7 @@ export default function LoginPage() {
   const [confirmPass, setConfirmPass] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const router = useRouter();
 
   const { registerUser } = useUserStore();
 
@@ -31,36 +32,29 @@ export default function LoginPage() {
     isPasswordValid &&
     password === confirmPass;
 
-  const mockUsers = [
-    { id: 1, nama: "Nasywa", email: "email", password: "goodpassword" },
-    { id: 2, nama: "Jane Smith", email: "jane.smith@example.com", password: "securepassword" },
-    { id: 3, nama: "Peter Jones", email: "peter.jones@example.com", password: "strongpassword" }
-  ];
-
-  const currentId = 3;
   // Handler untuk mendaftarkan pengguna
   const handleRegister = () => {
       // Periksa kembali validitas form sebelum mendaftarkan
       if (isFormValid) {
+        const lastId = mockUsers.length > 0 ? mockUsers[mockUsers.length - 1].id : 0;
         const newUser = {
           // ID sementara, idealnya dihasilkan dari backend
-          id: currentId + 1,
-          nama: fullName,
+          id: lastId + 1,
+          name: fullName,
           email: email,
         };
         // Panggil fungsi registerUser dari store
         registerUser(newUser);
-        // Tampilkan notifikasi atau navigasi ke halaman lain setelah berhasil
-        console.log("Pengguna berhasil didaftarkan:", newUser);
-        // Reset form setelah pendaftaran
+
         setFullName("");
         setEmail("");
         setPassword("");
         setConfirmPass("");
+        router.push("/login")
       } else {
         console.error("Form tidak valid");
       }
-    };
+  };
 
   return (
     <div className="min-h-screen flex">
@@ -75,18 +69,19 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side (Form) */}
-      <div className="flex flex-col w-3/8 items-start gap-[32px] p-[44px_64px_32px_64px]">
-      {/* Logo */}
+      <div className="flex flex-col w-full md:w-3/8 items-start gap-[32px] p-[44px_64px_32px_64px]">
+        {/* Logo */}
         <div>
-            <h1 className={styles.titleTypography}>medi
+          <h1 className="flex flex-row font-poppins text-2xl font-semibold leading-tight bg-gradient-to-r from-blue-400 via-blue-200 to-blue-400 bg-clip-text text-transparent">
+            medi
             <Image
-                src={mediQ}
-                alt="Q"
-                width={26}
-                height={32}
-                className="ml-1"
+              src={mediQ}
+              alt="Q"
+              width={26}
+              height={32}
+              className="ml-1"
             />
-            </h1>
+          </h1>
         </div>
         <div className="flex flex-col items-start self-stretch gap-[32px] max-w-xl">
           {/* Header */}
@@ -109,16 +104,16 @@ export default function LoginPage() {
           <div className="space-y-1 w-full">
             <label className="text-md font-[600px] text-gray-700"> Nama</label>
             <Input
-              placeholder="John Doe"
+              placeholder="Nama Lengkap"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               className="pl-5 w-full py-5"
             />
           </div>
 
-            {/* Email */}
-            <div className="space-y-1 w-full">
-              <label className="text-md font-[600px] text-gray-700"> Email</label>
+          {/* Email */}
+          <div className="space-y-1 w-full">
+            <label className="text-md font-[600px] text-gray-700"> Email</label>
             <Input
               type="email"
               placeholder="mediQ@gmail.com"
@@ -126,11 +121,11 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               className="pl-5 w-full py-5"
             />
-            </div>
+          </div>
 
-           {/* Password */}
-           <div className="space-y-1 w-full">
-              <label className="text-md font-[600px] text-gray-700"> Kata Sandi</label>
+          {/* Password */}
+          <div className="space-y-1 w-full">
+            <label className="text-md font-[600px] text-gray-700"> Kata Sandi</label>
             <div className="relative">
               <Input
                 type={showPassword ? "text" : "password"}
@@ -157,12 +152,12 @@ export default function LoginPage() {
                 </div>
               </div>
             </div>
-           </div>
-           
-            {/* Confirm Password */}
-            <div className="w-full">
-              <label className="text-md font-[600px] text-gray-700">Konfirmasi Kata Sandi</label>
-              <div className="relative">
+          </div>
+
+          {/* Confirm Password */}
+          <div className="w-full">
+            <label className="text-md font-[600px] text-gray-700">Konfirmasi Kata Sandi</label>
+            <div className="relative">
               <Input
                 type={showConfirm ? "text" : "password"}
                 placeholder="Masukkan kata sandi"
@@ -178,40 +173,39 @@ export default function LoginPage() {
                 {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
-            </div>
+          </div>
 
-            <Button 
-              variant="secondary"
-              className="w-full p-6 mt-1"
-              disabled={!isFormValid}
-              onClick={handleRegister}
-            >
-              Buat Akun
-            </Button>
+          <Button
+            variant="default"
+            className="w-full p-6 mt-1 bg-blue-300"
+            disabled={!isFormValid}
+            onClick={handleRegister}
+          >
+            Buat Akun
+          </Button>
 
-            {/* Divider */}
-            <div className="flex flex-col w-full items-center">
-              <div className="flex items-center pt-1 pb-3">
+          {/* Divider */}
+          <div className="flex flex-col w-full items-center">
+            <div className="flex items-center pt-1 pb-3">
               <Separator className="flex-1" />
               <span className="text-md text-gray-600">Atau lanjutkan dengan</span>
               <Separator className="flex-1" />
             </div>
 
             {/* Social Login */}
-              <div className="flex gap-2 w-full">
-                <Button variant="outline" className="flex-1 flex items-center gap-2">
-                  <Globe className="h-5 w-5" />
-                  Google
-                </Button>
-                <Button variant="outline" className="flex-1 flex items-center gap-2">
-                  <Facebook className="h-5 w-5 text-blue-600" />
-                  Facebook
-                </Button>
-              </div>
+            <div className="flex gap-2 w-full">
+              <Button variant="outline" className="flex-1 flex items-center gap-2">
+                <Globe className="h-5 w-5" />
+                Google
+              </Button>
+              <Button variant="outline" className="flex-1 flex items-center gap-2">
+                <Facebook className="h-5 w-5 text-blue-600" />
+                Facebook
+              </Button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
-

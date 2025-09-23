@@ -1,9 +1,9 @@
 // stores/useUserStore.ts
 import { create } from "zustand";
 
-type User = {
+export type User = {
   id: number;
-  nama: string;
+  name: string;
   email: string;
   umur?: number;
   beratBadan?: number;
@@ -12,9 +12,9 @@ type User = {
   golonganDarah?: string;
   alergi?: string;
   alamat?: {
-    negara: string;
-    kota: string;
-    kodePos: string;
+    negara?: string;
+    kota?: string;
+    kodePos?: string;
   };
 };
 
@@ -30,9 +30,19 @@ export const useUserStore = create<UserState>((set) => ({
   user: null,
   setUser: (user) => set({ user }),
   updateUser: (partialUser) =>
-    set((state) =>
-      state.user ? { user: { ...state.user, ...partialUser } } : state
-    ),
+  set((state) => {
+    if (!state.user) return state;
+
+    return {
+      user: {
+        ...state.user,
+        ...partialUser,
+        alamat: partialUser.alamat
+          ? { ...state.user.alamat, ...partialUser.alamat }
+          : state.user.alamat,
+      },
+    };
+  }),
   clearUser: () => set({ user: null }),
   registerUser: (user) => set({ user }),
 }));

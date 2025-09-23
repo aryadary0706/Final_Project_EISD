@@ -11,15 +11,15 @@ import clsx from 'clsx';
 import { useUserStore } from '@/stores/userStore';
 
 const navItems = [
-  { name: 'Beranda', href: '/beranda', icon: <Home className="w-6 h-6" /> },
-  { name: 'Telusuri', href: '/search', icon: <Search className="w-6 h-6" /> },
-  { name: 'Riwayat', href: '/riwayat', icon: <Clock className="w-6 h-6" /> },
-  { name: 'Profil', href: '/profil', icon: <User className="w-6 h-6" /> },
+  { name: 'Beranda', href: '/beranda', icon: <Home className="w-5 h-5" /> },
+  { name: 'Telusuri', href: '/search', icon: <Search className="w-4 h-4" /> },
+  { name: 'Riwayat', href: '/riwayat', icon: <Clock className="w-4 h-4" /> },
+  { name: 'Profil', href: '/profil', icon: <User className="w-4 h-4" /> }, // Tetap tulis '/profil' sebagai default
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { clearUser } = useUserStore();
+  const { clearUser } = useUserStore(); // ✅ Ambil user dari store
 
   const handleLogout = () => {
     clearUser();
@@ -29,7 +29,13 @@ export default function Sidebar() {
     <aside className={styles.container}>
       {/* Logo */}
       <div className={styles.title}>
-        <h1 className={styles.titleTypography}>mediQ</h1>
+        <h1 className={styles.titleTypography}>medi</h1>
+        <img
+          src="/mediQ.png" 
+          alt="Logo" 
+          width={30} 
+          height={30} 
+        />
       </div>
 
       {/* Menu */}
@@ -37,7 +43,7 @@ export default function Sidebar() {
         <h4 className={styles.menuTypography}>Menu</h4>
         <nav className="flex flex-col space-y-2 w-full">
           {navItems.map((item) => {
-            // Perbaiki logika untuk menentukan halaman aktif
+            // Perbaiki logika active berdasarkan targetHref, bukan item.href
             const isActive = pathname === item.href || 
               (item.href === '/' && pathname === '/') ||
               (item.href !== '/' && pathname.startsWith(item.href));
@@ -45,7 +51,7 @@ export default function Sidebar() {
             return (
               <Link
                 key={item.name}
-                href={item.href}
+                href={item.href} // ✅ Pakai href yang sudah disesuaikan
                 className={clsx(styles.navItem, {
                   [styles.activeNavItem]: isActive,
                 })}
@@ -65,7 +71,7 @@ export default function Sidebar() {
       <div className={styles.logoutContainer}>
         <Link href="/login">
           <Button onClick={handleLogout} className={styles.logoutButton}>
-              <LogOut className="w-5 h-5" />
+            <LogOut className="w-5 h-5" />
             <span>Keluar</span>
           </Button>
         </Link>

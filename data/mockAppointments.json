@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "doctor": {
+      "name": "dr. Clara Wulandari, M.Ked",
+      "specialty": "Dokter Umum",
+      "image": "/beranda/doctor1.png"
+    },
+    "date": "2025-08-30T00:00:00.000Z",
+    "time": "13:00 WIB - 13:15 WIB",
+    "status": "Selesai",
+    "facility": "RS Media Kasih",
+    "patient": {
+      "name": "Naswa Gyna Sahira",
+      "symptom": "Demam, batuk kering, sakit kepala ringan, tenggorokan terasa perih",
+      "allergy": "Aspirin"
+    },
+    "diagnosis": {
+      "physicalExam": [
+        "Suhu tubuh 38,2°C",
+        "Tekanan darah 120/80 mmHg",
+        "Nadi 90 x/menit",
+        "Pernafasan 20x/menit",
+        "Tenggorokan tampak merah, tidak ada lendir berlebihan"
+      ],
+      "temporary": "Infeksi saluran pernafasan (ISPA) ringan",
+      "plan": "Istirahat cukup, perbanyak minum air putih, konsumsi obat penurun panas sesuai resep"
+    }
+  },
+  {
+    "id": 2,
+    "doctor": {
+      "name": "dr. Clara Wulandari, M.Ked",
+      "specialty": "Dokter Umum",
+      "image": "/beranda/doctor1.png"
+    },
+    "date": "2025-08-30T00:00:00.000Z",
+    "time": "09:15 WIB - 09:30 WIB",
+    "status": "Dibatalkan",
+    "facility": "RS Media Kasih",
+    "patient": {
+      "name": "Rafi Ahmad",
+      "symptom": "Sakit perut dan mual sejak pagi"
+    },
+    "diagnosis": {
+      "physicalExam": [],
+      "temporary": "Tidak tersedia karena jadwal dibatalkan"
+    }
+  },
+  {
+    "id": 3,
+    "doctor": {
+      "name": "dr. Andini Pratama, Sp.D",
+      "specialty": "Spesialis Penyakit Dalam",
+      "image": "/beranda/doctor1.png"
+    },
+    "date": "2025-07-03T00:00:00.000Z",
+    "time": "18:15 WIB - 19:00 WIB",
+    "status": "Dibatalkan",
+    "facility": "RS Media Kasih",
+    "patient": {
+      "name": "Siti Nurhaliza",
+      "symptom": "Nyeri ulu hati, mual, sering sendawa"
+    },
+    "diagnosis": {
+      "physicalExam": [],
+      "temporary": "Tidak tersedia karena jadwal dibatalkan"
+    }
+  },
+  {
+    "id": 4,
+    "doctor": {
+      "name": "dr. Aditya Pratama, Sp.KJ",
+      "specialty": "Psikiater",
+      "image": "/beranda/doctor1.png"
+    },
+    "date": "2025-07-26T00:00:00.000Z",
+    "time": "13:00 WIB - 13:15 WIB",
+    "status": "Selesai",
+    "facility": "RS Media Kasih",
+    "patient": {
+      "name": "Bima Arya",
+      "symptom": "Kesulitan tidur, sering cemas, mudah marah"
+    },
+    "diagnosis": {
+      "physicalExam": [
+        "Tekanan darah 110/70 mmHg",
+        "Denyut nadi normal",
+        "Kondisi fisik normal"
+      ],
+      "temporary": "Gangguan kecemasan ringan",
+      "plan": "Terapi relaksasi, konseling rutin, obat sesuai resep dokter"
+    }
+  },
+  {
+    "id": 5,
+    "doctor": {
+      "name": "dr. Melati Kusuma, Sp.A",
+      "specialty": "Dokter Anak",
+      "image": "/beranda/doctor1.png"
+    },
+    "date": "2025-09-15T00:00:00.000Z",
+    "time": "10:00 WIB - 10:30 WIB",
+    "status": "Menunggu",
+    "facility": "RS Media Kasih",
+    "patient": {
+      "name": "Dewi Lestari",
+      "symptom": "Anak demam tinggi sejak kemarin sore"
+    },
+    "diagnosis": {
+      "physicalExam": [],
+      "temporary": "Pemeriksaan belum dilakukan",
+      "plan": "Menunggu jadwal konsultasi"
+    }
+  }
+]

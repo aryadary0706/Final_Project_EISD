@@ -3,8 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import style from "@/app/styles/main.module.css";
 import clsx from "clsx";
+import Link from "next/link";
 import { MapPin, ChevronRight  } from 'lucide-react';
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const mockFacilities = [
   {
@@ -60,7 +60,6 @@ const mockFacilities = [
 
 export default function FaskesList() {
   return (
-    <ScrollArea className="w-[540px] lg:w-[830px] whitespace-nowrap pb-3">
     <div className="flex space-x-4 pb-4">
       {mockFacilities.map((facility) => (
         <Card
@@ -88,22 +87,22 @@ export default function FaskesList() {
                 {facility.city}
               </div>
             </div>
-
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="w-full h-7 text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300"
-            >
-              <div className="flex flex-row gap-1 text-xs">
-                <span>Lihat Detail</span>
-              <ChevronRight className="w-4 h-4 "/>
-              </div>
-            </Button>
+            <Link href={`/search/faskes/${facility.id}`}>
+              <Button 
+                asChild
+                variant="outline" 
+                size="sm" 
+                className="w-full h-7 text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300"
+              >
+                <div className="flex flex-row gap-1 text-xs">
+                  <span>Lihat Detail</span>
+                <ChevronRight className="w-4 h-4 "/>
+                </div>
+              </Button>
+            </Link>
           </CardContent>
         </Card>
       ))}
     </div>
-    <ScrollBar orientation="horizontal" />
-    </ScrollArea>
   );
 }

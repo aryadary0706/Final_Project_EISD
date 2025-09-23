@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "dr. Arief Nugroho, Sp.JP",
+    "label": "umum",
+    "specialty": "Spesialis Jantung dan Pembuluh Darah",
+    "rating": "5.0",
+    "totalPatients": "450+",
+    "image": "/beranda/doctor2.png",
+    "lokasi": "Rumah Sakit Medika Center"
+  },
+  {
+    "id": 2,
+    "name": "dr. Ratna Dewi Sp.A",
+    "label": "umum",
+    "specialty": "Spesialis Anak",
+    "rating": "4.9",
+    "totalPatients": "450+",
+    "image": "/beranda/doctor1.png",
+    "lokasi": "Rumah Sakit Medika Center"
+  },
+  {
+    "id": 3,
+    "name": "dr. Andini Pratama, Sp.PD",
+    "label": "umum",
+    "specialty": "Spesialias Penyakit Dalam",
+    "rating": "5.0",
+    "totalPatients": "450+",
+    "image": "/beranda/doctor3.png",
+    "lokasi": "Rumah Sakit Medika Center"
+  },
+  {
+    "id": 4,
+    "name": "dr. Maya Lestari, Sp.PD",
+    "label": "umum",
+    "specialty": "Spesialias Penyakit Dalam",
+    "rating": "5.0",
+    "totalPatients": "450+",
+    "image": "/beranda/dokterBanner.png",
+    "lokasi": "Rumah Sakit Medika Center"
+  }
+]

@@ -9,12 +9,14 @@ export default function MainLayout({
   return (
     <div className="flex">
       {/* Sidebar kiri (global) */}
-      <Sidebar />
+      <div className="sticky top-0 h-screen">
+        <Sidebar />
+      </div>
 
-      {/* Area kanan (dinamis per page) */}
-      <div className="flex flex-1">
-        {children}
-    </div>
+        {/* Area kanan (dinamis per page) */}
+        <div className="w-full">
+          {children}
+      </div>
     </div>
   );
 }

@@ -1,14 +1,18 @@
 .container {
     display: flex;
     flex-direction: column;
-    width: 240px;
-    height: auto;
-    padding: 32px 0;
+    flex-shrink: 0;
+    width: 185px;
+    height: 100vh;
+    padding-top: 40px;
+    padding-left: 5px;
+    padding-bottom: 40px;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     border-right: 2px solid #EAEAEA;
     background: #FFF;
+    position: sticky;
 }
 
 .title {
@@ -22,9 +26,8 @@
 .titleTypography {
     display: flex;
     flex-direction: row;
-    align-items: center;
     font-family: Poppins, sans-serif;
-    font-size: 28px;
+    font-size: 23px;
     font-weight: 600;
     line-height: 120%;
     background: linear-gradient(90deg, #59A5F5 0%, #B8DAFE 54.4%, #59A5F5 100%);
@@ -45,9 +48,9 @@
     color: #000;
     font-family: Poppins, sans-serif;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: medium;
     line-height: 120%;
-    margin-bottom: 16px; /* Space below "Menu" heading */
+    margin-bottom: 12px; /* Space below "Menu" heading */
     padding-left: 10px;
 }
 
@@ -60,7 +63,7 @@
     cursor: pointer;
     text-decoration: none;
     color: #000;
-    font-size:20px;
+    font-size:13px;
 }
 
 .navItem:hover {
@@ -82,7 +85,7 @@
 .logoutButton {
     display: flex;
     width: 100%;
-    padding: 24px;
+    padding: 16px;
     align-items: center;
     justify-content: center; /* Center the icon and text */
     gap: 8px;
@@ -92,7 +95,7 @@
     color: #333;
     font-family: Poppins, sans-serif;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 12px;
     cursor: pointer;
 }
 
@@ -103,24 +106,13 @@
 @media (max-width: 1024px) {
     .container {
         display: flex;
-        min-width: 85; /* Lebar diperkecil */
+        width: 55px; /* Lebar diperkecil */
         align-items: center;
     }
 
     .titleTypography {
         font-size: 0; /* Sembunyikan teks "mediQ" */
     }
-
-    /* Tampilkan hanya huruf 'Q' */
-    .titleTypography::before {
-        content: "Q";
-        font-size: 32px; /* Atur ukuran font untuk huruf 'Q' */
-        background: linear-gradient(90deg, #59A5F5 0%, #B8DAFE 54.4%, #59A5F5 100%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
     .navbar {
         padding: 0;
         align-items: start;
@@ -147,9 +139,9 @@
     }
 
     .logoutButton {
-        width: 60px;
+        width: 35px;
         height: auto;
-        padding: 12px; /* Sesuaikan padding */
+        padding: 10px; /* Sesuaikan padding */
         justify-content: center;
     }
 
