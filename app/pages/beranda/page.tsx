@@ -5,7 +5,7 @@ import JadwalTemu from "@/components/app-components/jadwaltemu";
 import DoctorList from '@/components/app-components/DoctorList';
 import FaskesList from '@/components/app-components/faskesList';
 import Header from '@/components/app-components/header';
-import Sidebar from "@/components/app-components/sidebar";
+// import Sidebar from "@/components/app-components/sidebar";
 
 export default function Beranda() {
   return (

@@ -11,7 +11,7 @@ import clsx from 'clsx';
 
 const navItems = [
   { name: 'Beranda', href: '/', icon: <Home className="w-6 h-6" /> },
-  { name: 'Telusuri', href: '/telusuri', icon: <Search className="w-6 h-6" /> },
+  { name: 'Telusuri', href: '/pages/telusuri', icon: <Search className="w-6 h-6" /> },
   { name: 'Riwayat', href: '/riwayat', icon: <Clock className="w-6 h-6" /> },
   { name: 'Profil', href: '/profil', icon: <User className="w-6 h-6" /> },
 ];
