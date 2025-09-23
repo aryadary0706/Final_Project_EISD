@@ -7,6 +7,7 @@ import AppointmentDetail from "@/app/components/AppointmentDetail";
 import { Calendar, Clock } from "lucide-react";
 import { Separator } from "@radix-ui/react-separator";
 import mockSchedule from "@/data/mockAppointments.json";
+import clsx from "clsx";
 
 type Appointment = {
   id: number;
@@ -33,7 +34,6 @@ type Appointment = {
 
 export default function RiwayatPage() {
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
-
   return (
     <div className="flex flex-row w-full">
       <div className="flex-1 flex flex-col">
@@ -55,13 +55,15 @@ export default function RiwayatPage() {
                     <p className="text-xs text-gray-500">{appt.facility}</p>
                   </div>
                   <span
-                    className={`text-xs px-3 py-1 rounded-full font-medium ${
-                      appt.status === "selesai"
-                        ? "bg-green-100 text-green-600"
-                        : "bg-red-100 text-red-600"
-                    }`}
+                    className={clsx("text-xs px-3 py-1 rounded-full font-medium", 
+                      appt.status === "Selesai" && "bg-green-100 text-green-600",
+                      appt.status === "Dibatalkan" && "bg-red-100 text-red-600",
+                      appt.status === "Menunggu" && "bg-blue-100 text-blue-600",
+                    )}
                   >
-                    {appt.status === "selesai" ? "Selesai" : "Dibatalkan"}
+                    {appt.status === "Selesai" && "Selesai"}
+                    {appt.status === "Dibatalkan" && "Dibatalkan"}
+                    {appt.status === "Menunggu" && "Menunggu"}
                   </span>
                 </div>
 
@@ -85,15 +87,15 @@ export default function RiwayatPage() {
       </div>
 
       {/* Aside untuk Appointment Detail */}
-      <div className="hidden lg:flex w-[380px] shrink-0 p-4">
+      <div className="hidden lg:flex w-[380px] shrink-0 sticky top-0 h-screen">
         {selectedAppointment ? (
           <AppointmentDetail
             appointment={selectedAppointment}
             onClose={() => setSelectedAppointment(null)}
           />
         ) : (
-          <div className="flex items-center justify-center w-full text-gray-400 text-sm">
-            Pilih jadwal untuk melihat detail
+          <div className="flex items-center justify-center w-full text-black text-sm">
+            <ScheduleMeet/>
           </div>
         )}
       </div>

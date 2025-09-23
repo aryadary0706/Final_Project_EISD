@@ -34,7 +34,7 @@ export default function AppointmentDetail({
   onClose: () => void;
 }) {
   return (
-    <div className="p-6 bg-white rounded-xl shadow-md w-[360px] relative">
+    <div className="py-12 px-7 bg-white rounded-xl shadow-md w-full min-h-screen max-h-full relative">
       {/* Tombol Close */}
       <button onClick={onClose} className="absolute top-4 right-4 text-gray-500">
         <X size={20} />
@@ -67,7 +67,7 @@ export default function AppointmentDetail({
             alt={appointment.doctor.name}
             width={80}
             height={80}
-            className="rounded-full"
+            className="rounded-full bg-blue-300"
           />
         )}
         <h3 className="mt-2 font-bold">{appointment.doctor.name}</h3>
