@@ -74,9 +74,42 @@
   color: inherit;
 }
 
+.faskesCardNew {
+  display: flex;
+  width: 173px;
+  padding: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  border-radius: 12px;
+  background: #FFF;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.05);
+
+  flex-shrink: 0;
+  height: 158px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+
 .faskesCard:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.faskesCardNew:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+}
+
+.faskesImageWrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+  
 }
 
 .faskesIcon {
@@ -84,15 +117,103 @@
   margin-bottom: 1rem;
 }
 
+.imageFaskes {
+  display: flex;
+  width: 75px;
+  height: 75px;
+  border-radius: 75px; 
+  position: relative;
+}
+
+.faskesImage {
+  max-width: 75px;
+}
+
+.arrowButton{
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+} 
+
+.faskesInfo {
+  /* padding: 1rem; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+}
+
 .faskesName {
-  font-weight: 600;
-  color: #1e293b;
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
+  align-self: stretch;
+  color: #000;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
 }
 
 .faskesCity {
-  font-size: 0.875rem;
-  color: #64748b;
+  color: var(--Foundation-Neutral-Normal, #737373);
+  align-self: stretch;
+  font-family: Poppins;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 15.6px */
 }
+
+.faskesSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* margin-top: 1.5rem; */
+}
+
+.faskesCategoryRow {
+  display: flex;
+  gap: 1.5rem;
+}
+
+
+.categoryLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 100px;
+  color: #3b82f6;
+  font-weight: 500;
+  text-align: center;
+}
+
+.categoryLabel span {
+  margin-top: 0.5rem;
+}
+
+
+.scrollContainer {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem; /* Memberi ruang untuk shadow & scrollbar */
+  flex-grow: 1;
+  /* Menyembunyikan scrollbar di berbagai browser */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
 
 
 /* Style untuk Featured Doctor Card */

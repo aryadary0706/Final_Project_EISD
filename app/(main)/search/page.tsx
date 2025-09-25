@@ -1,12 +1,13 @@
 // Lokasi: app/pages/telusuri/page.tsx
 "use client";
 
-import styles from './telusuri.module.css';
+import styles from '@/app/styles/telusuri.module.css';
 import { faskesData } from '@/lib/data';
-import FaskesCard from '@/app/components/FaskesCard';
 import DoctorList from '@/app/components/DoctorList'; // Komponen dari teman Anda
 import Header from '@/app/components/header';
 import FaskesList from '@/app/components/faskesList';
+import FaskesCategory from '@/app/components/FaskesCategory';
+import { Hospital, Stethoscope, Home } from 'lucide-react';
 import image4 from "@/public/doctor4.png"
 import Image from 'next/image';
 import Link from 'next/link';
@@ -30,6 +31,10 @@ const testimonialsData = [
 ];
 
 export default function TelusuriPage() {
+  const rumahSakit = faskesData.filter(f => f.type === 'Rumah Sakit');
+  const klinik = faskesData.filter(f => f.type === 'Klinik');
+  const puskesmas = faskesData.filter(f => f.type === 'Puskesmas');
+
   return (
     <div className={styles.container}>
       <Header />
@@ -38,22 +43,18 @@ export default function TelusuriPage() {
         <div className={styles.header}>
           <h2>Fasilitas Kesehatan</h2>
           <div className={styles.filters}>
+            {/* Filter ini bisa dibuat lebih fungsional nanti */}
             <button className={styles.active}>Semua</button>
             <button>Rumah Sakit</button>
             <button>Klinik</button>
             <button>Puskesmas</button>
           </div>
         </div>
-        <div className={styles.grid}>
-          {faskesData.map((faskes) => (
-            <FaskesCard 
-              key={faskes.id} 
-              id={faskes.id} 
-              name={faskes.name} 
-              city={faskes.city} 
-              icon={faskes.icon}
-            />
-          ))}
+        
+        <div className={styles.faskesSection}>
+            <FaskesCategory title="Rumah Sakit" icon={<Hospital size={24}/>} facilities={rumahSakit} />
+            <FaskesCategory title="Klinik" icon={<Stethoscope size={24}/>} facilities={klinik} />
+            <FaskesCategory title="Puskesmas" icon={<Home size={24}/>} facilities={puskesmas} />
         </div>
       </section>
 
@@ -83,7 +84,7 @@ export default function TelusuriPage() {
                   <span>{featuredDoctor.totalPatients} Total Pasien Terlayani</span>
                 </div>
               </div>
-              <Link href={`/pages/dokter/${featuredDoctor.id}`} className={styles.detailButton}>
+              <Link href={`/search/doctor/${featuredDoctor.id}`} className={styles.detailButton}>
                 Lihat Detail <span>→</span>
               </Link>
             </div>
