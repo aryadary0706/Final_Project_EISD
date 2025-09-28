@@ -1,0 +1,195 @@
+/* Lokasi: app/dokter/dokter.module.css */
+
+.pageWrapper {
+  display: flex;
+  background-color: #f8fafc;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  color: #475569;
+}
+.header h2 { font-weight: 600; color: #1e293b; }
+.header p { font-size: 0.875rem; color: #64748b; }
+
+/* Banner Dokter */
+.doctorBanner {
+  position: relative;
+  background: linear-gradient(105deg, #e0f2fe, #dbeafe);
+  border-radius: 20px;
+  height: 250px;
+  display: flex;
+  overflow: hidden;
+  padding: 2rem;
+}
+.bannerText h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  line-height: 1.1;
+  max-width: 250px;
+}
+.bannerImage {
+  position: absolute;
+  right: 15%;
+  bottom: 0;
+  width: 300px;
+  height: 300px;
+}
+.bannerStats {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+.statItem {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  text-align: center;
+}
+.statItem span { font-size: 1.25rem; font-weight: 700; color: #0ea5e9; }
+.statItem p { font-size: 0.75rem; color: #475569; }
+
+/* Jadwal */
+.scheduleSection h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.scheduleRange {
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+.dateSelector, .timeSelector {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.dateButton, .timeButton {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.dateButton {
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dateButton span { font-size: 0.875rem; color: #64748b; }
+.dateButton strong { font-size: 1.25rem; color: #1e293b; }
+.timeButton { padding: 0.75rem; font-weight: 500; }
+
+.dateButton.selected, .timeButton.selected {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+.dateButton.selected span, .dateButton.selected strong { color: white; }
+
+/* Form */
+.formSection {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+.formSection h4 { font-size: 1.125rem; font-weight: 600; }
+.formSubtitle { color: #64748b; margin-top: 0.25rem; margin-bottom: 1.5rem; }
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.formGroup { display: flex; flex-direction: column; }
+.formGroup.fullWidth { grid-column: 1 / -1; }
+.formGroup label { margin-bottom: 0.5rem; font-weight: 500; font-size: 0.875rem; }
+.formGroup input, .formGroup textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+.formGroup input:focus { outline-color: #3b82f6; }
+/* ... Styles untuk radio button, upload, dll ... */
+
+.reminder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.submitButton {
+    width: 100%;
+    margin-top: 1.5rem;
+    background-color: #3b82f6;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Sidebar Kanan */
+.rightSidebar {
+  width: 380px;
+  flex-shrink: 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  border-left: 1px solid #e2e8f0;
+}
+
+/* Switch Toggle */
+.switch { position: relative; display: inline-block; width: 50px; height: 28px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 28px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+input:checked + .slider { background-color: #3b82f6; }
+input:checked + .slider:before { transform: translateX(22px); }
