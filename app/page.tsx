@@ -7,9 +7,9 @@ import Image from "next/image";
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <header className="flex h-18 py-8 px-10 gap-2 justify-between items-center border border-b-2 shadow-lg bg-white">
+      <header className="flex h-18 py-8 px-10 gap-2 justify-between items-center bg-white">
         <div className="flex items-center gap-1">
           <h1 className={styles.titleTypography}>medi</h1>
           <img
@@ -53,7 +53,7 @@ const AboutUs = () => {
           </div>
 
           <div className="mt-20 flex flex-row justify-center gap-16">
-            <h1 className="text-4xl font-semibold">
+            <h1 className="text-4xl font-medium">
               <span className="bg-gradient-to-r mr-4 from-blue-500 to-blue-800 bg-clip-text text-transparent">
                 Tentang
               </span>
@@ -124,9 +124,45 @@ const AboutUs = () => {
               alt="List Dokter"
               width={1000}
               height={1000}
+              loading="lazy"
             />
           </div>
         </div>
+          <div className="my-20 flex flex-row justify-between gap-20">
+            <div className="flex gap-1 flex-col items-start">
+              <div className="flex flex-row gap-1">
+                <h1 className={styles.titleTypography}>medi</h1>
+                <img
+                  src="/mediQ.png"
+                  alt="Logo"
+                  width={30}
+                  height={30}
+                />
+              </div>
+              <div>
+                <p className="text-sm text-gray-600">Jembatan menuju layanan kesehatan</p>
+              </div>
+            </div>
+            <div className="mx-30">
+            </div>
+            <div className="flex flex-col gap-4 items-start text-sm">
+              <span className="font-bold">Navigasi</span>
+              <p>Home</p>
+              <p>Tentang Kami</p>
+              <p>Kontak</p>
+            </div>
+            <div className="flex flex-col gap-4 items-start text-sm">
+              <span className="font-bold">Informasi</span>
+              <p>Instagram</p>
+              <p>Twitter</p>
+              <p>Facebook</p>
+            </div>
+            <div className="flex flex-col gap-4 items-start text-sm">
+              <span className="font-bold">Mitra Kerja</span>
+              <p>Kemenkes</p>
+              <p>BPJS</p>
+            </div>
+          </div>
         </div>
       </main>
     </div>

@@ -39,7 +39,7 @@ export default function DokterDetailPage({ params }: { params: { id: string } })
       return (
           <div className={styles.mainContent}>
               <header className={styles.header}>
-                  <Link href="/telusuri" className={styles.backButton}>
+                  <Link href="/search" className={styles.backButton}>
                       <ChevronLeft size={24} />
                   </Link>
                   <h2>Dokter Tidak Ditemukan</h2>

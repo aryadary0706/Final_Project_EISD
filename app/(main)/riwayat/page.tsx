@@ -36,7 +36,7 @@ export default function RiwayatPage() {
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
   return (
     <div className="flex flex-row w-full">
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col py-2">
         <Header />
         <main className="flex-1 mt-4 space-y-4 px-6 w-full">
           <h1 className="text-base font-medium">Riwayat Jadwal Temu</h1>

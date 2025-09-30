@@ -18,6 +18,7 @@ export const faskesData: Faskes[] = [
   { id: 4, type: 'Rumah Sakit', name: 'RS Bina Sejahtera', city: 'Bandung', imageUrl: '/faskes/rs4.png' },
   { id: 5, type: 'Rumah Sakit', name: 'RS Mitra Keluarga', city: 'Bandung', imageUrl: '/faskes/rs5.png' },
   { id: 6, type: 'Rumah Sakit', name: 'RS Persada Bhakti', city: 'Bandung', imageUrl: '/faskes/rs6.png' },
+  { id: 16, type: 'Rumah Sakit', name: 'RS Persada Bhakti', city: 'Bandung', imageUrl: '/faskes/rs6.png' },
 
   // Klinik
   { id: 7, type: 'Klinik', name: 'Harmony Dental', city: 'Bandung', imageUrl: '/faskes/klinik1.png' },

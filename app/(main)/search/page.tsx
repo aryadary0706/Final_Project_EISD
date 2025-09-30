@@ -11,6 +11,7 @@ import { Hospital, Stethoscope, Home } from 'lucide-react';
 import image4 from "@/public/doctor4.png"
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 // Data untuk dokter unggulan (featured doctor), bisa dipindah ke lib/data.ts jika perlu
 const featuredDoctor = {
@@ -34,27 +35,82 @@ export default function TelusuriPage() {
   const rumahSakit = faskesData.filter(f => f.type === 'Rumah Sakit');
   const klinik = faskesData.filter(f => f.type === 'Klinik');
   const puskesmas = faskesData.filter(f => f.type === 'Puskesmas');
+  const [filters, setFilters] = useState({
+    semua: true,
+    rs: true,
+    klinik: true,
+    puskesmas: true,
+  });
+
+  // handler checkbox
+  const handleCheckboxChange = (name: string) => {
+    if (name === "semua") {
+      // klik "Semua"
+      const newVal = !filters.semua;
+      setFilters({
+        semua: newVal,
+        rs: newVal,
+        klinik: newVal,
+        puskesmas: newVal,
+      });
+    } else {
+      // klik salah satu kategori
+      const updated = { ...filters, [name]: !filters[name as keyof typeof filters] };
+      // cek apakah semua kategori aktif
+      const allOn = updated.rs && updated.klinik && updated.puskesmas;
+      setFilters({ ...updated, semua: allOn });
+    }
+  };
 
   return (
     <div className={styles.container}>
       <Header />
       {/* === BAGIAN FASILITAS KESEHATAN === */}
-      <section>
+      <section className={styles.section}>
         <div className={styles.header}>
           <h2>Fasilitas Kesehatan</h2>
-          <div className={styles.filters}>
-            {/* Filter ini bisa dibuat lebih fungsional nanti */}
-            <button className={styles.active}>Semua</button>
-            <button>Rumah Sakit</button>
-            <button>Klinik</button>
-            <button>Puskesmas</button>
+          <div className="flex flex-row gap-4 mt-4">
+            <label className='flex items-center gap-1'>
+              <input type="checkbox" checked={filters.semua} onChange={() => handleCheckboxChange("semua")}/>
+              Semua
+            </label>
+            <label className='flex items-center gap-1'>
+              <input type="checkbox" checked={filters.rs} onChange={() => handleCheckboxChange("rs")}/>
+              Rumah Sakit
+            </label>
+            <label className='flex items-center gap-1'>
+              <input type="checkbox" checked={filters.klinik} onChange={() => handleCheckboxChange("klinik")}/>
+              Klinik
+            </label>
+            <label className='flex items-center gap-1'>
+              <input type="checkbox" checked={filters.puskesmas} onChange={() => handleCheckboxChange("puskesmas")}/>
+              Puskesmas
+            </label>
           </div>
         </div>
         
         <div className={styles.faskesSection}>
-            <FaskesCategory title="Rumah Sakit" icon={<Hospital size={24}/>} facilities={rumahSakit} />
-            <FaskesCategory title="Klinik" icon={<Stethoscope size={24}/>} facilities={klinik} />
-            <FaskesCategory title="Puskesmas" icon={<Home size={24}/>} facilities={puskesmas} />
+          {filters.rs && (
+            <FaskesCategory
+              title="Rumah Sakit"
+              icon={<Hospital size={24} />}
+              facilities={rumahSakit}
+            />
+          )}
+          {filters.klinik && (
+            <FaskesCategory
+              title="Klinik"
+              icon={<Stethoscope size={24} />}
+              facilities={klinik}
+            />
+          )}
+          {filters.puskesmas && (
+            <FaskesCategory
+              title="Puskesmas"
+              icon={<Home size={24} />}
+              facilities={puskesmas}
+            />
+          )}
         </div>
       </section>
 
@@ -105,11 +161,15 @@ export default function TelusuriPage() {
       <section className={styles.section}>
         <h2 className="font-[500] self-stretch mb-4 text-lg">Dokter Pilihan Pasien</h2>
         {/* Langsung panggil komponen dari teman Anda di sini */}
-        <DoctorList />
+        <div className='flex gap-4 overflow-x-auto no-scrollbar max-w-[1280px]'>
+          <DoctorList />
+        </div>
       </section>
       <section className={styles.section}>
         <h2 className="font-[500] self-stretch mb-4 text-lg">Fasilitas Kesehatan Terdekat</h2>
-        <FaskesList />
+        <div className='flex gap-4 overflow-x-auto no-scrollbar max-w-[1280px]'>
+          <FaskesList />
+        </div>
       </section>
     </div>
   );

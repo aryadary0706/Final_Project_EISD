@@ -13,6 +13,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { Globe, Facebook } from "lucide-react";
 import mediQ from "@/public/mediQ.png";
 import mockUsers from "@/data/mockUsers.json";
+import clsx from "clsx";
 
 export default function LoginPage() {
   const [fullName, setFullName] = useState("");
@@ -59,12 +60,13 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex">
       {/* Left Side (Image) */}
-      <div className="hidden md:flex w-5/8 items-center justify-center bg-gray-100">
+      <div className="hidden md:flex w-5/8 justify-center items-center bg-gray-100 shrink-0 sticky top-0 h-screen">
         <Image
           src={Rumahsakit}
           alt="Logo"
           width={500}
           height={700}
+          loading="eager"
         />
       </div>
 
@@ -177,7 +179,7 @@ export default function LoginPage() {
 
           <Button
             variant="default"
-            className="w-full p-6 mt-1 bg-blue-300"
+            className={clsx("w-full p-6 mt-1", isFormValid ? "bg-blue-400 hover:bg-blue-500" : "bg-gray-400")}
             disabled={!isFormValid}
             onClick={handleRegister}
           >
@@ -186,11 +188,14 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div className="flex flex-col w-full items-center">
-            <div className="flex items-center pt-1 pb-3">
+            <div className="flex items-center pt-3 pb-4 justify-center gap-2">
               <Separator className="flex-1" />
-              <span className="text-md text-gray-600">Atau lanjutkan dengan</span>
+              <span className="text-sm text-gray-600 whitespace-nowrap">
+                Atau lanjutkan dengan
+              </span>
               <Separator className="flex-1" />
             </div>
+
 
             {/* Social Login */}
             <div className="flex gap-2 w-full">

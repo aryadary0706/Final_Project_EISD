@@ -66,7 +66,7 @@ export default function FaskesList() {
           key={facility.id}
           className={clsx(
             style.faskesCard,
-            'flex w-[180px] h-[170px] flex-shrink-0 px-1 py-2 flex-col items-start'
+            'flex w-[180px] min-h-[170px] max-h-[220px] flex-shrink-0 px-1 py-2 flex-col items-start'
           )}
         >
           <CardHeader>
@@ -92,7 +92,7 @@ export default function FaskesList() {
                 asChild
                 variant="outline" 
                 size="sm" 
-                className="w-full h-7 text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300"
+                className="w-full h-7 text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300 mb-2"
               >
                 <div className="flex flex-row gap-1 text-xs">
                   <span>Lihat Detail</span>

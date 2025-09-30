@@ -1,12 +1,14 @@
 /* Lokasi: app/pages/telusuri/telusuri.module.css */
 
 .container {
-  padding: 2rem 3rem;
   background-color: #f8fafc; /* Sedikit abu-abu */
+  width: screen;
 }
 
 .section {
   margin-top: 24px;
+  padding-left: 2.5rem;
+  padding-right: 1rem;
 }
 
 .kataDokter {
@@ -21,6 +23,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .header h2 {
@@ -172,13 +176,14 @@
 .faskesSection {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1px;
   /* margin-top: 1.5rem; */
 }
 
 .faskesCategoryRow {
   display: flex;
-  gap: 1.5rem;
+  gap: 4rem;
+
 }
 
 
@@ -201,20 +206,23 @@
 
 .scrollContainer {
   display: flex;
+  flex-wrap: nowrap;
   gap: 1.5rem;
   overflow-x: auto;
-  padding-bottom: 1rem; /* Memberi ruang untuk shadow & scrollbar */
-  flex-grow: 1;
-  /* Menyembunyikan scrollbar di berbagai browser */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  flex: 1;              /* isi sisa space, gantikan width:80% */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .scrollContainer::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, and Opera */
+  display: none;
 }
 
-
+.scrollContainer > * {
+  flex: 0 0 auto;
+  min-width: 170px;
+  max-width: 200px;
+}
 
 /* Style untuk Featured Doctor Card */
 .featuredCard {
@@ -235,6 +243,8 @@
   border-radius: 20px;
   border: 1px solid #e2e8f0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 1240px; 
 }
 
 .featuredImageContainer {

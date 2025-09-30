@@ -98,9 +98,9 @@ export default function ScheduleMeet() {
       <div className="flex flex-col space-y-6 mb-0 w-full h-full">
         {/* MOBILE */}
         <div className="xl:hidden">
-          <div className="w-full h-[280px] overflow-hidden">
+          <div className="w-full h-[240px] overflow-hidden">
             <ScrollArea className="w-full h-xl">
-              <div className="flex gap-6 pr-4 pb-4">
+              <div className="flex gap-6 px-5 pb-4">
                 {sortedDates.map((date) => (
                   <div key={date} className="flex-shrink-0 flex flex-col">
                     <h3 className="font-normal text-md text-black mb-2 whitespace-nowrap">
