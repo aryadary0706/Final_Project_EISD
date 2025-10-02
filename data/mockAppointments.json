@@ -112,5 +112,47 @@
       "temporary": "Pemeriksaan belum dilakukan",
       "plan": "Menunggu jadwal konsultasi"
     }
+  },
+  {
+    "id": 6,
+    "doctor": {
+      "name": "dr. Melati Kusuma, Sp.A",
+      "specialty": "Dokter Anak",
+      "image": "/beranda/doctor1.png"
+    },
+    "date": "2025-09-17T00:00:00.000Z",
+    "time": "10:00 WIB - 10:30 WIB",
+    "status": "Menunggu",
+    "facility": "RS Media Kasih",
+    "patient": {
+      "name": "Dewi Lestari",
+      "symptom": "Anak demam tinggi sejak kemarin sore"
+    },
+    "diagnosis": {
+      "physicalExam": [],
+      "temporary": "Pemeriksaan belum dilakukan",
+      "plan": "Menunggu jadwal konsultasi"
+    }
+  },
+  {
+    "id": 7,
+    "doctor": {
+      "name": "dr. Melati Kusuma, Sp.A",
+      "specialty": "Dokter Anak",
+      "image": "/beranda/doctor1.png"
+    },
+    "date": "2025-11-15T00:00:00.000Z",
+    "time": "10:00 WIB - 10:30 WIB",
+    "status": "Menunggu",
+    "facility": "RS Media Kasih",
+    "patient": {
+      "name": "Dewi Lestari",
+      "symptom": "Anak demam tinggi sejak kemarin sore"
+    },
+    "diagnosis": {
+      "physicalExam": [],
+      "temporary": "Pemeriksaan belum dilakukan",
+      "plan": "Menunggu jadwal konsultasi"
+    }
   }
 ]

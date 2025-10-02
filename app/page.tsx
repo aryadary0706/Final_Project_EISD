@@ -31,45 +31,57 @@ const AboutUs = () => {
       </header>
 
       {/* Isi konten halaman */}
-      <main className="flex flex-col items-center justify-center text-center">
-        <div className="mt-30 flex flex-col items-center">
+      
+      <main className="flex flex-col items-center justify-center text-center px-4 sm:px-8">
+
+        <div className="mt-20 flex flex-col items-center max-w-screen w-full">
           <h1 className="text-4xl font-medium">Jembatan menuju</h1>
           <h1 className="mt-5 text-3xl font-medium bg-gradient-to-r from-blue-400 via-blue-300 to-blue-400 bg-clip-text text-transparent">
             Layanan Kesehatan Terbaik
           </h1>
           <p className="mt-5 text-gray-400 text-sm">Sahabat akses kesehatan</p>
 
-          <div className="mt-7 flex flex-row gap-6 justify-center">
-            <Button variant="default" className="bg-gradient-to-r from-blue-300 via-blue-200 to-blue-300 p-6 rounded-4xl w-47 justify-between text-black shadow-md">
+          {/* CTA Button */}
+          <div className="mt-7 flex flex-col md:flex-row gap-4 sm:gap-6 justify-center w-full sm:w-auto">
+            <Button variant="default" className="bg-gradient-to-r from-blue-300 via-blue-200 to-blue-300 p-6 rounded-2xl shadow-md text-black">
               Hubungi Kami<CircleArrowRight />
             </Button>
-            <Button variant="outline" className="bg-gray-50 rounded-4xl w-47 justify-between p-6 shadow-md">
+            <Button variant="outline" className="bg-gray-50 rounded-2xl p-6 shadow-md">
               Sign Up<CircleArrowRight />
             </Button>
           </div>
 
-          <div className="mt-15 mx-15">
-            <Image src="/about/Pict_top_about.png" alt="Top" width={1200} height={1200} />
+          {/* Top Image */}
+          <div className="mt-16 w-full max-w-5xl">
+            <Image 
+            src="/about/Pict_top_about.png" 
+            alt="Top" 
+            width={1000} 
+            height={700}
+            className="w-full h-auto object-contain"
+            priority
+            />
           </div>
-
-          <div className="mt-20 flex flex-row justify-center gap-16">
-            <h1 className="text-4xl font-medium">
-              <span className="bg-gradient-to-r mr-4 from-blue-500 to-blue-800 bg-clip-text text-transparent">
-                Tentang
-              </span>
-              <span className="inline-flex items-center gap-0.5 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-400 bg-clip-text text-transparent">
-                medi
-                <img
-                  src="/mediQ.png"
-                  alt="Logo"
-                  className="inline-block align-middle"
-                  width={30}
-                  height={30}
-                  loading="lazy"
-                />
-              </span>
-            </h1>
-          </div>
+        </div>
+        {/* Tentang mediQ */}
+        <div className="mt-20 flex flex-row justify-center gap-16">
+          <h1 className="text-4xl font-medium">
+            <span className="bg-gradient-to-r mr-4 from-blue-500 to-blue-800 bg-clip-text text-transparent">
+              Tentang
+            </span>
+            <span className="inline-flex items-center gap-0.5 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-400 bg-clip-text text-transparent">
+              medi
+              <img
+                src="/mediQ.png"
+                alt="Logo"
+                className="inline-block align-middle"
+                width={30}
+                height={30}
+                loading="lazy"
+              />
+            </span>
+          </h1>
+        </div>
           <div className="mt-10 max-w-4xl text-center">
             <p className="text-gray-400">
               MediQ hadir sebagai solusi layanan kesehatan digital yang memudahkan pasien untuk terhubung dengan dokter, rumah sakit, dan fasilitas kesehatan terpercaya. Kami berkomitmen untuk memberikan pengalaman konsultasi dan layanan kesehatan yang mudah, cepat, dan aman.
@@ -94,37 +106,42 @@ const AboutUs = () => {
               <p className="text-gray-600 mt-2">Tingkat Kepuasan Pasien</p>
             </div>
         </div>
-        </div>
-        <div className="flex min-h-[500px] items-center justify-center gap-12 px-8">
+
+        {/* Layanan Terpopuler */}
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-screen-xl w-full">
           {/* Kiri: Teks */}
-          <div className="w-1/3 flex flex-col items-start">
-            <h2 className="text-3xl font-medium text-start">
+          <div className="flex flex-col items-start text-left px-4 md:px-0">
+            <h2 className="text-3xl font-medium">
               Layanan <br/> <span className="text-blue-400">Terpopuler</span> Kami
             </h2>
-            <button className="inline-flex w-auto mt-6 px-6 py-3 rounded-lg gap-7 bg-blue-400 text-white hover:bg-blue-500">
+            <button className="inline-flex mt-6 px-6 py-3 rounded-lg gap-3 bg-blue-400 text-white hover:bg-blue-500">
               <span>Telusuri </span> <CircleArrowRight/>
             </button>
           </div>
 
           {/* Kanan: Gambar/Card */}
-          <div className="w-2/3">
-            <img
+          <div className="w-full">
+            <Image
               src="/about/Pict_mid.png"
               alt="Layanan Terpopuler"
-              className="w-full h-auto rounded-xl shadow-md"
+              width={600}
+              height={800}
+              className="w-full h-auto rounded-xl shadow-md object-cover"
             />
           </div>
         </div>
-        <div className="mt-15 mb-15 space-y-2 text-2xl font-medium">
-          <h1 >Dokter Unggulan</h1>
-          <h1 className="text-blue-400">Siap Membantu Anda</h1>
-          <div className="mt-20">
+
+        {/* Dokter Unggulan */}
+        <div className="mt-25 max-w-screen-xl w-full">
+          <h1 className="text-2xl sm:text-3xl font-medium">Dokter Unggulan</h1>
+          <h1 className="text-blue-400 text-xl sm:text-2xl">Siap Membantu Anda</h1>
+          <div className="mt-20 w-full">
             <Image
               src="/about/Pict_down_about.png"
               alt="List Dokter"
               width={1000}
               height={1000}
-              loading="lazy"
+              className="w-full h-auto object-contain"
             />
           </div>
         </div>

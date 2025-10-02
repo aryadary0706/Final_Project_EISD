@@ -10,7 +10,7 @@ export default function Header() {
   const user = useUserStore((state) => state.user);
 
   return (
-    <header className="flex md:w-full w-full items-center px-6 pt-8 pb-4">
+    <header className="flex w-full items-center px-6 pt-8 pb-4">
       {/* Kiri: Avatar + Nama Pengguna */}
       <div className="mr-auto flex items-center gap-3">
         <div className="flex h-12 w-12 items-center rounded-full bg-gray-200 md:h-13 md:w-13" />

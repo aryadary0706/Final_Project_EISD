@@ -37,7 +37,7 @@ export default function AppointmentDetail({
   onClose: () => void;
 }) {
   return (
-    <div className="py-12 bg-white rounded-xl shadow-md w-full min-h-screen max-h-fu;; relative">
+    <div className="py-12 bg-white rounded-xl border-l-1 shadow-md w-full min-h-screen max-h-fu;; relative">
       {/* Tombol Close */}
       <div className="my-6">
         <button

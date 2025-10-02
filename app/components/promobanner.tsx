@@ -12,87 +12,52 @@ import Image from "next/image";
 
 export default function Promobanner() {
   return (
-    <div className="justify-center">
+    <div className="flex justify-center w-full">
       <Carousel
-        className="w-full"
+        className="w-full max-w-screen-xl"
         opts={{
           loop: true,
           align: "start",
         }}
       >
         <CarouselContent>
-          <CarouselItem className="pl-2 md:pl-4 md:w-[30px] lg:w-[50px] xl:w-[120px]">
-            <div className="flex justify-center rounded-md overflow-hidden bg-gradient-to-r from-blue-500 via-blue-200 to-blue-500 text-white px-12 h-[240px] w-full">
-              <div className="items-end flex flex-row">
-                <div className="mr-2 mb-23">
-                  <h3 className="text-md md:text-sm lg:text-2xl font-bold mb-2">PROMO SPESIAL</h3>
-                  <h2 className="text-sm md:text-sm lg:text-lg font-medium border-2 pl-9 py-1 shadow-sm rounded-md">Beli Sekarang!</h2>
+          {[1, 2, 3].map((item) => (
+            <CarouselItem key={item} className="w-full">
+              <div className="flex items-center justify-between rounded-md overflow-hidden bg-gradient-to-r from-blue-500 via-blue-200 to-blue-500 text-white px-4 sm:px-8 lg:px-12 h-[220px] sm:h-[240px] w-full">
+                {/* Kiri */}
+                <div className="flex flex-col gap-2 text-left max-w-[40%] pl-3">
+                  <h3 className="text-base sm:text-lg lg:text-2xl font-bold">
+                    PROMO SPESIAL
+                  </h3>
+                  <h2 className="text-xs sm:text-sm lg:text-lg font-medium border-2 px-4 py-1 rounded-md shadow-sm">
+                    Beli Sekarang!
+                  </h2>
                 </div>
-                <div className="justify-end mx-3"> 
-                  <Image
-                    src="/beranda/dokterBanner.png"
-                    alt="doctor"
-                    width={180}
-                    height={180}
-                  />
-                </div>              
-                <div className="flex flex-col ml-2 mb-23">
-                  <h3 className="text-md md:text-sm lg:text-2xl font-bold mb-2">Diskon 30%!</h3>
-                  <p className="text-xs md:text-sm lg:text-md">Dapatkan diskon untuk pengguna baru</p>
-                </div>
-              </div>
-            </div>
-          </CarouselItem>
 
-          <CarouselItem className="pl-2 md:pl-4">
-            <div className="flex justify-center rounded-md overflow-hidden bg-gradient-to-r from-blue-500 via-blue-200 to-blue-500 text-white px-12 h-[240px] w-full">
-              <div className="items-end flex flex-row">
-                <div className="mr-2 mb-23">
-                  <h3 className="text-2xl font-bold mb-2">PROMO SPESIAL</h3>
-                  <h2 className="text-lg font-medium border-2 pl-9 py-1 shadow-sm rounded-md">Beli Sekarang!</h2>
-                </div>
-                <div className="justify-end mx-3">
+                {/* Tengah gambar */}
+                <div className="flex-shrink-0 mx-2 sm:mx-6">
                   <Image
                     src="/beranda/dokterBanner.png"
                     alt="doctor"
-                    width={180}
-                    height={180}
+                    width={160}
+                    height={160}
+                    className="w-[120px] sm:w-[160px] lg:w-[200px] h-auto object-contain"
                   />
-                </div>              
-                <div className="flex flex-col ml-2 mb-23">
-                  <h3 className="text-2xl font-bold mb-2">Diskon 30%!</h3>
-                  <p className="text-md">Dapatkan diskon untuk pengguna baru</p>
                 </div>
-              </div>
-            </div>
-          </CarouselItem>
 
-          <CarouselItem className="pl-2 md:pl-4">
-            <div className="flex justify-center rounded-md overflow-hidden bg-gradient-to-r from-blue-500 via-blue-200 to-blue-500 text-white px-12 h-[240px] w-full">
-              <div className="items-end flex flex-row">
-                <div className="mr-2 mb-23">
-                  <h3 className="text-2xl font-bold mb-2">PROMO SPESIAL</h3>
-                  <h2 className="text-lg font-medium border-2 pl-9 py-1 shadow-sm rounded-md">Beli Sekarang!</h2>
-                </div>
-                <div className="justify-end mx-3">
-                  <Image
-                    src="/beranda/dokterBanner.png"
-                    alt="doctor"
-                    width={180}
-                    height={180}
-                  />
-                </div>              
-                <div className="flex flex-col ml-2 mb-23">
-                  <h3 className="text-2xl font-bold mb-2">Diskon 30%!</h3>
-                  <p className="text-md">Dapatkan diskon untuk pengguna baru</p>
+                {/* Kanan */}
+                <div className="flex flex-col gap-1 max-w-[40%]">
+                  <h3 className="text-base sm:text-lg lg:text-2xl font-bold">
+                    Diskon 30%!
+                  </h3>
+                  <p className="text-xs sm:text-sm lg:text-base">
+                    Dapatkan diskon untuk pengguna baru
+                  </p>
                 </div>
               </div>
-            </div>
-          </CarouselItem>
+            </CarouselItem>
+          ))}
         </CarouselContent>
-
-        <CarouselPrevious className="w-5 h-5 left-2" />
-        <CarouselNext className="w-5 h-5 right-2" />
       </Carousel>
     </div>
   );

@@ -9,6 +9,7 @@ import { Calendar, Clock, BadgePlus, XCircle } from "lucide-react";
 import AppointmentDetail from "./AppointmentDetail";
 import mockSchedule from "@/data/mockAppointments.json"
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Appointment = {
   id: number;
@@ -79,9 +80,9 @@ export default function ScheduleMeet() {
   };
 
   return (
-    <div className="justify-end flex sm:w-xl md:w-4xl lg:w-full flex-col lg:h-[420px] xl:h-screen bg-gray-50 border-2 border-gray-200">
+    <div className="justify-end flex flex-col w-full max-w-md sm:max-w-2xl md:max-w-4xl lg:max-w-4xl xl:max-w-5xl xl:w-full lg:h-[440px] xl:h-full bg-gray-50 border-1 border-gray-200">
       {/* Header */}
-      <div className="flex justify-between items-center self-stretch mb-5 py-6 px-6">
+      <div className="flex justify-between items-center self-stretch mb-2 py-6 px-6">
         <h2 className="font-semibold text-[15px]">Jadwal Temu Mendatang</h2>
         <button
           className="font-light text-blue-400 hover:underline"
@@ -95,7 +96,7 @@ export default function ScheduleMeet() {
       </div>
 
       {/* Schedule Card List */}
-      <div className="flex flex-col space-y-6 mb-0 w-full h-full">
+      <div className="flex flex-col space-y-6 w-full h-full">
         {/* MOBILE */}
         <div className="xl:hidden">
           <div className="w-full h-[240px] overflow-hidden">
@@ -127,7 +128,7 @@ export default function ScheduleMeet() {
         {/* DESKTOP */}
         <div className="hidden xl:flex flex-col">
           <div className="w-full h-full">
-            <ScrollArea className="flex-1">
+            <ScrollArea className="flex-1 h-[550px]">
               <div className="flex flex-col space-y-6 pb-4 items-center">
                 {sortedDates.map((date) => (
                   <div key={date} className="flex flex-col">
@@ -177,12 +178,23 @@ export default function ScheduleMeet() {
       </div>
 
       {/* Appointment Detail */}
-      {!cancelMode && selectedAppointment && (
-        <AppointmentDetail
-          appointment={selectedAppointment}
-          onClose={() => setSelectedAppointment(null)}
-        />
-      )}
+      <AnimatePresence mode="wait">
+        {!cancelMode && selectedAppointment && (
+          <motion.div
+            key={selectedAppointment.id}   // gunakan id biar unik per appointment
+            initial={{ x: "100%", opacity: 0 }} 
+            animate={{ x: 0, opacity: 1 }} 
+            exit={{ x: "100%", opacity: 0 }} 
+            transition={{ type: "spring", stiffness: 250, damping: 25, duration: 0.3 }}
+            className="absolute top-0 left-0 w-full h-full"
+          >
+            <AppointmentDetail
+              appointment={selectedAppointment}
+              onClose={() => setSelectedAppointment(null)}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -203,7 +215,7 @@ function AppointmentCard({
   return (
     <Card
       className={`relative flex flex-col ${
-        isMobile ? "w-[280px] h-[200px]" : "w-[320px] h-[180px]"
+        isMobile ? "w-[280px] h-[200px]" : "w-[328px] h-[172px]"
       } p-[16px] gap-[4px] rounded-lg border bg-white`}
       onClick={() => onSelect(appt)}
     >

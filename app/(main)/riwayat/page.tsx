@@ -7,6 +7,7 @@ import AppointmentDetail from "@/app/components/AppointmentDetail";
 import { Calendar, Clock } from "lucide-react";
 import { Separator } from "@radix-ui/react-separator";
 import mockSchedule from "@/data/mockAppointments.json";
+import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 
 type Appointment = {
@@ -87,17 +88,27 @@ export default function RiwayatPage() {
       </div>
 
       {/* Aside untuk Appointment Detail */}
-      <div className="hidden lg:flex w-[380px] shrink-0 sticky top-0 h-screen">
-        {selectedAppointment ? (
-          <AppointmentDetail
-            appointment={selectedAppointment}
-            onClose={() => setSelectedAppointment(null)}
-          />
-        ) : (
-          <div className="flex items-center justify-center w-full text-black text-sm">
-            <ScheduleMeet/>
-          </div>
-        )}
+      <div className="hidden lg:flex w-[400px] shrink-0 relative top-0 h-screen overflow-hidden">
+        <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full text-black text-sm">
+          <ScheduleMeet/>
+        </div>
+        <AnimatePresence mode="wait">
+          {selectedAppointment && (
+            <motion.div
+              key="appointment"
+              initial={{ x: "100%", opacity: 0 }} // masuk dari kanan
+              animate={{ x: 0, opacity: 1 }}        // geser ke posisi normal
+              exit={{ x:"100%", opacity: 0 }}      // keluar geser ke kanan lagi
+              transition={{ type: "spring", stiffness: 250, damping: 25, duration:0.3}}
+              className="absolute top-0 left-0 w-full h-full"
+            >
+              <AppointmentDetail
+              appointment={selectedAppointment}
+              onClose={() => setSelectedAppointment(null)}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

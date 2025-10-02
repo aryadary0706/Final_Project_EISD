@@ -18,14 +18,16 @@ const FaskesCategory = ({ title, icon, facilities    }: FaskesCategoryProps) => 
                 {icon}
                 <span>{title}</span>
             </div>
-            <ScrollArea className="flex w-[1100px] whitespace-nowrap">
-                <div className="flex gap-4 py-2">
-                    {facilities.map((faskes) => (
-                        <FaskesCard key={faskes.id} {...faskes} />
-                    ))}
-                </div>
-                <ScrollBar orientation="horizontal" />
-            </ScrollArea>
+            <div className="w-[1100px] overflow-x-auto ">
+                <ScrollArea className="whitespace-nowrap pb-1">
+                    <div className="flex gap-4 py-2">
+                        {facilities.map((faskes) => (
+                            <FaskesCard key={faskes.id} {...faskes} />
+                        ))}
+                    </div>
+                    <ScrollBar orientation="horizontal" />
+                </ScrollArea>
+            </div>
         </div>
     );
 };

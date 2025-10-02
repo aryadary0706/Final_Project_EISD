@@ -2,13 +2,13 @@
 
 .container {
   background-color: #f8fafc; /* Sedikit abu-abu */
-  width: screen;
 }
 
 .section {
   margin-top: 24px;
   padding-left: 2.5rem;
   padding-right: 1rem;
+  width: 100%;
 }
 
 .kataDokter {

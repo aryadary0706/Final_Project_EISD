@@ -34,7 +34,15 @@ export default function Sidebar() {
           src="/mediQ.png" 
           alt="Logo" 
           width={30} 
-          height={30} 
+          height={30}
+          className='hidden lg:flex'
+        />
+        <img
+          src="/mediQ.png" 
+          alt="Logo" 
+          width={25} 
+          height={25}
+          className='flex lg:hidden'
         />
       </div>
 

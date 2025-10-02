@@ -66,24 +66,23 @@ export default function FaskesList() {
           key={facility.id}
           className={clsx(
             style.faskesCard,
-            'flex w-[180px] min-h-[170px] max-h-[220px] flex-shrink-0 px-1 py-2 flex-col items-start'
+            'flex w-[180px] min-h-[170px] max-h-[220px] flex-shrink-0 p-0 flex-col items-start'
           )}
         >
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex pt-2 items-center justify-between">
               <Badge variant="default" className={style.faskesTag}>
                 {facility.type}
               </Badge>
             </div>
           </CardHeader>
           
-          <CardContent className="pt-0 space-y-3">
-            <div>
-              <CardTitle className="text-[14px] font-light text-gray-900 mb-1">
+          <CardContent className="space-y-3">
+            <div className="flex flex-col justify-between">
+              <h1 className="text-[14px] font-light text-gray-900 mb-1 w-sm">
                 {facility.name}
-              </CardTitle>
+              </h1>
               <div className="flex items-center text-[12px] text-gray-600">
-                <MapPin className="w-5 h-5"/>
                 {facility.city}
               </div>
             </div>
@@ -91,8 +90,8 @@ export default function FaskesList() {
               <Button 
                 asChild
                 variant="outline" 
-                size="sm" 
-                className="w-full h-7 text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300 mb-2"
+                size="lg" 
+                className="p-4 text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300 mb-2"
               >
                 <div className="flex flex-row gap-1 text-xs">
                   <span>Lihat Detail</span>
