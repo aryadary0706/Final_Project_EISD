@@ -21,7 +21,7 @@ export default function PoliCategory({
         <div key={cat.label} className="flex flex-col items-center gap-2">
             <button
               onClick={() => onCategoryClick(cat.label)} // ✅ panggil callback
-              className="relative flex items-center justify-center w-18 h-18 bg-blue-400 rounded-full hover:bg-blue-300 transition"
+              className="relative flex items-center justify-center w-18 h-18 bg-blue-400 rounded-full hover:bg-blue-600 transition"
             >
               <Image src={cat.src} alt={cat.alt} width={35} height={35} />
             </button>

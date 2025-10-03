@@ -2,7 +2,6 @@
 
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { compareAsc, format } from "date-fns";
 import { id as LocaleID } from "date-fns/locale";
 import { Calendar, Clock, BadgePlus, XCircle } from "lucide-react";
@@ -10,33 +9,11 @@ import AppointmentDetail from "./AppointmentDetail";
 import mockSchedule from "@/data/mockAppointments.json"
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-type Appointment = {
-  id: number;
-  doctor: {
-    name: string;
-    specialty: string;
-    image: string;
-  };
-  date: string;
-  time: string;
-  status: string;
-  facility: string;
-  patient: {
-    name: string;
-    symptom: string;
-    allergy: string;
-  };
-  diagnosis: {
-    physicalExam: string[];
-    temporary: string;
-    plan: string;
-  };
-};
+import { Appointment, useAppointmentStore } from "@/stores/AppointmentStore";
 
 export default function ScheduleMeet() {
   const getDateKey = (date: Date) => format(date, "yyyy-MM-dd");
-  const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
+  const { selectedAppointment, source, closeDetailAppointment, openDetailAppointment } = useAppointmentStore();
 
   // cancel mode state
   const [cancelMode, setCancelMode] = useState(false);
@@ -46,18 +23,18 @@ export default function ScheduleMeet() {
     (appt: Appointment) => appt.status === "Menunggu"
   );
 
-  const handleSelect = (appt: Appointment) => {
-    if (cancelMode) {
-      // toggle checkbox selection
-      setSelectedIds((prev) =>
-        prev.includes(appt.id)
-          ? prev.filter((id) => id !== appt.id)
-          : [...prev, appt.id]
-      );
-    } else {
-      setSelectedAppointment(appt);
-    }
-  };
+const handleSelect = (appt: Appointment, isMobile: boolean) => {
+  if (cancelMode) {
+    setSelectedIds((prev) =>
+      prev.includes(appt.id)
+        ? prev.filter((id) => id !== appt.id)
+        : [...prev, appt.id]
+    );
+  } else if (isMobile == false) {
+    openDetailAppointment(appt, "schedule");
+  }
+};
+
 
   const groupedAppointments = filteredAppointments.reduce((acc, curr) => {
     const dateKey = getDateKey(new Date(curr.date));
@@ -80,7 +57,7 @@ export default function ScheduleMeet() {
   };
 
   return (
-    <div className="justify-end flex flex-col w-full max-w-md sm:max-w-2xl md:max-w-4xl lg:max-w-4xl xl:max-w-5xl xl:w-full lg:h-[440px] xl:h-full bg-gray-50 border-1 border-gray-200">
+    <div className="justify-end flex flex-col w-full max-w-md sm:max-w-2xl md:max-w-4xl lg:max-w-4xl xl:max-w-5xl xl:w-full h-[400px] xl:h-full bg-gray-100 border-1 border-gray-200">
       {/* Header */}
       <div className="flex justify-between items-center self-stretch mb-2 py-6 px-6">
         <h2 className="font-semibold text-[15px]">Jadwal Temu Mendatang</h2>
@@ -97,6 +74,7 @@ export default function ScheduleMeet() {
 
       {/* Schedule Card List */}
       <div className="flex flex-col space-y-6 w-full h-full">
+
         {/* MOBILE */}
         <div className="xl:hidden">
           <div className="w-full h-[240px] overflow-hidden">
@@ -105,7 +83,7 @@ export default function ScheduleMeet() {
                 {sortedDates.map((date) => (
                   <div key={date} className="flex-shrink-0 flex flex-col">
                     <h3 className="font-normal text-md text-black mb-2 whitespace-nowrap">
-                      {format(new Date(date), "EEEE, dd MMMM yyyy", { locale: LocaleID })}
+                      {format(new Date(date), "dd/MM/yyyy", { locale: LocaleID })}
                     </h3>
                     {groupedAppointments[date].map((appt) => (
                       <AppointmentCard
@@ -114,7 +92,7 @@ export default function ScheduleMeet() {
                         isMobile={true}
                         cancelMode={cancelMode}
                         selected={selectedIds.includes(appt.id)}
-                        onSelect={handleSelect}
+                        onSelect={() => handleSelect(appt, true)}
                       />
                     ))}
                   </div>
@@ -132,8 +110,8 @@ export default function ScheduleMeet() {
               <div className="flex flex-col space-y-6 pb-4 items-center">
                 {sortedDates.map((date) => (
                   <div key={date} className="flex flex-col">
-                    <h3 className="font-normal text-md text-black mb-2">
-                      {format(new Date(date), "EEEE, dd MMMM yyyy", { locale: LocaleID })}
+                    <h3 className="font-normal text-xs text-black mb-2">
+                      {format(new Date(date), "dd/MM/yyyy", { locale: LocaleID })}
                     </h3>
                     {groupedAppointments[date].map((appt) => (
                       <AppointmentCard
@@ -142,7 +120,7 @@ export default function ScheduleMeet() {
                         isMobile={false}
                         cancelMode={cancelMode}
                         selected={selectedIds.includes(appt.id)}
-                        onSelect={handleSelect}
+                        onSelect={() => handleSelect(appt, false)}
                       />
                     ))}
                   </div>
@@ -157,22 +135,22 @@ export default function ScheduleMeet() {
       {/* Action Button */}
       <div className="flex justify-center">
         {!cancelMode ? (
-          <Button className="flex w-50 xl:w-85 justify-between p-[24px] xl:p-[32px] mb-6 bg-blue-400 hover:bg-blue-500">
-            <h3 className="font-medium text-[16px]">Buat Jadwal Baru</h3>
-            <BadgePlus className="w-16 h-16" />
+          <Button className="flex w-2/3 xl:w-85 justify-between p-[18px] xl:p-[25px] mb-4 bg-blue-400 hover:bg-blue-500">
+            <h3 className="font-medium text-[12px]">Buat Jadwal Baru</h3>
+            <BadgePlus className="w-10 h-10 mr-2" />
           </Button>
         ) : (
           <Button
-            className={`flex w-50 xl:w-85 justify-center p-[24px] xl:p-[32px] mb-6 ${
+            className={`flex w-50 xl:w-85 justify-between p-[18px] xl:p-[25px] mb-4 ${
               selectedIds.length > 0
                 ? "bg-red-500 hover:bg-red-600"
-                : "bg-gray-300 cursor-not-allowed"
+                : "text-gray-800 bg-gray-300 cursor-not-allowed"
             }`}
             disabled={selectedIds.length === 0}
             onClick={handleCancelAppointments}
           >
+            <h3 className="font-medium text-[12px]">Batalkan Janji Temu</h3>
             <XCircle className="w-5 h-5 mr-2" />
-            Batalkan Janji Temu
           </Button>
         )}
       </div>
@@ -190,7 +168,7 @@ export default function ScheduleMeet() {
           >
             <AppointmentDetail
               appointment={selectedAppointment}
-              onClose={() => setSelectedAppointment(null)}
+              onClose={closeDetailAppointment}
             />
           </motion.div>
         )}
@@ -213,10 +191,10 @@ function AppointmentCard({
   onSelect: (appt: Appointment) => void;
 }) {
   return (
-    <Card
-      className={`relative flex flex-col ${
+    <div
+      className={`relative flex flex-col border-l-4 border-gray-300 ${
         isMobile ? "w-[280px] h-[200px]" : "w-[328px] h-[172px]"
-      } p-[16px] gap-[4px] rounded-lg border bg-white`}
+      } p-[16px] rounded-sm border bg-white`}
       onClick={() => onSelect(appt)}
     >
       {cancelMode && (
@@ -228,35 +206,39 @@ function AppointmentCard({
         />
       )}
 
-      <CardHeader className="flex items-center gap-2 p-1 mb-4 border-b-1">
-        <div>
-          <h2 className="text-blue-400 text-md font-semibold">
-            {appt.doctor.specialty}
-          </h2>
-          <p className="text-gray-500 text-sm">{appt.facility} - Bandung</p>
+      <div className="flex items-center gap-2 px-2 py-1 mb-4 border-b-1">
+        <div className="flex flex-row gap-3 items-center">
+            <img src="Icons/fontisto_doctor.png" alt="icon dokter" className="w-6 h-7 object-contain"/>
+            <div className="flex flex-col">
+              <h2 className="text-blue-400 text-[12px] font-medium">
+                {appt.doctor.specialty}
+              </h2>
+              <h3 className="text-gray-500 text-[10px]">
+                {appt.facility}
+              </h3>
+            </div>
         </div>
-      </CardHeader>
-
+      </div>
       <div className="flex flex-row gap-0 h-full items-center">
         <div className="flex-1 flex flex-col">
-          <p className="text-md text-gray-400">Antrian</p>
-          <p className="text-4xl font-bold">
+          <p className="text-[12px] text-gray-400">Antrian</p>
+          <p className="text-[24px] font-extralight">
             {appt.id.toString().padStart(2, "0")}
           </p>
         </div>
         <div className="flex-1 flex flex-col gap-3 justify-start">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col items-start">
             <Calendar className="w-4 h-4 text-gray-500" />
             <p className="text-xs font-medium">
               {format(new Date(appt.date), "dd MMMM yyyy", { locale: LocaleID })}
             </p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col items-start">
             <Clock className="w-4 h-4 text-gray-500" />
             <p className="text-xs font-medium">{appt.time}</p>
           </div>
         </div>
       </div>
-    </Card>
+    </div>
   );
 }

@@ -8,33 +8,10 @@ import ScheduleMeet from "@/app/components/Schedulelist";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import AppointmentDetail from "@/app/components/AppointmentDetail";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-
-type Appointment = {
-  id: number;
-  doctor: {
-    name: string;
-    specialty: string;
-    image?: string;
-  };
-  date: string;
-  time: string;
-  status: string;
-  facility: string;
-  patient: {
-    name: string;
-    symptom: string;
-    allergy?: string;
-  };
-  diagnosis: {
-    physicalExam: string[];
-    temporary?: string;
-    plan?: string;
-  };
-};
+import { useAppointmentStore } from "@/stores/AppointmentStore";
 
 export default function Beranda() {
-    const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
+    const { selectedAppointment, source, closeDetailAppointment } = useAppointmentStore();
     return (
       <div className="flex flex-col lg:flex-row w-full">
   {/* Kolom utama */}
@@ -42,7 +19,7 @@ export default function Beranda() {
     <Header />
 
     {/* Konten utama */}
-    <main className="flex-1 mt-4 space-y-4 px-4 sm:px-6 max-w-full md:max-w-[780px] lg:max-w-[840px] xl:max-w-[900px] w-full mx-auto">
+    <main className="flex-1 mt-4 space-y-4 px-4 sm:px-6 max-w-full md:max-w-[780px] lg:max-w-[860px] xl:max-w-[900px] w-full mx-auto">
       {/* Promo Banner */}
       <section className="w-full">
         <Promobanner />
@@ -78,28 +55,31 @@ export default function Beranda() {
   </div>
 
   {/* Kolom kanan (hanya di lg ke atas) */}
-  <div className="hidden lg:flex w-[400px] shrink-0 relative top-0 h-screen overflow-hidden">
-    <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full text-black text-sm">
-      <ScheduleMeet/>
+    <div className="hidden xl:flex w-[400px] relative">
+      <div className="sticky top-0 w-full h-screen overflow-hidden">
+        <div className="relative w-full h-full flex items-center justify-center">
+          <ScheduleMeet />
+        </div>
+
+        <AnimatePresence mode="wait">
+          {selectedAppointment && (
+            <motion.div
+              key="appointment"
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x:"100%", opacity: 0 }}
+              transition={{ type: "spring", stiffness: 250, damping: 25, duration:0.3 }}
+              className="absolute top-0 left-0 w-full h-full"
+            >
+              <AppointmentDetail
+                appointment={selectedAppointment}
+                onClose={closeDetailAppointment}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
-    <AnimatePresence mode="wait">
-      {selectedAppointment && (
-        <motion.div
-          key="appointment"
-          initial={{ x: "100%", opacity: 0 }} // masuk dari kanan
-          animate={{ x: 0, opacity: 1 }}        // geser ke posisi normal
-          exit={{ x:"100%", opacity: 0 }}      // keluar geser ke kanan lagi
-          transition={{ type: "spring", stiffness: 250, damping: 25, duration:0.3}}
-          className="absolute top-0 left-0 w-full h-full"
-        >
-          <AppointmentDetail
-          appointment={selectedAppointment}
-          onClose={() => setSelectedAppointment(null)}
-          />
-        </motion.div>
-      )}
-    </AnimatePresence>
   </div>
-</div>
-    );
+  );
 }

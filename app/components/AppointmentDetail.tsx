@@ -6,28 +6,8 @@ import clsx from "clsx";
 import { Separator } from "@radix-ui/react-context-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Scrollbar } from "@radix-ui/react-scroll-area";
-
-type Appointment = {
-  id: number;
-  doctor: {
-    name: string;
-    specialty: string;
-    image?: string;
-  };
-  date: string;
-  time: string;
-  status: string;
-  patient: {
-    name: string;
-    symptom: string;
-    allergy?: string;
-  };
-  diagnosis: {
-    physicalExam: string[];
-    temporary?: string;
-    plan?: string;
-  };
-};
+import { format } from "date-fns";
+import { Appointment } from "@/stores/AppointmentStore";
 
 export default function AppointmentDetail({
   appointment,
@@ -36,8 +16,9 @@ export default function AppointmentDetail({
   appointment: Appointment;
   onClose: () => void;
 }) {
+  const getDateKey = (date: Date) => format(date, "yyyy-MM-dd");
   return (
-    <div className="py-12 bg-white rounded-xl border-l-1 shadow-md w-full min-h-screen max-h-fu;; relative">
+    <div className="pt-8 pb-4 bg-white border-l-1 shadow-md w-full min-h-screen max-h-fu;; relative">
       {/* Tombol Close */}
       <div className="my-6">
         <button
@@ -55,9 +36,9 @@ export default function AppointmentDetail({
         <span
           className={clsx(
             "flex items-center gap-1 text-sm font-medium px-3 py-1 rounded-full",
-            appointment.status === "Selesai" && "text-green-600 bg-green-50",
-            appointment.status === "Dibatalkan" && "text-red-600 bg-red-50",
-            appointment.status === "Menunggu" && "text-yellow-600 bg-yellow-50"
+            appointment.status === "Selesai" && "text-green-600 bg-green-100",
+            appointment.status === "Dibatalkan" && "text-red-600 bg-red-100",
+            appointment.status === "Menunggu" && "text-blue-600 bg-blue-100"
           )}
         >
           {appointment.status === "Selesai" && <CircleCheck size={14} />}
@@ -91,7 +72,7 @@ export default function AppointmentDetail({
           <div className="flex justify-around mt-4 text-sm text-gray-600">
             <div className="flex items-center gap-1">
               <Calendar size={16} />
-              <span>{appointment.date}</span>
+              <span>{getDateKey(new Date(appointment.date))}</span>
             </div>
             <div className="flex items-center gap-1">
               <Clock size={16} />

@@ -1,45 +1,72 @@
 // stores/appointmentStore.ts
 import { create } from "zustand";
-import { User } from "./userStore";
-import { Doctors } from "./DoctorStore";
 
 export type Appointment = {
-  id: string;         // ID unik appointment
-  queue: string;      // nomor antrian
-  user: User;         // pasien
-  date: Date;         // tanggal appointment
-  faskes: string;     // fasilitas kesehatan
-  doctor: Doctors;    // dokter
-  time: string;       // jam appointment
+  id: number;
+  doctor: {
+    name: string;
+    specialty: string;
+    image?: string;
+  };
+  date: string;
+  time: string;
+  status: string;
+  facility: string;
+  patient: {
+    name: string;
+    symptom: string;
+    allergy?: string;
+  };
+  diagnosis: {
+    physicalExam: string[];
+    temporary?: string;
+    plan?: string;
+  };
 };
 
 type AppointmentState = {
   appointments: Appointment[];
+  selectedAppointment: Appointment | null;
+  source: "schedule" | "riwayat" | null;
+
   addAppointment: (appointment: Appointment) => void;
-  updateAppointment: (id: string, partial: Partial<Appointment>) => void;
-  removeAppointment: (id: string) => void;
+  updateAppointment: (id: number, partial: Partial<Appointment>) => void;
+  removeAppointment: (id: number) => void;
   clearAppointments: () => void;
+
+  openDetailAppointment: (appointment: Appointment, source: "schedule" | "riwayat") => void;
+  closeDetailAppointment: () => void;
 };
 
 export const useAppointmentStore = create<AppointmentState>((set) => ({
   appointments: [],
+  selectedAppointment: null,
+  source: null,
 
   addAppointment: (appointment) =>
     set((state) => ({
       appointments: [...state.appointments, appointment],
     })),
-
   updateAppointment: (id, partial) =>
     set((state) => ({
       appointments: state.appointments.map((a) =>
         a.id === id ? { ...a, ...partial } : a
       ),
     })),
-
   removeAppointment: (id) =>
     set((state) => ({
       appointments: state.appointments.filter((a) => a.id !== id),
     })),
-
   clearAppointments: () => set({ appointments: [] }),
+
+  openDetailAppointment: (appointment, source) =>
+    set(() => ({
+      selectedAppointment: appointment,
+      source,
+    })),
+  closeDetailAppointment: () =>
+    set(() => ({
+      selectedAppointment: null,
+      source: null,
+    })),
 }));

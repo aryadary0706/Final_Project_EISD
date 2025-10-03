@@ -47,8 +47,8 @@
 .menuTypography {
     color: #000;
     font-family: Poppins, sans-serif;
-    font-size: 18px;
-    font-weight: medium;
+    font-size: 15px;
+    font-weight: bold;
     line-height: 120%;
     margin-bottom: 12px; /* Space below "Menu" heading */
     padding-left: 10px;
@@ -59,10 +59,10 @@
     width: 100%;
     padding: 12px;
     align-items: center;
-    gap: 2px;
+    gap: 0px;
     cursor: pointer;
     text-decoration: none;
-    color: #000;
+    color: #6B7280;
     font-size:13px;
 }
 

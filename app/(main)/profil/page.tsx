@@ -57,8 +57,8 @@ export default function ProfilePage() {
           <div className="flex items-center mb-3 gap-4">
             <Link href="/">
               <Avatar className="flex h-16 w-16">
-                <AvatarImage src="/placeholder-avatar.jpg" alt="Naswa Gyna Sahira" />
-                <AvatarFallback></AvatarFallback>
+                <AvatarImage src="/placeholder-avatar.jpg" alt="Naswa Gyna Sahira"/>
+                <AvatarFallback>SN</AvatarFallback>
               </Avatar>
             </Link>
             <div className="flex flex-col items-start gap-2">
