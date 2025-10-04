@@ -82,7 +82,7 @@ const handleSelect = (appt: Appointment, isMobile: boolean) => {
               <div className="flex gap-6 px-5 pb-4">
                 {sortedDates.map((date) => (
                   <div key={date} className="flex-shrink-0 flex flex-col">
-                    <h3 className="font-normal text-md text-black mb-2 whitespace-nowrap">
+                    <h3 className="font-normal text-xs text-black mb-2 whitespace-nowrap">
                       {format(new Date(date), "dd/MM/yyyy", { locale: LocaleID })}
                     </h3>
                     {groupedAppointments[date].map((appt) => (
@@ -193,7 +193,7 @@ function AppointmentCard({
   return (
     <div
       className={`relative flex flex-col border-l-4 border-gray-300 ${
-        isMobile ? "w-[280px] h-[200px]" : "w-[328px] h-[172px]"
+        isMobile ? "w-[280px] h-[180px]" : "w-[328px] h-[172px]"
       } p-[16px] rounded-sm border bg-white`}
       onClick={() => onSelect(appt)}
     >

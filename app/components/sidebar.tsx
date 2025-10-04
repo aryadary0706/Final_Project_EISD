@@ -11,11 +11,12 @@ import clsx from 'clsx';
 import { useUserStore } from '@/stores/userStore';
 
 const navItems = [
-  { name: 'Beranda', href: '/beranda', icon: <Home className="w-5 h-5 text-gray-400 active:text-blue-500" /> },
-  { name: 'Telusuri', href: '/search', icon: <Hospital className="w-5 h-5 text-gray-400 active:text-blue-500" /> },
-  { name: 'Riwayat', href: '/riwayat', icon: <ClipboardClock className="w-5 h-5 text-gray-400 active:text-blue-500" /> },
-  { name: 'Profil', href: '/profil', icon: <UserRound className="w-5 h-5 text-gray-400 active:text-blue-500" /> }, // Tetap tulis '/profil' sebagai default
+  { name: 'Beranda', href: '/beranda', icon: Home },
+  { name: 'Telusuri', href: '/search', icon: Hospital },
+  { name: 'Riwayat', href: '/riwayat', icon: ClipboardClock },
+  { name: 'Profil', href: '/profil', icon: UserRound },
 ];
+
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -59,12 +60,17 @@ export default function Sidebar() {
             return (
               <Link
                 key={item.name}
-                href={item.href} // ✅ Pakai href yang sudah disesuaikan
+                href={item.href}
                 className={clsx(styles.navItem, {
                   [styles.activeNavItem]: isActive,
                 })}
               >
-                {item.icon}
+                <item.icon 
+                  className={clsx(
+                    "w-5 h-5", 
+                    isActive ? "text-blue-400" : "text-gray-400"
+                  )} 
+                />
                 <span className="text-[16px] font-normal pl-3">{item.name}</span>
               </Link>
             );
