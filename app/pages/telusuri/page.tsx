@@ -17,6 +17,9 @@ import FaskesCategory from '@/app/components/FaskesCategory';
 import { Hospital, Stethoscope, Home } from 'lucide-react';
 import image4 from "@/public/beranda/doctor4.png"
 <<<<<<< Updated upstream:app/pages/telusuri/page.tsx
+<<<<<<< Updated upstream:app/pages/telusuri/page.tsx
+>>>>>>> Stashed changes:app/(main)/search/page.tsx
+=======
 >>>>>>> Stashed changes:app/(main)/search/page.tsx
 =======
 >>>>>>> Stashed changes:app/(main)/search/page.tsx
