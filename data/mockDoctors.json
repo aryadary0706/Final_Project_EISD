@@ -21,6 +21,16 @@
   },
   {
     "id": 3,
+    "name": "dr. Clara Wulandari, M.Ked",
+    "label": "umum",
+    "specialty": "Spesialias Penyakit Dalam",
+    "rating": "5.0",
+    "totalPatients": "450+",
+    "image": "/beranda/doctor4.png",
+    "lokasi": "Rumah Sakit Medika Center"
+  },
+  {
+    "id": 4,
     "name": "dr. Andini Pratama, Sp.PD",
     "label": "umum",
     "specialty": "Spesialias Penyakit Dalam",
@@ -30,7 +40,7 @@
     "lokasi": "Rumah Sakit Medika Center"
   },
   {
-    "id": 4,
+    "id": 5,
     "name": "dr. Maya Lestari, Sp.PD",
     "label": "umum",
     "specialty": "Spesialias Penyakit Dalam",
