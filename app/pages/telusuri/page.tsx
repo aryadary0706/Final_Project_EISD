@@ -3,17 +3,26 @@
 
 import styles from './telusuri.module.css';
 import { faskesData } from '@/lib/data';
+<<<<<<< Updated upstream:app/pages/telusuri/page.tsx
 import FaskesCard from '@/components/app-components/FaskesCard';
 import DoctorList from '@/components/app-components/DoctorList'; // Komponen dari teman Anda
 import Header from '@/components/app-components/header';
 import FaskesList from '@/components/app-components/faskesList';
 import image4 from "@/public/doctor4.png"
+=======
+import DoctorList from '@/app/components/DoctorList'; // Komponen dari teman Anda
+import Header from '@/app/components/header';
+import FaskesList from '@/app/components/faskesList';
+import FaskesCategory from '@/app/components/FaskesCategory';
+import { Hospital, Stethoscope, Home } from 'lucide-react';
+import image4 from "@/public/beranda/doctor4.png"
+>>>>>>> Stashed changes:app/(main)/search/page.tsx
 import Image from 'next/image';
 import Link from 'next/link';
 
 // Data untuk dokter unggulan (featured doctor), bisa dipindah ke lib/data.ts jika perlu
 const featuredDoctor = {
-    id: 3,
+    id: 4,
     name: 'dr. Clara Wulandari, M.Ked',
     specialty: 'Dokter Umum',
     imageUrl: image4, // Pastikan gambar ada di folder public
