@@ -10,7 +10,7 @@ export default function DoctorList() {
   return (
     <div className="flex space-x-4 overflow-x-auto pb-5">
       {mockDoctors.map((doctor) => (
-        <Link key={doctor.id} href={`/search/doctor/${doctor.id}}`} className="w-fit">
+        <Link key={doctor.id} href={`/search/doctor/${doctor.id}`} className="w-fit">
           <div className="w-full h-74 flex flex-col rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
             {/* Div for Image */}
             <div className={clsx(style.doctorimage, "relative w-full h-40 overflow-hidden")}>
