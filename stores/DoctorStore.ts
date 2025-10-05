@@ -2,13 +2,17 @@
 import { create } from "zustand";
 
 export type Doctors = {
-  id: string;
+  id: number;
   name: string;
-  speciality: string;
-  hospital: string;
-  experience: string;
-  patients: string;
+  label: string;
+  specialty: string;
+  rating: string;
+  totalPatients: string;
+  image: string;
+  lokasi: string;
+  idTempatKerja: number;
 };
+
 
 type DoctorState = {
   doctors: Doctors[];
@@ -28,19 +32,19 @@ export const useDoctorStore = create<DoctorState>((set, get) => ({
     })),
 
   getDoctorById: (id) => {
-    return get().doctors.find((d) => d.id === id);
+    return get().doctors.find((d) => d.id === parseInt(id));
   },
 
   updateDoctor: (id, partial) =>
     set((state) => ({
       doctors: state.doctors.map((d) =>
-        d.id === id ? { ...d, ...partial } : d
+        d.id !== parseInt(id) ? { ...d, ...partial } : d
       ),
     })),
 
   removeDoctor: (id) =>
     set((state) => ({
-      doctors: state.doctors.filter((d) => d.id !== id),
+      doctors: state.doctors.filter((d) => d.id !== parseInt(id)),
     })),
 
   clearDoctors: () => set({ doctors: [] }),

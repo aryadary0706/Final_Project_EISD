@@ -7,9 +7,9 @@ import Image from "next/image";
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-blue-50">
       {/* Header */}
-      <header className="flex h-18 py-8 px-10 gap-2 justify-between items-center bg-white">
+      <header className="flex h-18 py-8 px-10 gap-2 justify-between items-center border-b-2 shadow-2xs">
         <div className="flex items-center gap-1">
           <h1 className={styles.titleTypography}>medi</h1>
           <img
@@ -24,7 +24,7 @@ const AboutUs = () => {
           <Button variant="link" className="px-3 font-light text-black border-0">
             <Link href="/login">Sign In</Link>
           </Button>
-          <Button variant="default" className="px-6 bg-blue-400 text-white w-40 justify-between">
+          <Button variant="default" className="px-6 bg-blue-400 hover:bg-blue-300 text-white w-40 justify-between">
             <Link href="/daftar">Daftar Gratis</Link><CircleArrowRight/>
           </Button>
         </div>

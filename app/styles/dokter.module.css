@@ -40,10 +40,27 @@
 }
 .timeSelector {
   display: flex;
-  width: 737px;
-  align-items: flex-start;
   gap: 8px;
+  overflow-x: auto;   /* tambahkan scroll horizontal */
+  overflow-y: hidden; /* cegah scroll vertikal */
+  white-space: nowrap; /* biar item tetap di satu baris */
+  padding-bottom: 4px; /* opsional, supaya scroll bar tidak terlalu nempel */
+  scrollbar-width: thin; /* Firefox: scrollbar tipis */
 }
+
+.timeSelector::-webkit-scrollbar {
+  height: 6px; /* tinggi scrollbar */
+}
+
+.timeSelector::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1; /* warna scrollbar */
+  border-radius: 4px;
+}
+
+.timeSelector::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
 .dateButton, .timeButton {
   display: flex;
   border: 1px solid #e2e8f0;

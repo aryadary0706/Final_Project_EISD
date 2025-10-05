@@ -38,11 +38,11 @@ export default function DoctorListBySpeciality({
       </h1>
       <p className="text-sm text-gray-600 mt-1">Dokter Jaga Hari Ini</p>
       
-      <ScrollArea className="h-[500px]">
+      <ScrollArea className="h-[480px]">
         {/* Doctors */}
           <div className="space-y-4">
             {filteredDoctors.map((doctor) => (
-              <Link key={doctor.id} href={`search/doctor/${doctor.id}`}>
+              <Link key={doctor.id} href={`/search/faskes/${doctor.id}`}>
               <div
                 key={doctor.id}
                 className="mb-5 bg-gradient-to-r from-blue-100 via-blue-50 to-blue-100 border-1 flex flex-row-reverse pl-3"

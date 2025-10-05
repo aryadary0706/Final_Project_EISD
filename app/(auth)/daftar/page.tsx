@@ -106,10 +106,10 @@ export default function LoginPage() {
           <div className="space-y-1 w-full">
             <label className="text-md font-[600px] text-gray-700"> Nama</label>
             <Input
-              placeholder="Nama Lengkap"
+              placeholder="nama"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              className="pl-5 w-full py-5"
+              className="pl-5 w-full py-5 focus:border-1 focus:border-blue-500"
             />
           </div>
 
@@ -118,7 +118,7 @@ export default function LoginPage() {
             <label className="text-md font-[600px] text-gray-700"> Email</label>
             <Input
               type="email"
-              placeholder="mediQ@gmail.com"
+              placeholder="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="pl-5 w-full py-5"
@@ -145,11 +145,11 @@ export default function LoginPage() {
               </button>
               <div className="mt-2 space-y-1 text-sm text-muted-foreground">
                 <div className="flex items-center space-x-2">
-                  <Checkbox checked={password.length >= 8} disabled />
+                  <Checkbox checked={password.length >= 8} disabled className="border-blue-400"/>
                   <span>Kata sandi minimal 8 karakter</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Checkbox checked={/\d/.test(password)} disabled />
+                  <Checkbox checked={/\d/.test(password)} disabled className="border-blue-400"/>
                   <span>Kata sandi harus mengandung angka (0-9)</span>
                 </div>
               </div>

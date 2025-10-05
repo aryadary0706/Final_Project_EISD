@@ -7,7 +7,8 @@
     "rating": "5.0",
     "totalPatients": "450+",
     "image": "/beranda/doctor2.png",
-    "lokasi": "Rumah Sakit Medika Center"
+    "lokasi": "Rumah Sakit Medika Center",
+    "idTempatKerja": 1 
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@
     "rating": "4.9",
     "totalPatients": "450+",
     "image": "/beranda/doctor1.png",
-    "lokasi": "Rumah Sakit Medika Center"
+    "lokasi": "Rumah Sakit Medika Center",
+    "idTempatKerja": 1
   },
   {
     "id": 3,
@@ -27,7 +29,8 @@
     "rating": "5.0",
     "totalPatients": "450+",
     "image": "/beranda/doctor4.png",
-    "lokasi": "Rumah Sakit Medika Center"
+    "lokasi": "Rumah Sakit Medika Center",
+    "idTempatKerja": 1
   },
   {
     "id": 4,
@@ -37,7 +40,8 @@
     "rating": "5.0",
     "totalPatients": "450+",
     "image": "/beranda/doctor3.png",
-    "lokasi": "Rumah Sakit Medika Center"
+    "lokasi": "Rumah Sakit Medika Center",
+    "idTempatKerja": 1
   },
   {
     "id": 5,
@@ -47,6 +51,7 @@
     "rating": "5.0",
     "totalPatients": "450+",
     "image": "/beranda/dokterBanner.png",
-    "lokasi": "Rumah Sakit Medika Center"
+    "lokasi": "Rumah Sakit Medika Center",
+    "idTempatKerja": 1
   }
 ]

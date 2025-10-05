@@ -6,25 +6,17 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import styles from '@/app/styles/dokter.module.css';
 import { ChevronLeft, Upload, Venus, Mars } from 'lucide-react';
+import { Doctors } from "@/stores/DoctorStore";
 
 // Impor komponen pop-up yang sudah kita buat
 import ScheduleSuccessPopup from "@/components/ui/ScheduleSuccessPopup"; 
 // Impor komponen ReviewList Anda
 import ReviewList from "@/app/components/ReviewList"; 
 
-// Tipe data untuk dokter (harus sama dengan di page.tsx)
-type Doctor = {
-    id: number;
-    name: string;
-    specialty: string;
-    image: string;
-    lokasi: string;
-    totalPatients: string;
-};
 
 // Tipe untuk props komponen ini
 interface DoctorDetailClientProps {
-    doctorData: Doctor;
+    doctorData: Doctors;
 }
 
 // Data dummy untuk jadwal
@@ -72,7 +64,7 @@ export default function DokterDetailClient({ doctorData }: DoctorDetailClientPro
             <div className="flex flex-col lg:flex-row w-full">
                 <main className="flex-1 flex flex-col px-4 sm:px-6 py-6 space-y-8 max-w-full lg:max-w-[900px] mx-auto">
                     <header className={styles.header}>
-                        <Link href="/search" className={styles.backButton}>
+                        <Link href={`/search/faskes/${doctorData.idTempatKerja}` }className={styles.backButton}>
                             <ChevronLeft size={24} />
                         </Link>
                         <div>
