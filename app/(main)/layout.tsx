@@ -1,5 +1,4 @@
 
-
 import Sidebar from "@/app/components/sidebar";
 // 1. Ganti import ini
 import { createServerClient } from "@supabase/ssr"; 
@@ -32,6 +31,7 @@ export default async function MainLayout({
   } = await supabase.auth.getUser();
 console.log("👤 USER DARI MIDDLEWARE:", user);
   if (!user) {
+
     redirect("/login");
   }
 

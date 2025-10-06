@@ -26,18 +26,14 @@ export default function Sidebar() {
 const router = useRouter();
 
 const handleLogout = async () => {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
-
-  await supabase.auth.signOut(); // Hapus session Supabase
-  clearUser(); // Hapus state user lokal
-  const { data } = await supabase.auth.getSession();
-  console.log("Session setelah logout:", data);
-  router.push("/login"); // Arahkan ke halaman login
+  try {
+    await fetch("/api/logout", { method: "POST" }); // panggil API logout server-side
+    clearUser();
+    router.push("/login");
+  } catch (err) {
+    console.error("Logout error:", err);
+  }
 };
-
   return (
     <aside className={styles.container}>
       {/* Logo */}
