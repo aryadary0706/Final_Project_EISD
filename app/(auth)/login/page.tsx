@@ -13,32 +13,41 @@ import mediQ from "@/public/mediQ.png"
 import { Separator } from "@/components/ui/separator"
 import { useUserStore } from "@/stores/userStore";
 import mockUsers from "@/data/mockUsers.json";
+import { supabase } from "@/lib/supabase";
+import { useEffect } from "react";
+import { createBrowserClient } from "@supabase/ssr";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+  
 
-  const handleLogin = (e: React.FormEvent) => {
-    const { setUser } = useUserStore.getState();
+const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoginError("");
 
-    e.preventDefault();
-    setLoginError("");
-    
-    const user = mockUsers.find(
-      (u) => u.email === email && u.password === password
-    );
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
 
-    if (user && user.password === password) {
-      setUser(user); 
-      router.push("/beranda");
-    } else {
-      alert("Login gagal: email atau password salah")
-      setLoginError("Email atau password salah");
-    }
-  };
+  if (error) {
+    console.error(error);
+    setLoginError(error.message);
+    alert("Login gagal: " + error.message);
+  } else {
+    // Redirect ke path yang benar, yang sekarang dilindungi oleh layout
+    router.push("/beranda"); // Arahkan ke /beranda, bukan /main/beranda
+    router.refresh(); // Penting: untuk me-refresh state server dan menjalankan layout baru
+  }
+};
 
   return (
     <div className="min-h-screen flex">

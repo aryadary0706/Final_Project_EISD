@@ -9,7 +9,8 @@ import { Home, Hospital, ClipboardClock, UserRound, LogOut } from 'lucide-react'
 import { Separator } from '@radix-ui/react-separator';
 import clsx from 'clsx';
 import { useUserStore } from '@/stores/userStore';
-
+import { createClient } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
 const navItems = [
   { name: 'Beranda', href: '/beranda', icon: Home },
   { name: 'Telusuri', href: '/search', icon: Hospital },
@@ -22,9 +23,20 @@ export default function Sidebar() {
   const pathname = usePathname();
   const { clearUser } = useUserStore(); // ✅ Ambil user dari store
 
-  const handleLogout = () => {
-    clearUser();
-  };
+const router = useRouter();
+
+const handleLogout = async () => {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+
+  await supabase.auth.signOut(); // Hapus session Supabase
+  clearUser(); // Hapus state user lokal
+  const { data } = await supabase.auth.getSession();
+  console.log("Session setelah logout:", data);
+  router.push("/login"); // Arahkan ke halaman login
+};
 
   return (
     <aside className={styles.container}>
@@ -82,14 +94,12 @@ export default function Sidebar() {
       <Separator className="my-4" />
 
       {/* Logout Button */}
-      <div className={styles.logoutContainer}>
-        <Link href="/login">
-          <Button onClick={handleLogout} className={styles.logoutButton}>
-            <LogOut className="w-5 h-5" />
-            <span>Keluar</span>
-          </Button>
-        </Link>
-      </div>
+    <div className={styles.logoutContainer}>
+      <Button onClick={handleLogout} className={styles.logoutButton}>
+        <LogOut className="w-5 h-5" />
+        <span>Keluar</span>
+      </Button>
+    </div>
     </aside>
   );
 }
