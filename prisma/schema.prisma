@@ -22,15 +22,25 @@ model User {
 }
 
 model Patient {
-  id           String        @id @default(cuid())
-  userId       String        @unique
-  user         User          @relation(fields: [userId], references: [id])
-  dateOfBirth  DateTime?
-  phoneNumber  String?
-  address      String?
-  appointments Appointment[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  id            String        @id @default(cuid())
+  userId        String        @unique
+  user          User          @relation(fields: [userId], references: [id])
+
+  fullName      String?
+  age           Int?
+  weight        Float?
+  height        Float?
+  gender        String?       // "Pria" atau "Perempuan"
+  bloodType     String?       // "A", "B", "O", "AB"
+  allergy       String?       // bisa kosong kalau "tidak ada"
+
+  negara        String?
+  kota          String?
+  kodePos       String?
+
+  appointments  Appointment[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
 model Doctor {
@@ -64,6 +74,9 @@ model Appointment {
   time        String // e.g., "10:30"
   status      String   @default("SCHEDULED") // e.g., SCHEDULED, COMPLETED, CANCELLED
   queueNumber Int      @default(0)
+  notes       String?  // <--- Tambahan untuk "gejala"
+  allergy     String?  // <--- Tambahan untuk "riwayat alergi"
+  fileUrl     String?  // <--- Tambahan untuk "dokumen medis"
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

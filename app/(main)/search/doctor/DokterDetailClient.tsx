@@ -45,9 +45,29 @@ export default function DokterDetailClient({ doctorData }: DoctorDetailClientPro
     const [noAllergy, setNoAllergy] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
 
-    const handleBuatJadwal = () => {
-        // Logika untuk mengirim data form bisa ditambahkan di sini
-        setShowPopup(true);
+    const handleBuatJadwal = async () => {
+    try {
+        const res = await fetch("/api/appointments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            doctorId: doctorData.id, // pastikan ada doctorData.id
+            date: `2025-10-${selectedDate}`, // ubah sesuai format date yang valid
+            time: selectedTime,
+        }),
+        });
+
+        if (!res.ok) {
+        const error = await res.json();
+        alert(`Gagal membuat jadwal: ${error.error}`);
+        return;
+        }
+
+        setShowPopup(true); // tampilkan pop-up sukses
+    } catch (err) {
+        console.error(err);
+        alert("Terjadi kesalahan saat membuat jadwal");
+    }
     };
 
     const handleClosePopup = () => {

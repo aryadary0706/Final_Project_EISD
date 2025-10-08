@@ -45,11 +45,11 @@ const handleRegister = async (e: React.FormEvent) => {
 
   try {
     const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
+      email,
+      password,
       options: {
         data: {
-          full_name: fullName, // kamu bisa tambah data tambahan di metadata
+          full_name: fullName,
         },
       },
     });
@@ -60,9 +60,24 @@ const handleRegister = async (e: React.FormEvent) => {
       return;
     }
 
-    console.log("User berhasil terdaftar:", data.user);
+    // ✅ Simpan user ke database kamu lewat API route Prisma
+    if (data?.user) {
+      const res = await fetch("/api/user/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: data.user.id,
+          email: data.user.email,
+          name: fullName,
+        }),
+      });
 
-    // Reset form
+      if (!res.ok) {
+        console.error("Gagal menyimpan user ke database Prisma");
+      }
+    }
+
+    // ✅ Reset form dan redirect
     setFullName("");
     setEmail("");
     setPassword("");
