@@ -9,7 +9,8 @@ import { Home, Hospital, ClipboardClock, UserRound, LogOut } from 'lucide-react'
 import { Separator } from '@radix-ui/react-separator';
 import clsx from 'clsx';
 import { useUserStore } from '@/stores/userStore';
-
+import { createClient } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
 const navItems = [
   { name: 'Beranda', href: '/beranda', icon: Home },
   { name: 'Telusuri', href: '/search', icon: Hospital },
@@ -22,10 +23,17 @@ export default function Sidebar() {
   const pathname = usePathname();
   const { clearUser } = useUserStore(); // ✅ Ambil user dari store
 
-  const handleLogout = () => {
-    clearUser();
-  };
+const router = useRouter();
 
+const handleLogout = async () => {
+  try {
+    await fetch("/api/logout", { method: "POST" }); // panggil API logout server-side
+    clearUser();
+    router.push("/login");
+  } catch (err) {
+    console.error("Logout error:", err);
+  }
+};
   return (
     <aside className={styles.container}>
       {/* Logo */}
@@ -82,14 +90,12 @@ export default function Sidebar() {
       <Separator className="my-4" />
 
       {/* Logout Button */}
-      <div className={styles.logoutContainer}>
-        <Link href="/login">
-          <Button onClick={handleLogout} className={styles.logoutButton}>
-            <LogOut className="w-5 h-5" />
-            <span>Keluar</span>
-          </Button>
-        </Link>
-      </div>
+    <div className={styles.logoutContainer}>
+      <Button onClick={handleLogout} className={styles.logoutButton}>
+        <LogOut className="w-5 h-5" />
+        <span>Keluar</span>
+      </Button>
+    </div>
     </aside>
   );
 }

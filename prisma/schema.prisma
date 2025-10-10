@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  patient       Patient?  // A user can have one patient profile
+}
+
+model Patient {
+  id            String        @id @default(cuid())
+  userId        String        @unique
+  user          User          @relation(fields: [userId], references: [id])
+
+  fullName      String?
+  age           Int?
+  weight        Float?
+  height        Float?
+  gender        String?       // "Pria" atau "Perempuan"
+  bloodType     String?       // "A", "B", "O", "AB"
+  allergy       String?       // bisa kosong kalau "tidak ada"
+
+  negara        String?
+  kota          String?
+  kodePos       String?
+
+  appointments  Appointment[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Doctor {
+  id           String        @id @default(cuid())
+  name         String
+  specialty    String
+  schedules    Schedule[]
+  appointments Appointment[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Schedule {
+  id        String   @id @default(cuid())
+  doctorId  String
+  doctor    Doctor   @relation(fields: [doctorId], references: [id])
+  dayOfWeek Int // 0 for Sunday, 1 for Monday, etc.
+  startTime String // e.g., "09:00"
+  endTime   String // e.g., "17:00"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Appointment {
+  id          String   @id @default(cuid())
+  patientId   String
+  patient     Patient  @relation(fields: [patientId], references: [id])
+  doctorId    String
+  doctor      Doctor   @relation(fields: [doctorId], references: [id])
+  date        DateTime
+  time        String // e.g., "10:30"
+  status      String   @default("SCHEDULED") // e.g., SCHEDULED, COMPLETED, CANCELLED
+  queueNumber Int      @default(0)
+  notes       String?  // <--- Tambahan untuk "gejala"
+  allergy     String?  // <--- Tambahan untuk "riwayat alergi"
+  fileUrl     String?  // <--- Tambahan untuk "dokumen medis"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

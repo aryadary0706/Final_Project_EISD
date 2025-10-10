@@ -14,6 +14,7 @@ import { Globe, Facebook } from "lucide-react";
 import mediQ from "@/public/mediQ.png";
 import mockUsers from "@/data/mockUsers.json";
 import clsx from "clsx";
+import { supabase } from "@/lib/supabase";
 
 export default function LoginPage() {
   const [fullName, setFullName] = useState("");
@@ -34,28 +35,61 @@ export default function LoginPage() {
     password === confirmPass;
 
   // Handler untuk mendaftarkan pengguna
-  const handleRegister = () => {
-      // Periksa kembali validitas form sebelum mendaftarkan
-      if (isFormValid) {
-        const lastId = mockUsers.length > 0 ? mockUsers[mockUsers.length - 1].id : 0;
-        const newUser = {
-          // ID sementara, idealnya dihasilkan dari backend
-          id: lastId + 1,
-          name: fullName,
-          email: email,
-        };
-        // Panggil fungsi registerUser dari store
-        registerUser(newUser);
+const handleRegister = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-        setFullName("");
-        setEmail("");
-        setPassword("");
-        setConfirmPass("");
-        router.push("/login")
-      } else {
-        console.error("Form tidak valid");
+  if (!isFormValid) {
+    console.error("Form tidak valid");
+    return;
+  }
+
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: fullName,
+        },
+      },
+    });
+
+    if (error) {
+      console.error("Error saat mendaftar:", error.message);
+      alert("Pendaftaran gagal: " + error.message);
+      return;
+    }
+
+    // ✅ Simpan user ke database kamu lewat API route Prisma
+    if (data?.user) {
+      const res = await fetch("/api/user/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: data.user.id,
+          email: data.user.email,
+          name: fullName,
+        }),
+      });
+
+      if (!res.ok) {
+        console.error("Gagal menyimpan user ke database Prisma");
       }
-  };
+    }
+
+    // ✅ Reset form dan redirect
+    setFullName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPass("");
+
+    alert("Pendaftaran berhasil! Silakan login.");
+    router.push("/login");
+  } catch (err) {
+    console.error("Terjadi kesalahan:", err);
+    alert("Terjadi kesalahan saat mendaftar.");
+  }
+};
 
   return (
     <div className="min-h-screen flex">

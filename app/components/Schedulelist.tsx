@@ -6,35 +6,50 @@ import { compareAsc, format } from "date-fns";
 import { id as LocaleID } from "date-fns/locale";
 import { Calendar, Clock, BadgePlus, XCircle } from "lucide-react";
 import AppointmentDetail from "./AppointmentDetail";
-import mockSchedule from "@/data/mockAppointments.json"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Appointment, useAppointmentStore } from "@/stores/AppointmentStore";
 
 export default function ScheduleMeet() {
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      const res = await fetch("/api/appointments");
+      const data = await res.json();
+      console.log("DATA DARI API:", data); // 👉 tambahkan ini
+      console.log("IS ARRAY:", Array.isArray(data));
+      setAppointments(data);
+    };
+    fetchAppointments();
+  }, []);
+
   const getDateKey = (date: Date) => format(date, "yyyy-MM-dd");
-  const { selectedAppointment, source, closeDetailAppointment, openDetailAppointment } = useAppointmentStore();
+  const {
+    selectedAppointment,
+    source,
+    closeDetailAppointment,
+    openDetailAppointment,
+  } = useAppointmentStore();
 
   // cancel mode state
   const [cancelMode, setCancelMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
-  const filteredAppointments =  (mockSchedule as Appointment[]).filter(
+  const filteredAppointments = appointments.filter(
     (appt: Appointment) => appt.status === "Menunggu"
   );
 
-const handleSelect = (appt: Appointment, isMobile: boolean) => {
-  if (cancelMode) {
-    setSelectedIds((prev) =>
-      prev.includes(appt.id)
-        ? prev.filter((id) => id !== appt.id)
-        : [...prev, appt.id]
-    );
-  } else if (isMobile == false) {
-    openDetailAppointment(appt, "schedule");
-  }
-};
-
+  const handleSelect = (appt: Appointment, isMobile: boolean) => {
+    if (cancelMode) {
+      setSelectedIds((prev) =>
+        prev.includes(appt.id)
+          ? prev.filter((id) => id !== appt.id)
+          : [...prev, appt.id]
+      );
+    } else if (isMobile == false) {
+      openDetailAppointment(appt, "schedule");
+    }
+  };
 
   const groupedAppointments = filteredAppointments.reduce((acc, curr) => {
     const dateKey = getDateKey(new Date(curr.date));
@@ -55,6 +70,27 @@ const handleSelect = (appt: Appointment, isMobile: boolean) => {
     setSelectedIds([]);
     setCancelMode(false);
   };
+  const handleCreateAppointment = async () => {
+    try {
+      const newAppt = {
+        doctorId: "1", // sementara hardcode, nanti bisa dari pilihan user
+        date: "2025-10-09",
+        time: "09:00",
+      };
+
+      const res = await fetch("/api/appointments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newAppt),
+      });
+
+      if (!res.ok) throw new Error("Gagal membuat janji temu");
+      const data = await res.json();
+      setAppointments((prev) => [...prev, data]);
+    } catch (err) {
+      console.error("❌ Gagal buat janji temu:", err);
+    }
+  };
 
   return (
     <div className="justify-end flex flex-col w-full max-w-md sm:max-w-2xl md:max-w-4xl lg:max-w-4xl xl:max-w-5xl xl:w-full h-[400px] xl:h-full bg-gray-100 border-1 border-gray-200">
@@ -74,7 +110,6 @@ const handleSelect = (appt: Appointment, isMobile: boolean) => {
 
       {/* Schedule Card List */}
       <div className="flex flex-col space-y-6 w-full h-full">
-
         {/* MOBILE */}
         <div className="xl:hidden">
           <div className="w-full h-[240px] overflow-hidden">
@@ -83,7 +118,9 @@ const handleSelect = (appt: Appointment, isMobile: boolean) => {
                 {sortedDates.map((date) => (
                   <div key={date} className="flex-shrink-0 flex flex-col">
                     <h3 className="font-normal text-xs text-black mb-2 whitespace-nowrap">
-                      {format(new Date(date), "dd/MM/yyyy", { locale: LocaleID })}
+                      {format(new Date(date), "dd/MM/yyyy", {
+                        locale: LocaleID,
+                      })}
                     </h3>
                     {groupedAppointments[date].map((appt) => (
                       <AppointmentCard
@@ -111,7 +148,9 @@ const handleSelect = (appt: Appointment, isMobile: boolean) => {
                 {sortedDates.map((date) => (
                   <div key={date} className="flex flex-col">
                     <h3 className="font-normal text-xs text-black mb-2">
-                      {format(new Date(date), "dd/MM/yyyy", { locale: LocaleID })}
+                      {format(new Date(date), "dd/MM/yyyy", {
+                        locale: LocaleID,
+                      })}
                     </h3>
                     {groupedAppointments[date].map((appt) => (
                       <AppointmentCard
@@ -135,7 +174,10 @@ const handleSelect = (appt: Appointment, isMobile: boolean) => {
       {/* Action Button */}
       <div className="flex justify-center">
         {!cancelMode ? (
-          <Button className="flex w-2/3 xl:w-85 justify-between p-[18px] xl:p-[25px] mb-4 bg-blue-400 hover:bg-blue-500">
+          <Button
+            onClick={handleCreateAppointment} // 🔹 Tambahkan handler ini
+            className="flex w-2/3 xl:w-85 justify-between p-[18px] xl:p-[25px] mb-4 bg-blue-400 hover:bg-blue-500"
+          >
             <h3 className="font-medium text-[12px]">Buat Jadwal Baru</h3>
             <BadgePlus className="w-10 h-10 mr-2" />
           </Button>
@@ -159,11 +201,16 @@ const handleSelect = (appt: Appointment, isMobile: boolean) => {
       <AnimatePresence mode="wait">
         {!cancelMode && selectedAppointment && (
           <motion.div
-            key={selectedAppointment.id}   // gunakan id biar unik per appointment
-            initial={{ x: "100%", opacity: 0 }} 
-            animate={{ x: 0, opacity: 1 }} 
-            exit={{ x: "100%", opacity: 0 }} 
-            transition={{ type: "spring", stiffness: 250, damping: 25, duration: 0.3 }}
+            key={selectedAppointment.id} // gunakan id biar unik per appointment
+            initial={{ x: "100%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: "100%", opacity: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 250,
+              damping: 25,
+              duration: 0.3,
+            }}
             className="absolute top-0 left-0 w-full h-full"
           >
             <AppointmentDetail
@@ -208,29 +255,33 @@ function AppointmentCard({
 
       <div className="flex items-center gap-2 px-2 py-1 mb-4 border-b-1">
         <div className="flex flex-row gap-3 items-center">
-            <img src="Icons/fontisto_doctor.png" alt="icon dokter" className="w-6 h-7 object-contain"/>
-            <div className="flex flex-col">
-              <h2 className="text-blue-400 text-[12px] font-medium">
-                {appt.doctor.specialty}
-              </h2>
-              <h3 className="text-gray-500 text-[10px]">
-                {appt.facility}
-              </h3>
-            </div>
+          <img
+            src="Icons/fontisto_doctor.png"
+            alt="icon dokter"
+            className="w-6 h-7 object-contain"
+          />
+          <div className="flex flex-col">
+            <h2 className="text-blue-400 text-[12px] font-medium">
+              {appt.doctor.specialty}
+            </h2>
+            <h3 className="text-gray-500 text-[10px]">{appt.doctor.name}</h3>
+          </div>
         </div>
       </div>
       <div className="flex flex-row gap-0 h-full items-center">
         <div className="flex-1 flex flex-col">
           <p className="text-[12px] text-gray-400">Antrian</p>
           <p className="text-[24px] font-extralight">
-            {appt.id.toString().padStart(2, "0")}
+            {appt.queueNumber.toString().padStart(2, "0")}
           </p>
         </div>
         <div className="flex-1 flex flex-col gap-3 justify-start">
           <div className="flex flex-col items-start">
             <Calendar className="w-4 h-4 text-gray-500" />
             <p className="text-xs font-medium">
-              {format(new Date(appt.date), "dd MMMM yyyy", { locale: LocaleID })}
+              {format(new Date(appt.date), "dd MMMM yyyy", {
+                locale: LocaleID,
+              })}
             </p>
           </div>
           <div className="flex flex-col items-start">
